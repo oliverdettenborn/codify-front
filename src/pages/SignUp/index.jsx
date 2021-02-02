@@ -1,7 +1,11 @@
 import React from 'react';
 
-import { Building } from '../../components';
+import { Title, BoxBackground } from '../../components';
 
 export default function SignUp() {
-  return <Building />;
+  return (
+    <BoxBackground>
+      <Title />
+    </BoxBackground>
+  );
 }
