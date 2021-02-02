@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function Input({
-  value, onChange, placeholder, type,
+  value, onChange, placeholder, type, background,
 }) {
   return (
     <StyledInput
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      background={background || 'white'}
       type={type}
       required
     />
@@ -16,7 +17,7 @@ export default function Input({
 }
 
 const StyledInput = styled.input`
-  background: white;
+  background: ${(props) => props.background};
   border-radius: 6px;
   width: 100%;
   height: 50px;
