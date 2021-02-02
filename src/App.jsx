@@ -10,11 +10,13 @@ import {
 import {
   Home, SignIn, SignUp, Course, Profile,
 } from './pages';
+import Globalstyles from './utils/globalstyles';
 
 function App() {
   return (
     <BrowserRouter>
       <Reset />
+      <Globalstyles />
       <Switch>
         <Route path="/" exact component={SignIn} />
         <Route path="/cadastro" exact component={SignUp} />
