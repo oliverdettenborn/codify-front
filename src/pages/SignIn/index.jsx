@@ -7,9 +7,11 @@ import {
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [disabledButton, setDisabledButton] = useState(false);
 
   function handleLogin(e) {
     e.preventDefault();
+    setDisabledButton(true);
   }
   return (
     <BoxBackground>
@@ -27,7 +29,7 @@ export default function SignIn() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit">
+        <Button type="submit" disabledButton={disabledButton}>
           Entrar
         </Button>
         <TextLink

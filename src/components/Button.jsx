@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Loading from './Loading';
+
 export default function Button({
   onClick, type, disabledButton, children,
 }) {
@@ -11,7 +13,7 @@ export default function Button({
       disabled={disabledButton}
     >
       {disabledButton
-        ? '...'
+        ? <Loading />
         : children}
     </StyledButton>
   );
