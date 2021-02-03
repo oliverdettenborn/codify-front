@@ -1,9 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export default function CourseInfoContainer({ children }) {
+export default function CourseInfoContainer(props) {
+  const { children, background, height } = props;
+
   return (
-    <Container>
+    <Container background={background} height={height}>
       {children}
     </Container>
   );
@@ -11,11 +13,16 @@ export default function CourseInfoContainer({ children }) {
 
 const Container = styled.div`
   width: 100%;
-  height: 220px;
-  background: linear-gradient(180deg, #EFDA4F 0%, rgba(239, 218, 79, 0.56) 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: 'Roboto';
+
+  ${(props) => (
+    css`
+      background: ${props.background || 'none'};
+      height: ${props.height || 'initial'};
+    `
+  )}
 `;
