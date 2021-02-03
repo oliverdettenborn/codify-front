@@ -1,13 +1,11 @@
 import BannerWelcome from './BannerWelcome';
-import TextWelcome from './TextWelcome';
-import TitleNameUser from './TitleNameUser';
-import CourseBox from './CourseBox';
 import ListAllCourse from './ListAllCourse';
+import OngoingCourses from './OngoingCourses';
+import SuggestedCourses from './SuggestedCourses';
 
 export {
   BannerWelcome,
-  TextWelcome,
-  TitleNameUser,
-  CourseBox,
   ListAllCourse,
+  OngoingCourses,
+  SuggestedCourses,
 };
