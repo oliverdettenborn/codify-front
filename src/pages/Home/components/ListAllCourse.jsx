@@ -12,7 +12,7 @@ export default function TitleNameUser({ user }) {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_URL_API}/courses`,
-        { headers: { Autorization: `Bearer ${user.token}` } })
+        { headers: { Authorization: `Bearer ${user.token}` } })
       .then((response) => setCourses(response.data))
       .catch((err) => {
         if (err.response && err.response.status === 401) {
