@@ -1,7 +1,8 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import {
-  CourseInfoContainer, PlainText,
+  CourseInfoContainer, PlainText, CourseDataWrapper, Button,
 } from '../../components';
 
 export default function Course() {
@@ -9,7 +10,7 @@ export default function Course() {
 
   return (
     <>
-      <CourseInfoContainer height="220px" background={titleBoxBackground}>
+      <CourseInfoContainer height="240px" background={titleBoxBackground} padding="50px 0">
         <PlainText fontSize="2.6rem" fontWeight="bold" marginBottom="15px">
           Javascript do zero!
         </PlainText>
@@ -19,8 +20,28 @@ export default function Course() {
       </CourseInfoContainer>
 
       <CourseInfoContainer>
-        <h1>Olá</h1>
+        <CourseDataWrapper height="150px" position="relative" top="-60px">
+          <UserProgress>
+            <Avatar />
+            <span>Você não iniciou este curso ainda</span>
+          </UserProgress>
+          <Button width="180px">{'Iniciar curso >>'}</Button>
+        </CourseDataWrapper>
       </CourseInfoContainer>
     </>
   );
 }
+
+const UserProgress = styled.div`
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+`;
+
+const Avatar = styled.div`
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: yellow;
+  margin-right: 25px;
+`;

@@ -8,6 +8,7 @@ import Button from './Button';
 import TextLink from './TextLink';
 import CourseInfoContainer from './CourseInfoContainer';
 import PlainText from './PlainText';
+import CourseDataWrapper from './CourseDataWrapper';
 
 export {
   Building,
@@ -20,4 +21,5 @@ export {
   TextLink,
   CourseInfoContainer,
   PlainText,
+  CourseDataWrapper,
 };
