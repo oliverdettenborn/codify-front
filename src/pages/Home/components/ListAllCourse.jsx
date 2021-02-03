@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import ContainerCourse from './ContainerCourse';
 
-export default function TitleNameUser() {
+export default function TitleNameUser({ user }) {
   const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL_API}/courses`)
+      .get(`${process.env.REACT_APP_URL_API}/courses`,
+        { headers: { Autorization: `Bearer ${user.token}` } })
       .then((response) => setCourses(response.data))
-      .catch((err) => console.error(err))
+      .catch((err) => {
+        if (err.response && err.response.status === 401) {
+          alert('Necessário realizar o login');
+          history.push('/');
+        }
+      })
       .finally(() => setLoading(false));
   }, []);
 

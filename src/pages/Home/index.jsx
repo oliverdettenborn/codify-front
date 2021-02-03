@@ -30,7 +30,7 @@ export default function Home() {
                 <SuggestedCourses user={user} />
               </>
             )
-            : <ListAllCourse />
+            : <ListAllCourse user={user} />
         }
       </Container>
     </>
