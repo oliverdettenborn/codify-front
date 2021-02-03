@@ -1,18 +1,26 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 
-import { BannerWelcome } from './components';
+import { BannerWelcome, ListAllCourse } from './components';
 
 export default function Home() {
-  const { user } = useContext(UserContext);
-  const history = useHistory();
+  let { user } = useContext(UserContext);
+  // const history = useHistory();
 
-  if (!user.token) {
-    history.push('/');
-  }
+  // if (!user.token) {
+  //   history.push('/');
+  // }
+
+  user = {
+    name: 'Oliver Dettenborn',
+    email: 'oliver.dettenborn@gmail.com',
+  };
 
   return (
-    <BannerWelcome user={user} alredyStartCourse={false} />
+    <>
+      <BannerWelcome user={user} alredyStartCourse={false} />
+      <ListAllCourse />
+    </>
   );
 }
