@@ -6,9 +6,14 @@ import Input from './Input';
 import FormBox from './FormBox';
 import Button from './Button';
 import TextLink from './TextLink';
+<<<<<<< HEAD
 import CourseInfoContainer from './CourseInfoContainer';
 import PlainText from './PlainText';
 import CourseDataWrapper from './CourseDataWrapper';
+=======
+import Error from './Error';
+import Banner from './Banner';
+>>>>>>> listCourses
 
 export {
   Building,
@@ -19,7 +24,12 @@ export {
   FormBox,
   Button,
   TextLink,
+<<<<<<< HEAD
   CourseInfoContainer,
   PlainText,
   CourseDataWrapper,
+=======
+  Error,
+  Banner,
+>>>>>>> listCourses
 };

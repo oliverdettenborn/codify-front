@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import media from '../utils/mediaQuery';
 
 export default function FormBox({ children, onSubmit }) {
   return (
@@ -15,4 +16,8 @@ const Container = styled.form`
   width: 28%;
   padding: 30px 25px 20px 25px;
   margin: 35px auto 0px auto;
+
+  ${media}{
+    width: 80%;
+  }
 `;
