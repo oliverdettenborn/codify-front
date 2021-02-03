@@ -6,6 +6,8 @@ import Input from './Input';
 import FormBox from './FormBox';
 import Button from './Button';
 import TextLink from './TextLink';
+import CourseInfoContainer from './CourseInfoContainer';
+import PlainText from './PlainText';
 
 export {
   Building,
@@ -16,4 +18,6 @@ export {
   FormBox,
   Button,
   TextLink,
+  CourseInfoContainer,
+  PlainText,
 };
