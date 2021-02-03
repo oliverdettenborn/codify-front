@@ -1,9 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-export default function PlainText({
-  children, fontSize, fontWeight, marginBottom,
-}) {
+export default function PlainText(props) {
+  const {
+    children,
+    fontSize,
+    fontWeight,
+    marginBottom,
+  } = props;
+
   return (
     <Text fontSize={fontSize} fontWeight={fontWeight} marginBottom={marginBottom}>
       {children}
