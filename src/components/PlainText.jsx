@@ -7,10 +7,16 @@ export default function PlainText(props) {
     fontSize,
     fontWeight,
     marginBottom,
+    alignSelf,
   } = props;
 
   return (
-    <Text fontSize={fontSize} fontWeight={fontWeight} marginBottom={marginBottom}>
+    <Text
+      fontSize={fontSize}
+      fontWeight={fontWeight}
+      marginBottom={marginBottom}
+      alignSelf={alignSelf}
+    >
       {children}
     </Text>
   );
@@ -22,6 +28,7 @@ const Text = styled.span`
       font-size: ${props.fontSize};
       font-weight: ${props.fontWeight || 'normal'};
       margin-bottom: ${props.marginBottom || '0'};
+      align-self: ${props.alignSelf}
     `
   )}
 `;

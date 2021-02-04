@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {
-  CourseInfoContainer, PlainText, CourseDataWrapper, Button,
+  CourseInfoContainer, PlainText, CourseDataWrapper, Button, Container,
 } from '../../components';
 
 export default function Course() {
@@ -10,7 +10,7 @@ export default function Course() {
 
   return (
     <>
-      <CourseInfoContainer height="240px" background={titleBoxBackground} padding="50px 0">
+      <CourseInfoContainer width="100%" height="240px" background={titleBoxBackground} padding="50px 0">
         <PlainText fontSize="2.6rem" fontWeight="bold" marginBottom="15px">
           Javascript do zero!
         </PlainText>
@@ -19,15 +19,30 @@ export default function Course() {
         </PlainText>
       </CourseInfoContainer>
 
-      <CourseInfoContainer>
-        <CourseDataWrapper height="150px" position="relative" top="-60px">
-          <UserProgress>
-            <Avatar />
-            <span>Você não iniciou este curso ainda</span>
-          </UserProgress>
-          <Button width="180px">{'Iniciar curso >>'}</Button>
-        </CourseDataWrapper>
-      </CourseInfoContainer>
+      <Container>
+        <CourseInfoContainer width="80%" padding="0 80px">
+          <CourseDataWrapper height="190px" position="relative" top="-60px">
+            <UserProgress>
+              <Avatar />
+              <PlainText fontSize="1.3rem">Você não iniciou este curso ainda</PlainText>
+            </UserProgress>
+            <Button width="180px">{'Iniciar curso >>'}</Button>
+          </CourseDataWrapper>
+
+          <PlainText
+            marginBottom="15px"
+            fontSize="1.8rem"
+            fontWeight="bold"
+            alignSelf="flex-start"
+          >
+            Ementa
+          </PlainText>
+
+          <CourseDataWrapper>
+            <h1>Teste</h1>
+          </CourseDataWrapper>
+        </CourseInfoContainer>
+      </Container>
     </>
   );
 }
@@ -39,8 +54,8 @@ const UserProgress = styled.div`
 `;
 
 const Avatar = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: yellow;
   margin-right: 25px;

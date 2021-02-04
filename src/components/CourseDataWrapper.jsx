@@ -17,7 +17,7 @@ export default function CourseDataWrapper(props) {
 }
 
 const Wrapper = styled.div`
-  width: 80%;
+  width: 100%;
   padding: 0 40px;
   font-family: 'Roboto';
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);

@@ -4,20 +4,20 @@ import styled, { css } from 'styled-components';
 export default function CourseInfoContainer(props) {
   const {
     children,
+    width,
     background,
     height,
     padding,
   } = props;
 
   return (
-    <Container background={background} height={height} padding={padding}>
+    <Container width={width} background={background} height={height} padding={padding}>
       {children}
     </Container>
   );
 }
 
 const Container = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -26,6 +26,7 @@ const Container = styled.div`
 
   ${(props) => (
     css`
+      width: ${props.width};
       background: ${props.background || 'none'};
       height: ${props.height || 'initial'};
       padding: ${props.padding || 0};
