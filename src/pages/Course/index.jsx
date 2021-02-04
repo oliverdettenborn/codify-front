@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {
   CourseInfoContainer, PlainText, CourseDataWrapper, Button, Container,
 } from '../../components';
+import ClassWrapper from './components/ClassWrapper';
 
 export default function Course() {
   const titleBoxBackground = 'linear-gradient(180deg, #EFDA4F 0%, rgba(239, 218, 79, 0.56) 100%)';
@@ -11,7 +12,7 @@ export default function Course() {
   return (
     <>
       <CourseInfoContainer width="100%" height="240px" background={titleBoxBackground} padding="50px 0">
-        <PlainText fontSize="2.6rem" fontWeight="bold" marginBottom="15px">
+        <PlainText fontSize="2.6rem" fontWeight="bold" margin=" 0 0 15px 0">
           Javascript do zero!
         </PlainText>
         <PlainText fontSize="1.5rem">
@@ -19,9 +20,9 @@ export default function Course() {
         </PlainText>
       </CourseInfoContainer>
 
-      <Container>
+      <Container justifyContent="center" alignItems="center">
         <CourseInfoContainer width="80%" padding="0 80px">
-          <CourseDataWrapper height="190px" position="relative" top="-60px">
+          <CourseDataWrapper height="190px" position="relative" top="-60px" padding="40px">
             <UserProgress>
               <Avatar />
               <PlainText fontSize="1.3rem">Você não iniciou este curso ainda</PlainText>
@@ -30,16 +31,18 @@ export default function Course() {
           </CourseDataWrapper>
 
           <PlainText
-            marginBottom="15px"
+            margin="0 0 25px 0"
             fontSize="1.8rem"
-            fontWeight="bold"
             alignSelf="flex-start"
           >
             Ementa
           </PlainText>
 
-          <CourseDataWrapper>
-            <h1>Teste</h1>
+          <CourseDataWrapper flexDirection="column">
+            <ClassWrapper />
+            <ClassWrapper />
+            <ClassWrapper />
+            <ClassWrapper />
           </CourseDataWrapper>
         </CourseInfoContainer>
       </Container>

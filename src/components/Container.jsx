@@ -1,9 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export default function Container({ children }) {
+export default function Container(props) {
+  const {
+    children,
+    justifyContent,
+    alignItems,
+    padding,
+    borderBottom,
+    cursor,
+  } = props;
+
   return (
-    <FlexContainer>
+    <FlexContainer
+      justifyContent={justifyContent}
+      alignItems={alignItems}
+      padding={padding}
+      borderBottom={borderBottom}
+      cursor={cursor}
+    >
       {children}
     </FlexContainer>
   );
@@ -12,6 +27,14 @@ export default function Container({ children }) {
 const FlexContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+
+  ${(props) => (
+    css`
+      padding: ${props.padding || 0};
+      justify-content: ${props.justifyContent || 'center'};
+      align-items: ${props.alignItems || 'center'};
+      border-bottom: ${props.borderBottom};
+      cursor: ${props.cursor || 'initial'}
+    `
+  )}
 `;

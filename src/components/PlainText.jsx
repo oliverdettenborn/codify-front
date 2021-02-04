@@ -4,17 +4,19 @@ import styled, { css } from 'styled-components';
 export default function PlainText(props) {
   const {
     children,
+    color,
     fontSize,
     fontWeight,
-    marginBottom,
+    margin,
     alignSelf,
   } = props;
 
   return (
     <Text
+      color={color}
       fontSize={fontSize}
       fontWeight={fontWeight}
-      marginBottom={marginBottom}
+      margin={margin}
       alignSelf={alignSelf}
     >
       {children}
@@ -25,9 +27,10 @@ export default function PlainText(props) {
 const Text = styled.span`
   ${(props) => (
     css`
+      color: ${props.color || 'initial'};
       font-size: ${props.fontSize};
       font-weight: ${props.fontWeight || 'normal'};
-      margin-bottom: ${props.marginBottom || '0'};
+      margin: ${props.margin || '0'};
       align-self: ${props.alignSelf}
     `
   )}

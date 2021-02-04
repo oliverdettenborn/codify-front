@@ -7,10 +7,18 @@ export default function CourseDataWrapper(props) {
     height,
     position,
     top,
+    padding,
+    flexDirection,
   } = props;
 
   return (
-    <Wrapper height={height} position={position} top={top}>
+    <Wrapper
+      height={height}
+      position={position}
+      top={top}
+      padding={padding}
+      flexDirection={flexDirection}
+    >
       {children}
     </Wrapper>
   );
@@ -18,7 +26,6 @@ export default function CourseDataWrapper(props) {
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 0 40px;
   font-family: 'Roboto';
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
   border-radius: 20px;
@@ -31,7 +38,9 @@ const Wrapper = styled.div`
     css`
       height: ${props.height || 'initial'};
       position: ${props.position || 'initial'};
-      top: ${props.top}
+      top: ${props.top};
+      padding: ${props.padding || 0};
+      flex-direction: ${props.flexDirection || 'row'};
     `
   )}
 `;
