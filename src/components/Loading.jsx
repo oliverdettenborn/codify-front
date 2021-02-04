@@ -6,6 +6,6 @@ export default function Loading() {
 }
 
 const Image = styled.img`
-  width: 100vw;
+  height: 100%;
   margin: auto 0;
 `;
