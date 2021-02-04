@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <>
-      <Header  user={user}/>
+      <Header user={user} />
       <BannerWelcome user={user} alredyStartCourse={alredyStartCourse} />
       <Container>
         {

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Avatar from 'react-avatar';
 
-export default function Header(user) {
+import media from '../utils/mediaQuery';
+
+export default function Header({ user }) {
   return (
     <Container>
       <div>
@@ -38,7 +40,7 @@ const Container = styled.div`
     color: #262626;
     padding: 0 30px 15px 30px;
     margin-top: 15px;
-    height: 8vh;
+    height: 60px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     div{
         display: flex;
@@ -56,6 +58,11 @@ const Container = styled.div`
     }
     .sb-avatar{
         cursor: pointer;
+        margin-right: 10px;
+    }
+
+    ${media}{
+      padding-left: 10px;
     }
 `;
 const Text = styled.h6`
@@ -67,4 +74,8 @@ const Text = styled.h6`
     padding-top: 5px;
     margin: 10px 15px;
     color: #262626;
+
+    ${media}{
+      margin: 10px;
+    }
 `;
