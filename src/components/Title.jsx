@@ -16,7 +16,7 @@ const TitleHeader = styled.div`
     align-items: center;
     padding-top: 50px;
     h1{
-        font-size: 5rem;
+        font-size: 4rem;
         color: white;
         font-family: 'Zilla Slab Highlight', cursive;
         letter-spacing: 3px;
