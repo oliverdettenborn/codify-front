@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Building } from '../../components';
+import { Header } from '../../components';
 
 export default function Home() {
-  return <Building />;
+  return <Header />;
 }

@@ -6,6 +6,7 @@ import Input from './Input';
 import FormBox from './FormBox';
 import Button from './Button';
 import TextLink from './TextLink';
+import Header from './Header';
 
 export {
   Building,
@@ -16,4 +17,5 @@ export {
   FormBox,
   Button,
   TextLink,
+  Header,
 };

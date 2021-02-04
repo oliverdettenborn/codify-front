@@ -3,6 +3,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Home from './Home';
 import Profile from './Profile';
+import ForgetPassword from './ForgetPassword';
 
 export {
   Course,
@@ -10,4 +11,5 @@ export {
   SignUp,
   Home,
   Profile,
+  ForgetPassword,
 };
