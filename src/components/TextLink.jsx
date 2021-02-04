@@ -13,10 +13,10 @@ const Text = styled.h6`
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 18px;
     text-decoration-line: underline;
     text-align: center;
-    margin: 10px 0px;
+    margin: 15px 0px;
     color: #787878;
 `;
