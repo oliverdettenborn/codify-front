@@ -13,8 +13,6 @@ import {
 import Globalstyles from './utils/globalstyles';
 import { UserProvider } from './context/UserContext';
 
-import Globalstyles from './utils/globalstyles';
-
 function App() {
   return (
     <UserProvider>
