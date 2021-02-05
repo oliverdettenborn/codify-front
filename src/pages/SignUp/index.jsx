@@ -18,7 +18,7 @@ export default function SignUp() {
     setDisabledButton(true);
     axios.post(`${process.env.REACT_APP_URL_API}/users/register`, {
       name, email, password, passwordConfirmation: repeatPassword,
-    }).then(() => history.push('/login'));
+    }).then(() => history.push('/'));
   }
   return (
     <BoxBackground>
