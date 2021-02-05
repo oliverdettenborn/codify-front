@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Loading from './Loading';
 
 export default function Button({
-  onClick, type, disabledButton, children, background,
+  onClick, type, disabledButton, children, background, width,
 }) {
   return (
     <StyledButton
@@ -12,7 +12,7 @@ export default function Button({
       type={type}
       disabled={disabledButton}
       background={background || '#46A7D4'}
-
+      width={width || '100%'}
     >
       {disabledButton
         ? <Loading />
@@ -22,7 +22,7 @@ export default function Button({
 }
 
 const StyledButton = styled.button`
-  width: 100%;
+  width: ${(props) => props.width};
   height: 50px;
   background-color: ${(props) => (props.disabled ? 'gray' : props.background)};
   border: none;
@@ -38,6 +38,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
+
   @media (max-width: 600px) {
     font-size: 18px;
   }

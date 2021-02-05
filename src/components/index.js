@@ -6,6 +6,10 @@ import Input from './Input';
 import FormBox from './FormBox';
 import Button from './Button';
 import TextLink from './TextLink';
+import CourseInfoContainer from './CourseInfoContainer';
+import PlainText from './PlainText';
+import CourseDataWrapper from './CourseDataWrapper';
+import Container from './Container';
 import Header from './Header';
 import Error from './Error';
 import Banner from './Banner';
@@ -19,6 +23,10 @@ export {
   FormBox,
   Button,
   TextLink,
+  CourseInfoContainer,
+  PlainText,
+  CourseDataWrapper,
+  Container,
   Header,
   Error,
   Banner,
