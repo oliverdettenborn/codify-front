@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-
 import {
-  CourseInfoContainer, PlainText, CourseDataWrapper, Button, Container,
+  CourseInfoContainer, PlainText, CourseDataWrapper, Button, Container, UserAvatar,
 } from '../../components';
 import ClassWrapper from './components/ClassWrapper';
 import UserContext from '../../context/UserContext';
@@ -15,7 +14,10 @@ export default function Course() {
   const [color, setColor] = useState('');
   const { user } = useContext(UserContext);
   const { id } = useParams();
-
+  const history = useHistory();
+  if (!user.token) {
+    history.push('/');
+  }
   const convertToRgba = (hex) => {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -51,8 +53,8 @@ export default function Course() {
         <CourseInfoContainer width="80%" padding="0 80px">
           <CourseDataWrapper height="190px" position="relative" top="-60px" padding="40px">
             <UserProgress>
-              <Avatar />
-              <PlainText fontSize="1.3rem">Você não iniciou este curso ainda</PlainText>
+              <UserAvatar user={user} />
+              <PlainText fontSize="1.3rem" margin="0 15px">Você não iniciou este curso ainda</PlainText>
             </UserProgress>
             <Button width="180px">{'Iniciar curso >>'}</Button>
           </CourseDataWrapper>
@@ -81,13 +83,4 @@ const UserProgress = styled.div`
   display: flex;
   align-items: center;
   flex-grow: 1;
-`;
-
-const Avatar = styled.div`
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: yellow;
-  margin-right: 25px;
-  flex-shrink: 0;
 `;
