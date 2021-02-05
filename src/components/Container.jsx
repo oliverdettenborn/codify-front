@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+import mediaQuery from '../utils/mediaQuery';
+
 export default function Container(props) {
   const {
     children,
@@ -37,4 +39,8 @@ const FlexContainer = styled.div`
       cursor: ${props.cursor || 'initial'}
     `
   )}
+  
+  ${mediaQuery} {
+    flex-direction: column;
+  }
 `;

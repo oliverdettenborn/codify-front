@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+import mediaQuery from '../utils/mediaQuery';
+
 export default function CourseDataWrapper(props) {
   const {
     children,
@@ -43,4 +45,9 @@ const Wrapper = styled.div`
       flex-direction: ${props.flexDirection || 'row'};
     `
   )}
+
+  ${mediaQuery} {
+    flex-direction: column;
+    padding: 15px;
+  }
 `;

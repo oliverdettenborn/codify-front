@@ -11,22 +11,22 @@ export default function ClassWrapper() {
       borderBottom="1px solid #E7E7E7"
       cursor="pointer"
     >
-      <>
-        <IoIosArrowDown size="1.6rem" color="#656565" />
+      <IoIosArrowDown size="1.6rem" color="#656565" />
 
-        <PlainText
-          color="#656565"
-          fontSize="1.4rem"
-          fontWeight="bold"
-          margin="0 auto 0 15px"
-        >
-          Apresentação
-        </PlainText>
-      </>
+      <PlainText
+        color="#656565"
+        fontSize="1.4rem"
+        fontWeight="bold"
+        margin="0 auto 0 15px"
+        mediaQueryMargin="0"
+      >
+        Apresentação
+      </PlainText>
 
       <PlainText
         color="#656565"
         fontSize="1.1rem"
+        mediaQueryDisplay="none"
       >
         2 aulas • 5 exercícios
       </PlainText>
