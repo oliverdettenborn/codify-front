@@ -27,7 +27,7 @@ const Container = styled.div`
   ${(props) => (
     css`
       width: ${props.width};
-      background: ${props.background || 'none'};
+      background: ${`linear-gradient(180deg, rgba(${props.background}, 1), rgba(${props.background}, 0.3))` || 'red'};
       height: ${props.height || 'initial'};
       padding: ${props.padding || 0};
     `

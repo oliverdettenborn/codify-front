@@ -1,26 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import {
   CourseInfoContainer, PlainText, CourseDataWrapper, Button, Container,
 } from '../../components';
 import ClassWrapper from './components/ClassWrapper';
+import UserContext from '../../context/UserContext';
 
 export default function Course() {
-  const titleBoxBackground = 'linear-gradient(180deg, #EFDA4F 0%, rgba(239, 218, 79, 0.56) 100%)';
+  const [courseName, setCourseName] = useState('');
+  const [description, setDescription] = useState('');
+  const [color, setColor] = useState('');
+  const { user } = useContext(UserContext);
+  const { id } = useParams();
+
+  const convertToRgba = (hex) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    setColor(`${r}, ${g}, ${b}`);
+  };
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_URL_API}/courses/${id}`, { headers: { Authorization: `Bearer ${user.token}` } })
+      .then((r) => {
+        setCourseName(r.data.title);
+        setDescription(r.data.description);
+        convertToRgba(r.data.color);
+      })
+      .catch((err) => console.log(err.response));
+  }, []);
 
   return (
     <>
-      <CourseInfoContainer width="100%" height="240px" background={titleBoxBackground} padding="50px 0">
+      <CourseInfoContainer width="100%" height="240px" background={color} padding="50px 0">
         <PlainText fontSize="2.6rem" fontWeight="bold" margin=" 0 0 15px 0">
-          Javascript do zero!
+          {courseName}
         </PlainText>
+
         <PlainText fontSize="1.5rem">
-          Aprenda JavaScript do zero ao avançado, com muita prática!
+          {description}
         </PlainText>
       </CourseInfoContainer>
 
-      <Container justifyContent="center" alignItems="center">
+      <Container justifyContent="center" alignItems="center" padding="0 0 0 20px">
         <CourseInfoContainer width="80%" padding="0 80px">
           <CourseDataWrapper height="190px" position="relative" top="-60px" padding="40px">
             <UserProgress>
@@ -62,4 +89,5 @@ const Avatar = styled.div`
   border-radius: 50%;
   background: yellow;
   margin-right: 25px;
+  flex-shrink: 0;
 `;

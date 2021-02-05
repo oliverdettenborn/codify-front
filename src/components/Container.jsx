@@ -33,7 +33,7 @@ const FlexContainer = styled.div`
       padding: ${props.padding || 0};
       justify-content: ${props.justifyContent || 'center'};
       align-items: ${props.alignItems || 'center'};
-      border-bottom: ${props.borderBottom};
+      border-bottom: ${props.borderBottom || 'none'};
       cursor: ${props.cursor || 'initial'}
     `
   )}
