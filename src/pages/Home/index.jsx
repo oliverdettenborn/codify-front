@@ -11,7 +11,7 @@ export default function Home() {
   const { user } = useContext(UserContext);
   const history = useHistory();
 
-  // logica para ver se já começou ou não um curso
+
   const alredyStartCourse = false;
 
   if (!user.token) {
