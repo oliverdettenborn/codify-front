@@ -10,6 +10,7 @@ import CourseInfoContainer from './CourseInfoContainer';
 import PlainText from './PlainText';
 import CourseDataWrapper from './CourseDataWrapper';
 import Container from './Container';
+import Header from './Header';
 import Error from './Error';
 import Banner from './Banner';
 
@@ -26,6 +27,7 @@ export {
   PlainText,
   CourseDataWrapper,
   Container,
+  Header,
   Error,
   Banner,
 };

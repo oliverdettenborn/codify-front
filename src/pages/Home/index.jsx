@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 
+import { Header } from '../../components';
 import {
   BannerWelcome, ListAllCourse, OngoingCourses, SuggestedCourses,
 } from './components';
@@ -10,7 +11,6 @@ import {
 export default function Home() {
   const { user } = useContext(UserContext);
   const history = useHistory();
-
 
   const alredyStartCourse = false;
 
@@ -20,6 +20,7 @@ export default function Home() {
 
   return (
     <>
+      <Header user={user} />
       <BannerWelcome user={user} alredyStartCourse={alredyStartCourse} />
       <Container>
         {
