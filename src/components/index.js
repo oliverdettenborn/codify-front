@@ -13,6 +13,7 @@ import Container from './Container';
 import Header from './Header';
 import Error from './Error';
 import Banner from './Banner';
+import UserAvatar from './Avatar';
 
 export {
   Building,
@@ -29,5 +30,6 @@ export {
   Container,
   Header,
   Error,
+  UserAvatar,
   Banner,
 };

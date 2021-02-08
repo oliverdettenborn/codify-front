@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Avatar from 'react-avatar';
+import UserAvatar from './Avatar';
 
 import media from '../utils/mediaQuery';
 
@@ -30,7 +30,7 @@ export default function Header({ user }) {
           </Text>
         </Link>
       </div>
-      <Avatar src={user.avatarUrl} name={user.name} round size="40" color={Avatar.getRandomColor('sitebase', ['red', 'green', 'pink', 'blue'])} />
+      <UserAvatar user={user} />
     </Container>
   );
 }
