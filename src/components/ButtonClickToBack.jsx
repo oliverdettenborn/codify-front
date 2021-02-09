@@ -7,7 +7,7 @@ export default function Button({
   to, size, color, top, bottom, left, right,
 }) {
   return (
-    <Link to={to}>
+    <Link to={to || '/'}>
       <Icon
         color={color}
         top={top}
@@ -15,7 +15,7 @@ export default function Button({
         left={left}
         right={right}
       >
-        <FaChevronLeft size={size} />
+        <FaChevronLeft size={size * 0.65} />
       </Icon>
     </Link>
   );
@@ -38,6 +38,8 @@ const Icon = styled.div`
       right: ${props.right || 'initial'};
       bottom: ${props.bottom || 'initial'};
       color: ${props.color || '#FFF'};
+      width: ${props.size || '50px'};
+      height: ${props.size || '50px'};
     `
   )}
 `;
