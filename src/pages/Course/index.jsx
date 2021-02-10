@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import styled from 'styled-components';
+import hexRgb from 'hex-rgb';
+
 import {
-  CourseInfoContainer, PlainText, CourseDataWrapper, Button, Container, UserAvatar,
+  CourseInfoContainer, Container, Header,
 } from '../../components';
-import ClassWrapper from './components/ClassWrapper';
+import { Summary, Banner, UserInfo } from './components';
 import UserContext from '../../context/UserContext';
 
 export default function Course() {
@@ -15,16 +16,10 @@ export default function Course() {
   const { user } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
+
   if (!user.token) {
     history.push('/');
   }
-  const convertToRgba = (hex) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-
-    setColor(`${r}, ${g}, ${b}`);
-  };
 
   useEffect(() => {
     axios
@@ -32,55 +27,21 @@ export default function Course() {
       .then((r) => {
         setCourseName(r.data.title);
         setDescription(r.data.description);
-        convertToRgba(r.data.color);
+        setColor(hexRgb(r.data.color, { format: 'array' }).slice(0, 3).join());
       })
-      .catch((err) => console.log(err.response));
+      .catch(() => history.push('/home'));
   }, []);
 
   return (
     <>
-      <CourseInfoContainer width="100%" height="240px" background={color} padding="50px 0">
-        <PlainText fontSize="2.6rem" fontWeight="bold" margin=" 0 0 15px 0">
-          {courseName}
-        </PlainText>
-
-        <PlainText fontSize="1.5rem">
-          {description}
-        </PlainText>
-      </CourseInfoContainer>
-
+      <Header user={user} />
+      <Banner background={color} courseName={courseName} description={description} />
       <Container justifyContent="center" alignItems="center" padding="0 0 0 20px">
         <CourseInfoContainer width="80%" padding="0 80px">
-          <CourseDataWrapper height="190px" position="relative" top="-60px" padding="40px">
-            <UserProgress>
-              <UserAvatar user={user} />
-              <PlainText fontSize="1.3rem" margin="0 15px">Você não iniciou este curso ainda</PlainText>
-            </UserProgress>
-            <Button width="180px">{'Iniciar curso >>'}</Button>
-          </CourseDataWrapper>
-
-          <PlainText
-            margin="0 0 25px 0"
-            fontSize="1.8rem"
-            alignSelf="flex-start"
-          >
-            Ementa
-          </PlainText>
-
-          <CourseDataWrapper flexDirection="column">
-            <ClassWrapper />
-            <ClassWrapper />
-            <ClassWrapper />
-            <ClassWrapper />
-          </CourseDataWrapper>
+          <UserInfo user={user} />
+          <Summary />
         </CourseInfoContainer>
       </Container>
     </>
   );
 }
-
-const UserProgress = styled.div`
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-`;

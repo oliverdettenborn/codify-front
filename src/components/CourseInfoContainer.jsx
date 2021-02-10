@@ -8,10 +8,17 @@ export default function CourseInfoContainer(props) {
     background,
     height,
     padding,
+    positionRelative,
   } = props;
 
   return (
-    <Container width={width} background={background} height={height} padding={padding}>
+    <Container
+      width={width}
+      background={background}
+      height={height}
+      padding={padding}
+      positionRelative={positionRelative}
+    >
       {children}
     </Container>
   );
@@ -30,6 +37,7 @@ const Container = styled.div`
       background: ${`linear-gradient(180deg, rgba(${props.background}, 1), rgba(${props.background}, 0.3))` || 'red'};
       height: ${props.height || 'initial'};
       padding: ${props.padding || 0};
+      position: ${props.positionRelative ? 'relative' : 'initial'};
     `
   )}
 `;
