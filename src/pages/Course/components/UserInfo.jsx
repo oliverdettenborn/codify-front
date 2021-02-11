@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -6,13 +6,21 @@ import {
 } from '../../../components';
 
 export default function Course({ user }) {
+  const [disabledButton, setDisabledButton] = useState(false);
+
+  function initCourse() {
+    setDisabledButton(true);
+  }
+
   return (
     <CourseDataWrapper height="190px" position="relative" top="-60px" padding="40px">
       <UserProgress>
         <UserAvatar user={user} size="65" />
         <PlainText fontSize="1.3rem" margin="0 15px">Você não iniciou este curso ainda</PlainText>
       </UserProgress>
-      <Button width="180px">{'Iniciar curso >>'}</Button>
+      <Button width="180px" onClick={initCourse} disabledButton={disabledButton}>
+        {'Iniciar curso >>'}
+      </Button>
     </CourseDataWrapper>
   );
 }
