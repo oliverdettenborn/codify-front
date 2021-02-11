@@ -11,7 +11,11 @@ export default function Checkbox() {
       <CheckboxContainer checked={checked} onClick={handleCheckboxChange}>
         <HiddenCheckbox checked={checked} onClick={handleCheckboxChange} />
         <StyledCheckbox checked={checked} />
-        <Text checked={checked}> Marcar como concluído </Text>
+        <Text checked={checked}>
+          {' '}
+          {checked ? 'Concluído' : 'Marcar como concluído'}
+          {' '}
+        </Text>
       </CheckboxContainer>
     </>
   );
@@ -39,6 +43,7 @@ export const Text = styled.label`
    font-weight: bold;
    margin-left: 5px;
    cursor: pointer;
+   transition: all 0.5s;
 `;
 export const StyledCheckbox = styled.label`
    width: 23px;
@@ -51,4 +56,5 @@ export const StyledCheckbox = styled.label`
    justify-content: center;
    align-items: center;
    cursor: pointer;
+   transition: all 0.5s;
 `;

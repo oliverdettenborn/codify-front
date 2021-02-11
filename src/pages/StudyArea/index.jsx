@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CircleLines, YoutubeVideo, Checkbox } from './components';
+import {
+  CircleLines, YoutubeVideo, Checkbox, CourseDropdown,
+} from './components';
 import { Button } from '../../components';
 
 export default function StudyArea() {
   return (
     <>
+      <CourseDropdown />
       <CircleLines />
       <YoutubeVideo>
         <Container>

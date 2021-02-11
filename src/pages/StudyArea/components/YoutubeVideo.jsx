@@ -18,5 +18,5 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   background: #3d3d3d;
-  height: 85vh;
+  height: 77vh;
 `;
