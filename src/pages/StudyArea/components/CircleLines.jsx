@@ -38,6 +38,7 @@ const Container = styled.div`
   justify-content: space-evenly;
   display: flex;
   padding: 10px;
+  border-bottom: 1px solid #717171;
   ul{
     display: flex;
     width: 100%;
@@ -50,6 +51,7 @@ const BulletBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
   color: ${(props) => (props.done ? '#76DF93' : props.active ? '#FFFFFF' : '#B2B2B2')};
 `;
 const Bullet = styled.div`

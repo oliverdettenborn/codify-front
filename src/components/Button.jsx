@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Loading from './Loading';
 
 export default function Button({
-  onClick, type, disabledButton, children, background, width,
+  onClick, type, disabledButton, children, background, width, height, fontsize, borderRadius,
 }) {
   return (
     <StyledButton
@@ -13,6 +13,9 @@ export default function Button({
       disabled={disabledButton}
       background={background || '#46A7D4'}
       width={width || '100%'}
+      height={height || '50px'}
+      fontsize={fontsize || '20px'}
+      borderRadius={borderRadius || '6px'}
     >
       {disabledButton
         ? <Loading />
@@ -23,11 +26,11 @@ export default function Button({
 
 const StyledButton = styled.button`
   width: ${(props) => props.width};
-  height: 50px;
+  height: ${(props) => props.height};
   background-color: ${(props) => (props.disabled ? 'gray' : props.background)};
   border: none;
   font-family: 'Roboto', sans-serif;
-  font-size: 20px;
+  font-size: ${(props) => (props.fontsize)};
   font-weight: bold;
   line-height: 28px;
   color: white;
@@ -37,7 +40,7 @@ const StyledButton = styled.button`
   outline: none;
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 6px;
+  border-radius: ${(props) => (props.borderRadius)};
 
   @media (max-width: 600px) {
     font-size: 18px;
