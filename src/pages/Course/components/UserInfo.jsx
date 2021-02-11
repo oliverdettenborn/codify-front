@@ -17,11 +17,18 @@ export default function Course({ user, courseId }) {
         { headers: { Authorization: `Bearer ${user.token}` } },
       )
       .then((r) => {
-        console.log(r.data);
         setProgress(r.data.progress);
       })
-      .catch((err) => console.warn(err.response));
+      .catch(() => alert('Erro ao carregar progresso no curso'));
   }, []);
+
+  let message;
+  const progressNumber = +progress.split('%')[0];
+  if (progressNumber >= 0 && progressNumber < 75) {
+    message = 'Seja bem vindo de volta! Seu progresso:';
+  } else if (progressNumber >= 75) {
+    message = `Faltam só ${100 - progressNumber}% para concluir o curso!`;
+  }
 
   return (
     <>
@@ -29,7 +36,7 @@ export default function Course({ user, courseId }) {
         <UserProgress>
           <UserAvatar user={user} size="65" />
           <Container flexDirection="column" alignItems="flex-start" margin="0 0 0 25px">
-            <PlainText fontSize="1rem">Você não iniciou este curso ainda</PlainText>
+            <PlainText fontSize="1rem">{message}</PlainText>
 
             <ProgressBar percentage={progress} />
           </Container>
