@@ -38,7 +38,7 @@ export default function Course() {
       <Banner background={color} courseName={courseName} description={description} />
       <Container justifyContent="center" alignItems="center" padding="0 0 0 20px">
         <CourseInfoContainer width="80%" padding="0 80px">
-          <UserInfo user={user} />
+          <UserInfo user={user} courseId={id} />
           <Summary />
         </CourseInfoContainer>
       </Container>
