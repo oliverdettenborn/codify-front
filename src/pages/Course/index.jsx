@@ -13,6 +13,7 @@ export default function Course() {
   const [courseName, setCourseName] = useState('');
   const [description, setDescription] = useState('');
   const [color, setColor] = useState('');
+  const [chapters, setChapters] = useState([]);
   const { user } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
@@ -28,6 +29,7 @@ export default function Course() {
         setCourseName(r.data.title);
         setDescription(r.data.description);
         setColor(hexRgb(r.data.color, { format: 'array' }).slice(0, 3).join());
+        setChapters(r.data.chapters);
       })
       .catch(() => history.push('/home'));
   }, []);
@@ -42,7 +44,7 @@ export default function Course() {
       />
       <Container justifyContent="center" alignItems="center" padding="0 0 0 20px">
         <CourseInfoContainer width="80%" padding="0 80px">
-          <UserInfo user={user} />
+          <UserInfo user={user} courseId={id} />
           <Summary />
         </CourseInfoContainer>
       </Container>
