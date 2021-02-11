@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import mediaQuery from '../utils/mediaQuery';
 
 export default function CourseInfoContainer(props) {
   const {
@@ -40,4 +41,9 @@ const Container = styled.div`
       position: ${props.positionRelative ? 'relative' : 'initial'};
     `
   )}
+  ${mediaQuery}{
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 `;

@@ -47,7 +47,11 @@ const Wrapper = styled.div`
   )}
 
   ${mediaQuery} {
+    padding: 25px;
+    width: 95%;
+  }
+
+  @media(max-width: 450px){
     flex-direction: column;
-    padding: 15px;
   }
 `;

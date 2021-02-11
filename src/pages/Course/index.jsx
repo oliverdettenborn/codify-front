@@ -33,6 +33,7 @@ export default function Course() {
       })
       .catch(() => history.push('/home'));
   }, []);
+  console.log(chapters);
 
   return (
     <>
@@ -42,7 +43,7 @@ export default function Course() {
         courseName={courseName}
         description={description}
       />
-      <Container justifyContent="center" alignItems="center" padding="0 0 0 20px">
+      <Container justifyContent="center" alignItems="center">
         <CourseInfoContainer width="80%" padding="0 80px">
           <UserInfo user={user} courseId={id} />
           <Summary />

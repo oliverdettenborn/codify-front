@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import mediaQuery from '../utils/mediaQuery';
 
 import Loading from './Loading';
 
@@ -39,7 +40,7 @@ const StyledButton = styled.button`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
 
-  @media (max-width: 600px) {
+  ${mediaQuery} {
     font-size: 18px;
   }
 `;

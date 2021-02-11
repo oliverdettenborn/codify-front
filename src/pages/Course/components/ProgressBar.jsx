@@ -6,9 +6,9 @@ import { PlainText } from '../../../components';
 export default function ProgressBar({ percentage }) {
   return (
     <Bar>
-      <Progress percentage={+percentage.split('%')[0]}>
+      <Progress percentage={percentage}>
         <PlainText fontSize="12px">
-          {percentage}
+          {`${percentage}%`}
         </PlainText>
       </Progress>
     </Bar>
@@ -16,7 +16,7 @@ export default function ProgressBar({ percentage }) {
 }
 
 const Bar = styled.div`
-  width: 240px;
+  width: 200px;
   height: 16px;
   position: relative;
   background: lightgray;
