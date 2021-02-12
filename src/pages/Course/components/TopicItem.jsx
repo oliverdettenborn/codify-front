@@ -13,7 +13,7 @@ export default function Item({ topic }) {
     <Topic flex="1" textAlign="left">
       <div>
         {
-          (topic.userHasFinished > 0)
+          (topic.userHasFinished)
             ? <FaCheckCircle color="#76DF93" />
             : <BsCircleFill color="#CFCFCF" />
         }
