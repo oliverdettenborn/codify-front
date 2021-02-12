@@ -42,6 +42,7 @@ export default function Course() {
     });
     setLastTopic(last);
   }
+  console.log(chapters);
 
   useEffect(() => {
     axios
