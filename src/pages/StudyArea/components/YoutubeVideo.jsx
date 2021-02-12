@@ -3,8 +3,8 @@ import YouTube from 'react-youtube';
 import styled from 'styled-components';
 import getYoutubeID from 'get-youtube-id';
 
-export default function Youtubevideo({ children }) {
-  const id = getYoutubeID('https://www.youtube.com/watch?v=jvHY_Ous2D4&ab_channel=KingSwish');
+export default function Youtubevideo({ children, link }) {
+  const id = getYoutubeID(`${link}`);
   return (
     <Container>
       <YouTube videoId={id} />

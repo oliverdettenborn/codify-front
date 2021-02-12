@@ -26,7 +26,7 @@ function App() {
           <Route path="/cursos/:id" exact component={Course} />
           <Route path="/perfil" exact component={Profile} />
           <Route path="/esqueceu-sua-senha" exact component={ForgetPassword} />
-          <Route path="/estudo" exact component={StudyArea} />
+          <Route path="/estudo/:topicId" exact component={StudyArea} />
         </Switch>
       </BrowserRouter>
     </UserProvider>

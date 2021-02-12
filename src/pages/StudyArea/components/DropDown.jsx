@@ -18,6 +18,7 @@ const Container = styled.div`
     justify-content: center;
     background: #292929;
     height: 8vh;
+    position: relative;
     .dropdown {
         background: initial;
         color: #D6D6D6;

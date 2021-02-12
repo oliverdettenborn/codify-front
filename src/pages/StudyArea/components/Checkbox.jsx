@@ -42,6 +42,7 @@ export const Text = styled.label`
    font-family: 'Roboto';
    font-weight: bold;
    margin-left: 5px;
+   margin-top: 2px;
    cursor: pointer;
    transition: all 0.5s;
 `;
