@@ -13,13 +13,14 @@ export default function StudyArea() {
   const { user } = useContext(UserContext);
   const [data, setData] = useState(false);
   const [topicType, setTopicType] = useState('theory');
-  // const history = useHistory();
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_URL_API}/topics/${topicId}/users/${user.userId}`, { headers: { Authorization: `Bearer ${user.token}` } }).then((response) => {
-      // eslint-disable-next-line max-len
-      setData([...response.data.theories, ...response.data.exercises]);
-    });
+    axios
+      .get(`${process.env.REACT_APP_URL_API}/topics/${topicId}/users/${user.userId}`, 
+              { headers: { Authorization: `Bearer ${user.token}` } })
+      .then((response) => {
+          setData([...response.data.theories, ...response.data.exercises]);
+      });
   }, []);
 
   console.log(data);
