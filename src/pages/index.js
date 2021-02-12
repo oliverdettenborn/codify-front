@@ -4,6 +4,7 @@ import SignUp from './SignUp';
 import Home from './Home';
 import Profile from './Profile';
 import ForgetPassword from './ForgetPassword';
+import StudyArea from './StudyArea';
 
 export {
   Course,
@@ -12,4 +13,5 @@ export {
   Home,
   Profile,
   ForgetPassword,
+  StudyArea,
 };

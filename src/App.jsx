@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import {
-  Home, SignIn, SignUp, Course, Profile, ForgetPassword,
+  Home, SignIn, SignUp, Course, Profile, ForgetPassword, StudyArea,
 } from './pages';
 import Globalstyles from './utils/globalstyles';
 import { UserProvider } from './context/UserContext';
@@ -28,6 +28,7 @@ function App() {
             <Route path="/cursos/:id" exact component={Course} />
             <Route path="/perfil" exact component={Profile} />
             <Route path="/esqueceu-sua-senha" exact component={ForgetPassword} />
+            <Route path="/estudo/:courseId/topic/:topicId" exact component={StudyArea} />
           </Switch>
         </BrowserRouter>
       </CourseProvider>

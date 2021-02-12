@@ -19,7 +19,7 @@ export default function Item({ topic }) {
         }
         <h3>{topic.name}</h3>
       </div>
-      <TextLink to={`/estudo/topic/${topic.id}`} text="Visualizar" />
+      <TextLink to={`/estudo/${topic.courseId}/topic/${topic.id}`} text="Visualizar" />
     </Topic>
 
   );

@@ -17,7 +17,7 @@ import UserContext from '../context/UserContext';
 import media from '../utils/mediaQuery';
 
 const ButtonTransparent = styled(Button)`
-  background: transparent;
+  background: transparent!important;
 `;
 
 export default function Header({ user }) {
