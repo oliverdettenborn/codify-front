@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import mediaQuery from '../utils/mediaQuery';
 
 import Loading from './Loading';
 
 export default function Button({
-  onClick, type, disabledButton, children, background, width,
+  onClick, type, disabledButton, children, background, width, height,
 }) {
   return (
     <StyledButton
@@ -13,6 +14,7 @@ export default function Button({
       disabled={disabledButton}
       background={background || '#46A7D4'}
       width={width || '100%'}
+      height={height || '50px'}
     >
       {disabledButton
         ? <Loading />
@@ -23,7 +25,7 @@ export default function Button({
 
 const StyledButton = styled.button`
   width: ${(props) => props.width};
-  height: 50px;
+  height: ${(props) => props.height};
   background-color: ${(props) => (props.disabled ? 'gray' : props.background)};
   border: none;
   font-family: 'Roboto', sans-serif;
@@ -38,8 +40,9 @@ const StyledButton = styled.button`
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
+  padding: 5px;
 
-  @media (max-width: 600px) {
-    font-size: 18px;
+  ${mediaQuery} {
+    font-size: 1.2rem;
   }
 `;

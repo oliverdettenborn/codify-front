@@ -14,7 +14,7 @@ const TitleHeader = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
+    padding-top: 40px;
     h1{
         font-size: 4rem;
         color: white;

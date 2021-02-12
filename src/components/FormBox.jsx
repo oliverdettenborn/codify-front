@@ -15,7 +15,7 @@ const Container = styled.form`
   border-radius: 10px;
   width: 28%;
   padding: 30px 25px 20px 25px;
-  margin: 35px auto 0px auto;
+  margin: 25px auto 0px auto;
 
   ${media}{
     width: 80%;

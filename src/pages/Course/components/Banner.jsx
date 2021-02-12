@@ -18,11 +18,11 @@ export default function Banner({ background, courseName, description }) {
         size="50"
         to="/home"
       />
-      <PlainText fontSize="2.6rem" fontWeight="bold" margin=" 0 0 15px 0" color={(background === '0,0,0' && '#FFF')}>
+      <PlainText fontSize="2.5rem" fontWeight="bold" margin=" 0 0 8px 0" color={(background === '0,0,0' && '#FFF')}>
         {courseName}
       </PlainText>
 
-      <PlainText fontSize="1.5rem">
+      <PlainText fontSize="1.2rem" color={(background === '0,0,0' && '#FFF')}>
         {description}
       </PlainText>
     </CourseInfoContainer>

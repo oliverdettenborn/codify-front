@@ -31,6 +31,8 @@ export default function PlainText(props) {
 }
 
 const Text = styled.span`
+margin: auto;
+text-align: center;
   ${(props) => (
     css`
       color: ${props.color || 'initial'};

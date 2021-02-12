@@ -9,10 +9,8 @@ import {
 } from './components';
 
 export default function Home() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const history = useHistory();
-
-  const alredyStartCourse = false;
 
   if (!user.token) {
     history.push('/');
@@ -21,17 +19,17 @@ export default function Home() {
   return (
     <>
       <Header user={user} />
-      <BannerWelcome user={user} alredyStartCourse={alredyStartCourse} />
+      <BannerWelcome user={user} alredyStartCourse={user.hasInitAnyCourse} />
       <Container>
         {
-          alredyStartCourse
+          user.hasInitAnyCourse
             ? (
               <>
                 <OngoingCourses user={user} />
                 <SuggestedCourses user={user} />
               </>
             )
-            : <ListAllCourse user={user} />
+            : <ListAllCourse user={user} setUser={setUser} />
         }
       </Container>
     </>
