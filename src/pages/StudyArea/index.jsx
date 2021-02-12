@@ -15,9 +15,12 @@ export default function StudyArea() {
   const [topicType, setTopicType] = useState('theory');
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_URL_API}/topics/${topicId}/users/${user.userId}`, { headers: { Authorization: `Bearer ${user.token}` } }).then((response) => {
-      setData([...response.data.theories, ...response.data.exercises]);
-    });
+    axios
+      .get(`${process.env.REACT_APP_URL_API}/topics/${topicId}/users/${user.userId}`,
+        { headers: { Authorization: `Bearer ${user.token}` } })
+      .then((response) => {
+        setData([...response.data.theories, ...response.data.exercises]);
+      });
   }, []);
   return (
     <>
