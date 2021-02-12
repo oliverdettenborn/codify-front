@@ -12,7 +12,6 @@ export default function Checkbox({ theoryId }) {
     axios.post(`${process.env.REACT_APP_URL_API}/users/${user.userId}/theories/${theoryId}/progress`, null, { headers: { Authorization: `Bearer ${user.token}` } }).then();
   }
   return (
-    <>
       <CheckboxContainer checked={checked} onClick={() => handleCheckboxChange(theoryId)}>
         <HiddenCheckbox checked={checked} />
         <StyledCheckbox checked={checked} />
@@ -22,7 +21,6 @@ export default function Checkbox({ theoryId }) {
           {' '}
         </Text>
       </CheckboxContainer>
-    </>
   );
 }
 export const CheckboxContainer = styled.div`
