@@ -7,7 +7,7 @@ export default function TitleNameUser({ course }) {
     id, title, description, color, imageUrl,
   } = course;
   return (
-    <Link to={`/cursos/${id}`} target="_blank">
+    <Link to={`/cursos/${id}`}>
       <Container>
         <BoxImage color={color}>
           <img src={imageUrl} alt={title} />

@@ -30,7 +30,7 @@ export default function Header({ user }) {
           </Text>
         </Link>
       </div>
-      <UserAvatar user={user} />
+      <UserAvatar user={user} size="40" />
     </Container>
   );
 }

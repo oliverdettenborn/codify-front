@@ -14,6 +14,7 @@ import Header from './Header';
 import Error from './Error';
 import Banner from './Banner';
 import UserAvatar from './Avatar';
+import ButtonClickToBack from './ButtonClickToBack';
 
 export {
   Building,
@@ -32,4 +33,5 @@ export {
   Error,
   UserAvatar,
   Banner,
+  ButtonClickToBack,
 };
