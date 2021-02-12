@@ -47,9 +47,9 @@ export default function Course() {
     axios
       .get(`${process.env.REACT_APP_URL_API}/courses/${id}/chapters`, { headers: { Authorization: `Bearer ${user.token}` } })
       .then(saveCourseInformations)
-      .catch((err) => {
-        // history.push('/home');
-        console.log(err);
+      .catch(() => {
+        alert('Ocorreu um erro ao carregar o curso, tente novamente mais tarde!');
+        history.push('/home');
       });
   }, []);
 
