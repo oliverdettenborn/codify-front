@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import mediaQuery from '../utils/mediaQuery';
 
 import Loading from './Loading';
 
@@ -41,8 +42,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => (props.borderRadius)};
-
-  @media (max-width: 600px) {
-    font-size: 18px;
+  ${mediaQuery} {
+    font-size: 1.2rem;
   }
 `;

@@ -1,12 +1,15 @@
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ButtonClickToBack } from '../../../components';
+import CourseContext from '../../../context/CourseContext';
 
 export default function CourseDropdown() {
   const options = ['Apresentação - Como usar', 'Apresentação - Entrando na plataforma', 'Apresentação - Fazendo teorias'];
   const defaultOption = options[0];
+  const { course } = useContext(CourseContext);
+  console.log(course);
   return (
     <Container>
       <ButtonClickToBack to="/" top="1.3vh" left="0" height="35px!important" />

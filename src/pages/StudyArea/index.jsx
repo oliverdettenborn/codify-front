@@ -13,6 +13,7 @@ export default function StudyArea() {
   const { user } = useContext(UserContext);
   const [data, setData] = useState(false);
   const [topicType, setTopicType] = useState('theory');
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     axios
@@ -21,7 +22,7 @@ export default function StudyArea() {
       .then((response) => {
         setData([...response.data.theories, ...response.data.exercises]);
       });
-  }, []);
+  }, [refresh]);
   return (
     <>
       <CourseDropdown />
@@ -31,7 +32,7 @@ export default function StudyArea() {
           ? (
             <YoutubeVideo link={data[0].youtubeUrl}>
               <Container>
-                <Checkbox theoryId={data[0].theoryId} />
+                <Checkbox theoryId={data[0].theoryId} refresh={refresh} setRefresh={setRefresh} />
                 <Button onClick={() => setTopicType('Exercise')} width="25%" height="30px" fontsize="15px" borderRadius="8px">{'Avançar >>'}</Button>
               </Container>
             </YoutubeVideo>

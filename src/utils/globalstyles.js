@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import mediaQuery from './mediaQuery';
+
 const GlobalStyle = createGlobalStyle`
 button{
     cursor: pointer;
@@ -32,6 +34,12 @@ button{
   }
   * {
     box-sizing: border-box;
+  }
+  html{
+    font-size: 18px;
+    ${mediaQuery}{
+      font-size: 14px;
+    }
   }
   `;
 export default GlobalStyle;

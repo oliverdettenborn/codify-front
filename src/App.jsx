@@ -12,23 +12,26 @@ import {
 } from './pages';
 import Globalstyles from './utils/globalstyles';
 import { UserProvider } from './context/UserContext';
+import { CourseProvider } from './context/CourseContext';
 
 function App() {
   return (
     <UserProvider>
-      <BrowserRouter>
-        <Reset />
-        <Globalstyles />
-        <Switch>
-          <Route path="/" exact component={SignIn} />
-          <Route path="/cadastro" exact component={SignUp} />
-          <Route path="/home" exact component={Home} />
-          <Route path="/cursos/:id" exact component={Course} />
-          <Route path="/perfil" exact component={Profile} />
-          <Route path="/esqueceu-sua-senha" exact component={ForgetPassword} />
-          <Route path="/estudo/:topicId" exact component={StudyArea} />
-        </Switch>
-      </BrowserRouter>
+      <CourseProvider>
+        <BrowserRouter>
+          <Reset />
+          <Globalstyles />
+          <Switch>
+            <Route path="/" exact component={SignIn} />
+            <Route path="/cadastro" exact component={SignUp} />
+            <Route path="/home" exact component={Home} />
+            <Route path="/cursos/:id" exact component={Course} />
+            <Route path="/perfil" exact component={Profile} />
+            <Route path="/esqueceu-sua-senha" exact component={ForgetPassword} />
+            <Route path="/estudo/:courseId/topic/:topicId" exact component={StudyArea} />
+          </Switch>
+        </BrowserRouter>
+      </CourseProvider>
     </UserProvider>
   );
 }

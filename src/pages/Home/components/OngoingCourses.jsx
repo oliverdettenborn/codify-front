@@ -10,9 +10,8 @@ export default function OngoingCourses({ user }) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL_API}/courses/users/${user.id}/outgoing`)
+      .get(`${process.env.REACT_APP_URL_API}/users/${user.userId}/courses/ongoing`, { headers: { Authorization: `Bearer ${user.token}` } })
       .then((response) => setCourses(response.data))
-      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
 
@@ -27,12 +26,16 @@ export default function OngoingCourses({ user }) {
         />
         )
       }
-      <ContainerCourse
-        courses={courses.slice(1)}
-        title={courses.length > 1 && 'Meus cursos em andamento'}
-        loading={loading}
-        showMessageWithEmptyArray={false}
-      />
+      {
+        (courses.length > 1) && (
+          <ContainerCourse
+            courses={courses.slice(1)}
+            title={courses.length > 1 && 'Meus cursos em andamento'}
+            loading={loading}
+            showMessageWithEmptyArray={false}
+          />
+        )
+      }
     </>
   );
 }

@@ -7,5 +7,6 @@ export default function Loading() {
 
 const Image = styled.img`
   height: 100%;
-  margin: auto 0;
+  margin: auto;
+  text-align: center;
 `;

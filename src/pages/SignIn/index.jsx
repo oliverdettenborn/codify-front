@@ -35,7 +35,7 @@ export default function SignIn() {
         if (err.response && err.response.status === 401) {
           setError('Email ou senha incorretos');
         } else if (err.response && err.response.status === 404) {
-          setError('Sistema fora do ar, tente novamente mais tarde');
+          setError('Esse usuário não existe');
         } else {
           setError('Houve um erro desconhecido, tente novamente mais tarde');
         }

@@ -2,10 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function TextLink({ text, to }) {
+export default function TextLink({
+  text, to, color, fontSize,
+}) {
   return (
     <Link to={to}>
-      <Text>{text}</Text>
+      <Text
+        color={color}
+        fontSize={fontSize}
+      >
+        {text}
+      </Text>
     </Link>
   );
 }
@@ -18,5 +25,5 @@ const Text = styled.h6`
     text-decoration-line: underline;
     text-align: center;
     margin: 15px 0px;
-    color: #787878;
+    color: ${(props) => props.color || '#787878'}
 `;
