@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import ContainerCourse from './ContainerCourse';
 
-export default function TitleNameUser({ user }) {
+export default function TitleNameUser({ user, setUser }) {
   const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState([]);
   const history = useHistory();
@@ -16,7 +16,7 @@ export default function TitleNameUser({ user }) {
       .then((response) => setCourses(response.data))
       .catch((err) => {
         if (err.response && err.response.status === 401) {
-          alert('Necessário realizar o login');
+          setUser({});
           history.push('/');
         }
       })

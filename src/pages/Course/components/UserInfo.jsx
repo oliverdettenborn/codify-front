@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
@@ -10,11 +11,13 @@ import {
 import ProgressBar from './ProgressBar';
 import CourseContext from '../../../context/CourseContext';
 
-export default function Course({ user, courseId, chapters }) {
+export default function Course({
+  user, setUser, courseId, chapters,
+}) {
   const [progress, setProgress] = useState(20);
   const [disabledButton, setDisabledButton] = useState(false);
   const [hasStarted, setHasStarted] = useState(true);
-  const { lastTopic } = useContext(CourseContext);
+  const { lastTopicId } = useContext(CourseContext);
 
   const history = useHistory();
 
@@ -44,7 +47,11 @@ export default function Course({ user, courseId, chapters }) {
         null,
         { headers: { Authorization: `Bearer ${user.token}` } },
       )
-      .then(() => history.push(`/estudo/${courseId}/topic/${chapters[0].topics[0].id}`))
+      .then(() => {
+        user.hasInitAnyCourse = true;
+        setUser({ ...user });
+        history.push(`/estudo/${courseId}/topic/${chapters[0].topics[0].id}`);
+      })
       .catch(() => {
         alert('Não foi possível iniciar esse curso no momento, tente novamente mais tarde!');
         history.push('/');
@@ -53,7 +60,7 @@ export default function Course({ user, courseId, chapters }) {
   }
 
   function continueCourse() {
-    history.push(`/estudo/${courseId}/topic/${lastTopic.id}`);
+    history.push(`/estudo/${courseId}/topic/${lastTopicId}`);
   }
 
   return (

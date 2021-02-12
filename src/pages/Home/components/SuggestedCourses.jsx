@@ -12,7 +12,6 @@ export default function SuggestedCourses({ user }) {
       .get(`${process.env.REACT_APP_URL_API}/courses/suggestions`,
         { headers: { Authorization: `Bearer ${user.token}` } })
       .then((response) => setCourses(response.data))
-      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
 

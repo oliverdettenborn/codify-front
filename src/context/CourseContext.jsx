@@ -6,12 +6,12 @@ export default CourseContext;
 
 export function CourseProvider({ children }) {
   const [course, setCourse] = useState(null);
-  const [lastTopic, setLastTopic] = useState(null);
+  const [lastTopicId, setLastTopicId] = useState(null);
 
   return (
     <CourseContext.Provider
       value={{
-        course, setCourse, lastTopic, setLastTopic,
+        course, setCourse, lastTopicId, setLastTopicId,
       }}
     >
       {children}

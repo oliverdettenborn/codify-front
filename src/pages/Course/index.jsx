@@ -15,8 +15,8 @@ export default function Course() {
   const [description, setDescription] = useState('');
   const [color, setColor] = useState('');
   const [chapters, setChapters] = useState([]);
-  const { user } = useContext(UserContext);
-  const { setCourse, setLastTopic } = useContext(CourseContext);
+  const { user, setUser } = useContext(UserContext);
+  const { setCourse, setLastTopicId } = useContext(CourseContext);
   const { id } = useParams();
   const history = useHistory();
 
@@ -31,18 +31,8 @@ export default function Course() {
     setColor(hexRgb(course.color, { format: 'array' }).slice(0, 3).join());
     setChapters(course.chapters);
     setCourse(course);
-    let last = course.chapters[0].topics[0];
-    course.chapters.forEach((chapter) => {
-      chapter.topics.forEach((topic) => {
-        const topicIsFinish = topic.topicUsers.length > 0;
-        if (topicIsFinish) {
-          last = topic;
-        }
-      });
-    });
-    setLastTopic(last);
+    setLastTopicId(course.lastTopicId);
   }
-  console.log(chapters);
 
   useEffect(() => {
     axios
@@ -64,7 +54,12 @@ export default function Course() {
       />
       <Container justifyContent="center" alignItems="center">
         <CourseInfoContainer width="80%" padding="0 80px">
-          <UserInfo user={user} courseId={id} chapters={chapters} />
+          <UserInfo
+            user={user}
+            setUser={setUser}
+            courseId={id}
+            chapters={chapters}
+          />
           <Summary chapters={chapters} />
         </CourseInfoContainer>
       </Container>
