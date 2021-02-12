@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { FaChevronLeft } from 'react-icons/fa';
 
 export default function Button({
-  to, size, color, top, bottom, left, right,
+  to, size, color, top, bottom, left, right, height,
 }) {
   return (
     <Link to={to || '/'}>
@@ -14,6 +14,7 @@ export default function Button({
         bottom={bottom}
         left={left}
         right={right}
+        height={height || '50px'}
       >
         <FaChevronLeft size={size * 0.65} />
       </Icon>
@@ -28,7 +29,7 @@ const Icon = styled.div`
   justify-content: center;
   align-items: center;
   width: 50px;
-  height: 50px;
+  height: ${(props) => (props.height)};
   position: absolute;
   
   ${(props) => (

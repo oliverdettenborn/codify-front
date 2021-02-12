@@ -2,12 +2,14 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import React from 'react';
 import styled from 'styled-components';
+import { ButtonClickToBack } from '../../../components';
 
 export default function CourseDropdown() {
   const options = ['Apresentação - Como usar', 'Apresentação - Entrando na plataforma', 'Apresentação - Fazendo teorias'];
   const defaultOption = options[0];
   return (
     <Container>
+      <ButtonClickToBack to="/" top="1.3vh" left="0" height="35px!important" />
       <Dropdown menuClassName="menu" arrowClassName="arrow" controlClassName="dropdown" options={options} value={defaultOption} placeholder="Select an option" />
     </Container>
   );

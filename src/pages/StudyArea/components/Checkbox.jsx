@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import UserContext from '../../../context/UserContext';
 
-export default function Checkbox() {
+export default function Checkbox({ theoryId }) {
+  const { user } = useContext(UserContext);
   const [checked, setChecked] = useState(false);
   function handleCheckboxChange() {
+    console.log(theoryId);
     setChecked(!checked);
+    axios.post(`${process.env.REACT_APP_URL_API}/users/${user.userId}/theories/${theoryId}/progress`, null, { headers: { Authorization: `Bearer ${user.token}` } }).then();
   }
   return (
     <>
-      <CheckboxContainer checked={checked} onClick={handleCheckboxChange}>
-        <HiddenCheckbox checked={checked} onClick={handleCheckboxChange} />
+      <CheckboxContainer checked={checked} onClick={() => handleCheckboxChange(theoryId)}>
+        <HiddenCheckbox checked={checked} />
         <StyledCheckbox checked={checked} />
         <Text checked={checked}>
           {' '}

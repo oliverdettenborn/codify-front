@@ -7,7 +7,7 @@ export default function CircleLines({ list }) {
     <Container>
       {list.map((e, i) => (
         <>
-          <BulletBox done={e.userHasFinished}>
+          <BulletBox exerciseNumber={i} done={e.userHasFinished}>
             <Bullet done={e.userHasFinished} />
             {i === 0 && 'Teoria'}
             {i !== 0 && 'Exercício'}
