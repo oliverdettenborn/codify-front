@@ -43,7 +43,6 @@ const Container = styled.div`
   )}
   ${mediaQuery}{
     width: 100%;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 0 10px;
   }
 `;

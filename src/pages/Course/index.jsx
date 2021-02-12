@@ -8,6 +8,7 @@ import {
 } from '../../components';
 import { Summary, Banner, UserInfo } from './components';
 import UserContext from '../../context/UserContext';
+import CourseContext from '../../context/CourseContext';
 
 export default function Course() {
   const [courseName, setCourseName] = useState('');
@@ -15,6 +16,7 @@ export default function Course() {
   const [color, setColor] = useState('');
   const [chapters, setChapters] = useState([]);
   const { user } = useContext(UserContext);
+  const { setCourse, setLastTopic } = useContext(CourseContext);
   const { id } = useParams();
   const history = useHistory();
 
@@ -22,18 +24,34 @@ export default function Course() {
     history.push('/');
   }
 
+  function saveCourseInformations(response) {
+    const course = response.data;
+    setCourseName(course.title);
+    setDescription(course.description);
+    setColor(hexRgb(course.color, { format: 'array' }).slice(0, 3).join());
+    setChapters(course.chapters);
+    setCourse(course);
+    let last = course.chapters[0].topics[0];
+    course.chapters.forEach((chapter) => {
+      chapter.topics.forEach((topic) => {
+        const topicIsFinish = topic.topicUsers.length > 0;
+        if (topicIsFinish) {
+          last = topic;
+        }
+      });
+    });
+    setLastTopic(last);
+  }
+
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL_API}/courses/${id}`, { headers: { Authorization: `Bearer ${user.token}` } })
-      .then((r) => {
-        setCourseName(r.data.title);
-        setDescription(r.data.description);
-        setColor(hexRgb(r.data.color, { format: 'array' }).slice(0, 3).join());
-        setChapters(r.data.chapters);
-      })
-      .catch(() => history.push('/home'));
+      .get(`${process.env.REACT_APP_URL_API}/courses/${id}/chapters`, { headers: { Authorization: `Bearer ${user.token}` } })
+      .then(saveCourseInformations)
+      .catch((err) => {
+        // history.push('/home');
+        console.log(err);
+      });
   }, []);
-  console.log(chapters);
 
   return (
     <>
@@ -45,8 +63,8 @@ export default function Course() {
       />
       <Container justifyContent="center" alignItems="center">
         <CourseInfoContainer width="80%" padding="0 80px">
-          <UserInfo user={user} courseId={id} />
-          <Summary />
+          <UserInfo user={user} courseId={id} chapters={chapters} />
+          <Summary chapters={chapters} />
         </CourseInfoContainer>
       </Container>
     </>

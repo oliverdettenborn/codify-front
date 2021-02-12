@@ -1,17 +1,26 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import {
   PlainText, CourseDataWrapper, Button, UserAvatar, Container,
 } from '../../../components';
 import ProgressBar from './ProgressBar';
+import CourseContext from '../../../context/CourseContext';
 
-export default function Course({ user, courseId }) {
+export default function Course({ user, courseId, chapters }) {
   const [progress, setProgress] = useState(20);
   const [disabledButton, setDisabledButton] = useState(false);
   const [hasStarted, setHasStarted] = useState(true);
+  const { lastTopic } = useContext(CourseContext);
+
+  const history = useHistory();
+
+  if (!user.token) {
+    history.push('/');
+  }
 
   useEffect(() => {
     axios
@@ -20,14 +29,31 @@ export default function Course({ user, courseId }) {
         { headers: { Authorization: `Bearer ${user.token}` } },
       )
       .then((r) => {
-        setProgress(+r.data.progress);
-        setHasStarted(r.data.hasStarted);
+        setProgress(+r.data.progress || 0);
+        setHasStarted(r.data.hasStarted || false);
       })
       .catch(() => alert('Erro ao carregar progresso no curso'));
   }, []);
 
   function initCourse() {
     setDisabledButton(true);
+
+    axios
+      .post(
+        `${process.env.REACT_APP_URL_API}/courses/${courseId}/users/${user.userId}`,
+        null,
+        { headers: { Authorization: `Bearer ${user.token}` } },
+      )
+      .then(() => history.push(`/estudo/${courseId}/topic/${chapters[0].topics[0].id}`))
+      .catch(() => {
+        alert('Não foi possível iniciar esse curso no momento, tente novamente mais tarde!');
+        history.push('/');
+      })
+      .finally(() => setDisabledButton(false));
+  }
+
+  function continueCourse() {
+    history.push(`/estudo/${courseId}/topic/${lastTopic.id}`);
   }
 
   return (
@@ -50,7 +76,14 @@ export default function Course({ user, courseId }) {
           <ProgressBar percentage={progress} />
         </Container>
       </UserProgress>
-      <Button width="180px" onClick={initCourse} disabledButton={disabledButton}>{'Iniciar curso >>'}</Button>
+      <Button
+        width="180px"
+        onClick={hasStarted ? continueCourse : initCourse}
+        disabledButton={disabledButton}
+        height="55px"
+      >
+        {hasStarted ? 'Continuar curso >>' : 'Iniciar curso >>'}
+      </Button>
     </CourseDataWrapper>
   );
 }

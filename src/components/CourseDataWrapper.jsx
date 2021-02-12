@@ -11,6 +11,7 @@ export default function CourseDataWrapper(props) {
     top,
     padding,
     flexDirection,
+    margin,
   } = props;
 
   return (
@@ -20,6 +21,7 @@ export default function CourseDataWrapper(props) {
       top={top}
       padding={padding}
       flexDirection={flexDirection}
+      margin={margin}
     >
       {children}
     </Wrapper>
@@ -43,6 +45,7 @@ const Wrapper = styled.div`
       top: ${props.top};
       padding: ${props.padding || 0};
       flex-direction: ${props.flexDirection || 'row'};
+      margin: ${props.margin || 'initial'};
     `
   )}
 
