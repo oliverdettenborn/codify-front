@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Portal,
+  Button,
+} from '@chakra-ui/react';
+import { FiChevronDown } from 'react-icons/fi';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import axios from 'axios';
 import UserAvatar from './Avatar';
-
+import UserContext from '../context/UserContext';
 import media from '../utils/mediaQuery';
 
+const ButtonTransparent = styled(Button)`
+  background: transparent;
+`;
+
 export default function Header({ user }) {
+  const { setUser } = useContext(UserContext);
+
+  function handleLogout() {
+    axios
+      .post(`${process.env.REACT_APP_URL_API}/users/signOut`,
+        null,
+        { headers: { Authorization: `Bearer ${user.token}` } })
+      .then(() => setUser({}));
+  }
+
   return (
     <Container>
       <div>
@@ -30,7 +55,21 @@ export default function Header({ user }) {
           </Text>
         </Link>
       </div>
-      <UserAvatar user={user} size="40" />
+      <Menu>
+        <MenuButton as={ButtonTransparent} rightIcon={<FiChevronDown color="#3D3D3D" />}>
+          <UserAvatar user={user} size="40" />
+        </MenuButton>
+        <Portal>
+          <MenuList>
+            <MenuItem
+              icon={<AiOutlineCloseCircle size="25" />}
+              onClick={handleLogout}
+            >
+              <Text>Logout</Text>
+            </MenuItem>
+          </MenuList>
+        </Portal>
+      </Menu>
     </Container>
   );
 }
