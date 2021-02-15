@@ -5,7 +5,7 @@ import { Accordion } from '@chakra-ui/react';
 import { PlainText } from '../../../components';
 import ItemAccordion from './ItemAccordion';
 
-export default function Course({ chapters }) {
+export default function Course({ chapters, courseId }) {
   return (
     <>
       <PlainText
@@ -18,7 +18,13 @@ export default function Course({ chapters }) {
       <BoxWhite>
         <Accordion defaultIndex={[0]} allowMultiple>
           {
-            chapters.map((chapter) => <ItemAccordion chapter={chapter} key={chapter.id} />)
+            chapters.map((chapter) => (
+              <ItemAccordion
+                chapter={chapter}
+                key={chapter.id}
+                courseId={courseId}
+              />
+            ))
           }
         </Accordion>
       </BoxWhite>

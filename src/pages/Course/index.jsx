@@ -60,7 +60,7 @@ export default function Course() {
             courseId={id}
             chapters={chapters}
           />
-          <Summary chapters={chapters} />
+          <Summary chapters={chapters} courseId={id} />
         </CourseInfoContainer>
       </Container>
     </>
