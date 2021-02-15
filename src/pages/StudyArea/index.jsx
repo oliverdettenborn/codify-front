@@ -59,7 +59,7 @@ export default function StudyArea() {
           : (
             <>
               <CourseDropdown topicId={topicId} />
-              <CircleLines list={data} finished={data} />
+              <CircleLines list={data} finished={data} setIndexActivity={setIndexActivity} />
               <Activity
                 activity={data[indexActivity]}
                 refresh={refresh}
