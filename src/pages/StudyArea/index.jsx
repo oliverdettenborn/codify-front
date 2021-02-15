@@ -58,7 +58,7 @@ export default function StudyArea() {
           ? <Error>Esse tópico está indisponível, tente novamente mais tarde.</Error>
           : (
             <>
-              <CourseDropdown />
+              <CourseDropdown topicId={topicId} />
               <CircleLines list={data} finished={data} />
               <Activity
                 activity={data[indexActivity]}

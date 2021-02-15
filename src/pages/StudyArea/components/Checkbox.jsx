@@ -9,6 +9,7 @@ export default function Checkbox(props) {
   } = props;
   const { user } = useContext(UserContext);
   const [checked, setChecked] = useState(userHasFinished);
+
   function handleCheckboxChange() {
     setChecked(!checked);
     axios

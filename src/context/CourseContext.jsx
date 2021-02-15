@@ -1,12 +1,13 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const CourseContext = createContext();
 
 export default CourseContext;
 
 export function CourseProvider({ children }) {
-  const [course, setCourse] = useState(null);
-  const [lastTopicId, setLastTopicId] = useState(null);
+  const [course, setCourse] = useLocalStorage('@codify-course', {});
+  const [lastTopicId, setLastTopicId] = useLocalStorage('@codify-lastTopic', '');
 
   return (
     <CourseContext.Provider
