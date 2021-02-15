@@ -1,19 +1,23 @@
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import {
-  CircleLines, YoutubeVideo, Checkbox, CourseDropdown, Exercise,
+  CircleLines, CourseDropdown, Activity,
 } from './components';
-import { Button } from '../../components';
+import { Error, Loading } from '../../components';
 import UserContext from '../../context/UserContext';
+import CourseContext from '../../context/CourseContext';
 
 export default function StudyArea() {
-  const { topicId } = useParams();
+  const { topicId, courseId } = useParams();
   const { user } = useContext(UserContext);
-  const [data, setData] = useState(false);
-  const [topicType, setTopicType] = useState('theory');
+  const { setLastTopicId } = useContext(CourseContext);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(false);
+  const [indexActivity, setIndexActivity] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -21,31 +25,58 @@ export default function StudyArea() {
         { headers: { Authorization: `Bearer ${user.token}` } })
       .then((response) => {
         setData([...response.data.theories, ...response.data.exercises]);
+        setLoading(false);
       });
   }, [refresh]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  function changeToNext() {
+    if (indexActivity < data.length) {
+      setIndexActivity(indexActivity + 1);
+    } else {
+      setLastTopicId(topicId);
+      alert('Tópico finalizado');
+      axios
+        .post(
+          `${process.env.REACT_APP_URL_API}/users/${user.userId}/topics/${topicId}/progress`,
+          null,
+          { headers: { Authorization: `Bearer ${user.token}` } },
+        )
+        .then(() => {
+          history.push(`/cursos/${courseId}`);
+        });
+    }
+  }
+
   return (
-    <>
-      <CourseDropdown />
-      {data && <CircleLines list={data} finished={data} /> }
-      {data && (
-        topicType === 'theory'
-          ? (
-            <YoutubeVideo link={data[0].youtubeUrl}>
-              <Container>
-                <Checkbox theoryId={data[0].theoryId} refresh={refresh} setRefresh={setRefresh} />
-                <Button onClick={() => setTopicType('Exercise')} width="25%" height="30px" fontsize="15px" borderRadius="8px">{'Avançar >>'}</Button>
-              </Container>
-            </YoutubeVideo>
+    <Background>
+      {
+        data.length === 0
+          ? <Error>Esse tópico está indisponível, tente novamente mais tarde.</Error>
+          : (
+            <>
+              <CourseDropdown />
+              <CircleLines list={data} finished={data} />
+              <Activity
+                activity={data[indexActivity]}
+                refresh={refresh}
+                setRefresh={setRefresh}
+                changeToNext={changeToNext}
+                totalOfActivities={data.length}
+                index={indexActivity}
+              />
+            </>
           )
-          : <Exercise description={data[1].description} />
-      )}
-    </>
+      }
+    </Background>
   );
 }
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 48vw;
-  height: 50px;
-  padding: 0px 5px;
+
+const Background = styled.div`
+  background: #3d3d3d;
+  width: 100vw;
+  height: 100vh;
 `;

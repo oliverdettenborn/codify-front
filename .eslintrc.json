@@ -19,6 +19,7 @@
     ],
     "rules": {
         "react/prop-types": ["off"],
-        "no-alert": "off"
+        "no-alert": "off",
+        "no-return-assign": "off"
     }
 }
