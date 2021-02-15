@@ -14,7 +14,7 @@ export default function Checkbox(props) {
     setChecked(!checked);
     axios
       .post(
-        `${process.env.REACT_APP_URL_API}/users/${user.userId}/${type}/${id}/progress`,
+        `${process.env.REACT_APP_URL_API}/users/${type}/${id}/progress`,
         null,
         { headers: { Authorization: `Bearer ${user.token}` } },
       )

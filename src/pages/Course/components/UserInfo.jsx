@@ -28,7 +28,7 @@ export default function Course({
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_URL_API}/users/${user.userId}/courses/${courseId}/progress`,
+        `${process.env.REACT_APP_URL_API}/users/courses/${courseId}/progress`,
         { headers: { Authorization: `Bearer ${user.token}` } },
       )
       .then((r) => {
@@ -43,7 +43,7 @@ export default function Course({
 
     axios
       .post(
-        `${process.env.REACT_APP_URL_API}/courses/${courseId}/users/${user.userId}`,
+        `${process.env.REACT_APP_URL_API}/courses/${courseId}/users`,
         null,
         { headers: { Authorization: `Bearer ${user.token}` } },
       )

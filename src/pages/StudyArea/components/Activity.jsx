@@ -8,7 +8,7 @@ import Checkbox from './Checkbox';
 
 export default function Activity(props) {
   const {
-    activity, refresh, setRefresh, changeToNext, index, totalOfActivities,
+    activity, refresh, setRefresh, changeToNext, index, totalOfActivities, disabledButton,
   } = props;
   return (
     <Container>
@@ -25,6 +25,7 @@ export default function Activity(props) {
         />
         <Button
           onClick={changeToNext}
+          disabledButton={disabledButton}
           width="25%"
           height="40px"
           fontsize="15px"

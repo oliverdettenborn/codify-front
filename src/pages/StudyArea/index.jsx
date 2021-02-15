@@ -17,6 +17,7 @@ export default function StudyArea() {
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(false);
   const [indexActivity, setIndexActivity] = useState(0);
+  const [disabledButton, setDisabledButton] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -37,17 +38,20 @@ export default function StudyArea() {
     if (indexActivity < data.length) {
       setIndexActivity(indexActivity + 1);
     } else {
+      setDisabledButton(true);
       setLastTopicId(topicId);
       alert('Tópico finalizado');
       axios
         .post(
-          `${process.env.REACT_APP_URL_API}/users/${user.userId}/topics/${topicId}/progress`,
+          `${process.env.REACT_APP_URL_API}/users/topics/${topicId}/progress`,
           null,
           { headers: { Authorization: `Bearer ${user.token}` } },
         )
         .then(() => {
           history.push(`/cursos/${courseId}`);
-        });
+        })
+        .catch(() => alert('Não foi possível concluir o tópico, tente novamente mais tarde.'))
+        .finally(() => setDisabledButton(false));
     }
   }
 
@@ -67,6 +71,7 @@ export default function StudyArea() {
                 changeToNext={changeToNext}
                 totalOfActivities={data.length}
                 index={indexActivity}
+                disabledButton={disabledButton}
               />
             </>
           )
