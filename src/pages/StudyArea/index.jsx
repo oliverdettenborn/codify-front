@@ -5,7 +5,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import {
   CircleLines, CourseDropdown, Activity,
 } from './components';
-import { Error, Loading } from '../../components';
+import { AlertDialog, Error, Loading } from '../../components';
+
 import UserContext from '../../context/UserContext';
 import CourseContext from '../../context/CourseContext';
 
@@ -18,39 +19,43 @@ export default function StudyArea() {
   const [refresh, setRefresh] = useState(false);
   const [indexActivity, setIndexActivity] = useState(0);
   const [disabledButton, setDisabledButton] = useState(false);
+  const [alertIsOpen, setAlertIsOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL_API}/topics/${topicId}/users/${user.userId}`,
+      .get(`${process.env.REACT_APP_URL_API}/topics/${topicId}/users`,
         { headers: { Authorization: `Bearer ${user.token}` } })
       .then((response) => {
         setData([...response.data.theories, ...response.data.exercises]);
         setLoading(false);
       });
-  }, [refresh]);
+  }, [refresh, topicId, courseId]);
 
   if (loading) {
     return <Loading />;
   }
 
   function changeToNext() {
-    if (indexActivity < data.length) {
+    if (indexActivity < data.length - 1) {
       setIndexActivity(indexActivity + 1);
     } else {
       setDisabledButton(true);
       setLastTopicId(topicId);
-      alert('Tópico finalizado');
       axios
         .post(
           `${process.env.REACT_APP_URL_API}/users/topics/${topicId}/progress`,
           null,
           { headers: { Authorization: `Bearer ${user.token}` } },
         )
-        .then(() => {
-          history.push(`/cursos/${courseId}`);
+        .then((res) => {
+          history.push(`/estudo/${courseId}/topic/${res.data.nextTopic}`);
         })
-        .catch(() => alert('Não foi possível concluir o tópico, tente novamente mais tarde.'))
+        .catch(() => {
+          setErrorMessage('Você precisa concluir todas as atividades desse tópico para avançar para o próximo!');
+          setAlertIsOpen(true);
+        })
         .finally(() => setDisabledButton(false));
     }
   }
@@ -62,7 +67,7 @@ export default function StudyArea() {
           ? <Error>Esse tópico está indisponível, tente novamente mais tarde.</Error>
           : (
             <>
-              <CourseDropdown topicId={topicId} />
+              <CourseDropdown topicId={topicId} courseId={courseId} />
               <CircleLines list={data} finished={data} setIndexActivity={setIndexActivity} />
               <Activity
                 activity={data[indexActivity]}
@@ -72,6 +77,11 @@ export default function StudyArea() {
                 totalOfActivities={data.length}
                 index={indexActivity}
                 disabledButton={disabledButton}
+              />
+              <AlertDialog
+                alertIsOpen={alertIsOpen}
+                setAlertIsOpen={setAlertIsOpen}
+                errorMessage={errorMessage}
               />
             </>
           )
@@ -83,5 +93,7 @@ export default function StudyArea() {
 const Background = styled.div`
   background: #3d3d3d;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
+  width: 100vw;
 `;

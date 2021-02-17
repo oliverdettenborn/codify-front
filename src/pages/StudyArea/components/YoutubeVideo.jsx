@@ -7,7 +7,11 @@ export default function Youtubevideo({ link }) {
   const id = getYoutubeID(`${link}`);
   return (
     <Container>
-      <YouTube videoId={id} />
+      {
+        link
+          ? <YouTube videoId={id} />
+          : 'Teoria ainda não foi cadastrada'
+      }
     </Container>
   );
 }

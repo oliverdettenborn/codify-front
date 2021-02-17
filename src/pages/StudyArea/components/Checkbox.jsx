@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import UserContext from '../../../context/UserContext';
@@ -8,7 +8,11 @@ export default function Checkbox(props) {
     id, setRefresh, refresh, userHasFinished, type,
   } = props;
   const { user } = useContext(UserContext);
-  const [checked, setChecked] = useState(userHasFinished);
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    setChecked(userHasFinished);
+  }, [id]);
 
   function handleCheckboxChange() {
     setChecked(!checked);

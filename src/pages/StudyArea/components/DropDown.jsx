@@ -22,7 +22,7 @@ const ButtonTransparent = styled(Button)`
   }
 `;
 
-export default function CourseDropdown({ topicId }) {
+export default function CourseDropdown({ topicId, courseId }) {
   const { course } = useContext(CourseContext);
   const { chapters } = course;
   const [defaultOption, setDefaultOption] = useState({});
@@ -57,7 +57,7 @@ export default function CourseDropdown({ topicId }) {
 
   return (
     <Container>
-      <ButtonClickToBack to="/" top="20%" left="10px" height="35px!important" />
+      <ButtonClickToBack to={`/cursos/${courseId}`} top="20%" left="10px" height="60%!important" />
       <Menu placement="top">
         <MenuButton as={ButtonTransparent} rightIcon={<FiChevronDown />}>
           {`${defaultOption.chapterName} - ${defaultOption.topicName}`}

@@ -12,7 +12,7 @@ export default function Activity(props) {
   } = props;
   return (
     <Container>
-      {activity.youtubeUrl
+      {activity && activity.youtubeUrl
         ? <YoutubeVideo link={activity.youtubeUrl} />
         : <Exercise description={activity.description} />}
       <Footer>
@@ -27,7 +27,7 @@ export default function Activity(props) {
           onClick={changeToNext}
           disabledButton={disabledButton}
           width="25%"
-          height="40px"
+          height="30%!important"
           fontsize="15px"
           borderRadius="8px"
         >
