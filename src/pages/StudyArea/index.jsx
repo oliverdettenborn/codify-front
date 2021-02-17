@@ -5,7 +5,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import {
   CircleLines, CourseDropdown, Activity,
 } from './components';
-import { AlertDialog, Error, Loading } from '../../components';
+import { AlertDialog, Loading } from '../../components';
 
 import UserContext from '../../context/UserContext';
 import CourseContext from '../../context/CourseContext';
@@ -13,12 +13,12 @@ import CourseContext from '../../context/CourseContext';
 export default function StudyArea() {
   const { topicId, courseId } = useParams();
   const { user } = useContext(UserContext);
-  const { setLastTopicId } = useContext(CourseContext);
+  const { setLastTopicId, refreshContext, setRefreshContext } = useContext(CourseContext);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [refresh, setRefresh] = useState(false);
   const [indexActivity, setIndexActivity] = useState(0);
   const [disabledButton, setDisabledButton] = useState(false);
+  const [refreshCheckBox, setRefreshCheckBox] = useState(false);
   const [alertIsOpen, setAlertIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
@@ -31,7 +31,7 @@ export default function StudyArea() {
         setData([...response.data.theories, ...response.data.exercises]);
         setLoading(false);
       });
-  }, [refresh, topicId, courseId]);
+  }, [refreshCheckBox, refreshContext, topicId, courseId]);
 
   if (loading) {
     return <Loading />;
@@ -51,9 +51,10 @@ export default function StudyArea() {
         )
         .then((res) => {
           history.push(`/estudo/${courseId}/topic/${res.data.nextTopic}`);
+          setRefreshContext(!refreshContext);
         })
         .catch(() => {
-          setErrorMessage('Você precisa concluir todas as atividades desse tópico para avançar para o próximo!');
+          setErrorMessage('Ocorreu um erro ao finalizar esse tópico, tente novamente mais tarde!');
           setAlertIsOpen(true);
         })
         .finally(() => setDisabledButton(false));
@@ -62,17 +63,22 @@ export default function StudyArea() {
 
   return (
     <Background>
+      <CourseDropdown
+        topicId={topicId}
+        courseId={courseId}
+        showOnlyButtonBack={data.length === 0}
+        refreshContext={refreshContext}
+      />
       {
         data.length === 0
-          ? <Error>Esse tópico está indisponível, tente novamente mais tarde.</Error>
+          ? <Message>Esse tópico está indisponível, tente novamente mais tarde.</Message>
           : (
             <>
-              <CourseDropdown topicId={topicId} courseId={courseId} />
               <CircleLines list={data} finished={data} setIndexActivity={setIndexActivity} />
               <Activity
                 activity={data[indexActivity]}
-                refresh={refresh}
-                setRefresh={setRefresh}
+                refresh={refreshCheckBox}
+                setRefresh={setRefreshCheckBox}
                 changeToNext={changeToNext}
                 totalOfActivities={data.length}
                 index={indexActivity}
@@ -96,4 +102,10 @@ const Background = styled.div`
   height: 100%;
   min-height: 100vh;
   width: 100vw;
+`;
+
+const Message = styled.h3`
+  text-align: center;
+  color: white;
+  padding: 100px;
 `;

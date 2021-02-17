@@ -22,17 +22,26 @@ const ButtonTransparent = styled(Button)`
   }
 `;
 
-export default function CourseDropdown({ topicId, courseId }) {
-  const { course } = useContext(CourseContext);
-  const { chapters } = course;
+export default function CourseDropdown(props) {
+  const {
+    topicId, courseId, showOnlyButtonBack, refreshContext,
+  } = props;
+  const { chapters } = useContext(CourseContext);
   const [defaultOption, setDefaultOption] = useState({});
   const [options, setOptions] = useState([]);
+
+  if (showOnlyButtonBack) {
+    return (
+      <Container>
+        <ButtonClickToBack to={`/cursos/${courseId}`} top="35px" left="10px" height="60%!important" />
+      </Container>
+    );
+  }
 
   useEffect(() => {
     const currentChapter = chapters.find(({ topics }) => topics.filter((t) => t.id === +topicId));
     const currentTopic = currentChapter.topics.find((t) => t.id === +topicId);
     setDefaultOption({
-      ...defaultOption,
       chapterName: currentChapter.name,
       chapterId: currentChapter.id,
       topicId,
@@ -53,7 +62,7 @@ export default function CourseDropdown({ topicId, courseId }) {
         };
       });
     setOptions(optionsMap);
-  }, []);
+  }, [refreshContext, topicId, courseId, chapters]);
 
   return (
     <Container>
@@ -68,7 +77,7 @@ export default function CourseDropdown({ topicId, courseId }) {
               <MenuOptionGroup title={opt.name}>
                 {
                   opt.items.map((item) => (
-                    <TextLink to={`/estudo/${course.id}/topic/${item.value}`}>
+                    <TextLink to={`/estudo/${courseId}/topic/${item.value}`}>
                       {
                           (item.done)
                             ? <FaCheckCircle color="#76DF93" />
