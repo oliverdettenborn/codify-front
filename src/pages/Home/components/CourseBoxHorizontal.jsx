@@ -1,8 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import UserContext from '../../../context/UserContext';
 import CourseContext from '../../../context/CourseContext';
 
 import { Button, TextLink } from '../../../components';
@@ -10,30 +8,10 @@ import mediaQuery from '../../../utils/mediaQuery';
 
 export default function CourseBoxHorizontal({ course, titleBox }) {
   const {
-    id, title, description, color, imageUrl,
+    id, title, description, color, imageUrl, nextTopicId,
   } = course;
+  const { setCourseId } = useContext(CourseContext);
   const history = useHistory();
-
-  const [disabledButton, setDisabledButton] = useState(false);
-  const { user } = useContext(UserContext);
-  const { setCourse, setLastTopicId } = useContext(CourseContext);
-
-  function continueCourse() {
-    setDisabledButton(true);
-    axios
-      .get(`${process.env.REACT_APP_URL_API}/courses/${id}/chapters`, { headers: { Authorization: `Bearer ${user.token}` } })
-      .then(((response) => {
-        setCourse(response.data);
-        setLastTopicId(response.data.lastTopicId);
-        history.push(
-          `/estudo/${response.data.id}/topic/${response.data.lastTopicId}`,
-        );
-      }))
-      .catch(() => {
-        setDisabledButton(false);
-        alert('Ocorreu um erro ao carregar o curso, tente novamente mais tarde!');
-      });
-  }
 
   return (
     <Container>
@@ -46,7 +24,7 @@ export default function CourseBoxHorizontal({ course, titleBox }) {
           <TitleCourse>{title}</TitleCourse>
           <Description>{description}</Description>
           <TextLink
-            to={`/cursos/${course.id}`}
+            to={`/cursos/${id}`}
             text="Ver mais"
             color="#BBBBBB"
           />
@@ -54,8 +32,10 @@ export default function CourseBoxHorizontal({ course, titleBox }) {
         <Button
           width="215px"
           height="60px"
-          disabledButton={disabledButton}
-          onClick={continueCourse}
+          onClick={() => {
+            setCourseId(id);
+            history.push(`/estudo/${id}/topic/${nextTopicId}`);
+          }}
         >
           {'Continuar curso >>'}
         </Button>

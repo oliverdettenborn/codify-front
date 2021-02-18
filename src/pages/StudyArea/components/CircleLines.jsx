@@ -2,13 +2,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function CircleLines({ list }) {
+export default function CircleLines({ list, setIndexActivity }) {
   return (
     <Container>
       {list.map((e, i) => (
         <>
           <BulletBox exerciseNumber={i} done={e.userHasFinished}>
-            <Bullet done={e.userHasFinished} />
+            <Bullet
+              done={e.userHasFinished}
+              onClick={() => setIndexActivity(i)}
+            />
             {i === 0 && 'Teoria'}
             {i !== 0 && 'Exercício'}
           </BulletBox>

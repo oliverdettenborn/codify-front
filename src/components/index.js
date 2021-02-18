@@ -15,6 +15,7 @@ import Error from './Error';
 import Banner from './Banner';
 import UserAvatar from './Avatar';
 import ButtonClickToBack from './ButtonClickToBack';
+import AlertDialog from './AlertDialog';
 
 export {
   Building,
@@ -34,4 +35,5 @@ export {
   UserAvatar,
   Banner,
   ButtonClickToBack,
+  AlertDialog,
 };

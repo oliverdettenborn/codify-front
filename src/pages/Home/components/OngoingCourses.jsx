@@ -10,7 +10,7 @@ export default function OngoingCourses({ user }) {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL_API}/users/${user.userId}/courses/ongoing`, { headers: { Authorization: `Bearer ${user.token}` } })
+      .get(`${process.env.REACT_APP_URL_API}/users/courses/ongoing`, { headers: { Authorization: `Bearer ${user.token}` } })
       .then((response) => setCourses(response.data))
       .finally(() => setLoading(false));
   }, []);

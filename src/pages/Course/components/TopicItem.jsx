@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { TextLink } from '../../../components';
 
-export default function Item({ topic }) {
+export default function Item({ topic, courseId }) {
   return (
     <Topic flex="1" textAlign="left">
       <div>
@@ -19,7 +19,7 @@ export default function Item({ topic }) {
         }
         <h3>{topic.name}</h3>
       </div>
-      <TextLink to={`/estudo/${topic.courseId}/topic/${topic.id}`} text="Visualizar" />
+      <TextLink to={`/estudo/${courseId}/topic/${topic.id}`} text="Visualizar" />
     </Topic>
 
   );
