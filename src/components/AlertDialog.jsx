@@ -13,26 +13,24 @@ export default function AlertDialogExample({ alertIsOpen, setAlertIsOpen, errorM
   const cancelRef = React.useRef();
 
   return (
-    <>
-      <AlertDialog
-        isOpen={alertIsOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogBody>
-              {errorMessage}
-            </AlertDialogBody>
+    <AlertDialog
+      isOpen={alertIsOpen}
+      leastDestructiveRef={cancelRef}
+      onClose={onClose}
+    >
+      <AlertDialogOverlay>
+        <AlertDialogContent>
+          <AlertDialogBody>
+            {errorMessage}
+          </AlertDialogBody>
 
-            <AlertDialogFooter>
-              <Button colorScheme="red" onClick={onClose} ml={3}>
-                Fechar
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
-    </>
+          <AlertDialogFooter>
+            <Button colorScheme="red" onClick={onClose} ml={3}>
+              Fechar
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
   );
 }
