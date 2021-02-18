@@ -5,7 +5,8 @@ import mediaQuery from '../utils/mediaQuery';
 import Loading from './Loading';
 
 export default function Button({
-  onClick, type, disabledButton, children, background, width, height, fontsize, borderRadius,
+  onClick, type, disabledButton, children,
+  background, width, height, fontsize, borderRadius, padding,
 }) {
   return (
     <StyledButton
@@ -17,6 +18,7 @@ export default function Button({
       height={height || '50px'}
       fontsize={fontsize || '20px'}
       borderRadius={borderRadius || '6px'}
+      padding={padding || '0px'}
     >
       {disabledButton
         ? <Loading />
@@ -39,6 +41,7 @@ const StyledButton = styled.button`
   margin-bottom: 10px;
   text-align: center;
   outline: none;
+  padding: ${(props) => (props.padding)};
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => (props.borderRadius)};
