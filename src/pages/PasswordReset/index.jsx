@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { NotificationManager } from 'react-notifications';
 
 import {
   BoxBackground,
@@ -38,14 +39,12 @@ export default function PasswordReset() {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => alert.sucess('senha redefinida'))
+      .then(() => NotificationManager.success('Senha redefinida com sucesso!', 'Faça login para continuar'))
       .catch((err) => {
         if (err.response && err.response.status === 401) {
-          alert.show('Não foi possível alterar sua senha');
-        } else if (err.response && err.response.status === 404) {
-          alert.show('As senhas precisam ser iguais');
+          NotificationManager.error('Não foi possível alterar sua senha');
         } else {
-          alert.show('Houve um erro desconhecido, tente novamente mais tarde');
+          NotificationManager.error('Houve um erro desconhecido, tente novamente mais tarde');
         }
       })
       .finally(() => setLoading(false));
