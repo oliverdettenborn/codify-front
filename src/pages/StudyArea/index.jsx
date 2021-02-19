@@ -33,6 +33,10 @@ export default function StudyArea() {
       });
   }, [refreshCheckBox, refreshContext, topicId, courseId]);
 
+  useEffect(() => {
+    setIndexActivity(0);
+  }, [topicId]);
+
   if (loading) {
     return <Loading />;
   }
