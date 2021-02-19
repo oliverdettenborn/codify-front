@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { NotificationManager } from 'react-notifications';
 
@@ -20,6 +20,7 @@ export default function PasswordReset() {
   const [loading, setLoading] = useState(false);
 
   const { token } = useParams();
+  const history = useHistory();
 
   function handleResetPassword(e) {
     e.preventDefault();
@@ -39,7 +40,10 @@ export default function PasswordReset() {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => NotificationManager.success('Senha redefinida com sucesso!', 'Faça login para continuar'))
+      .then(() => {
+        NotificationManager.success('Senha redefinida com sucesso!', 'Faça login para continuar')
+        history.push('/')
+      })
       .catch((err) => {
         if (err.response && err.response.status === 401) {
           NotificationManager.error('Não foi possível alterar sua senha');
