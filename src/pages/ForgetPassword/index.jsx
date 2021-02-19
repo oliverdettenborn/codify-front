@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 
+import { NotificationManager } from 'react-notifications';
 import {
   BoxBackground,
   Title,
@@ -27,7 +28,7 @@ export default function ForgetPassword() {
         { email },
         { headers: { Authorization: `Bearer ${user.token}` } },
       )
-      .then(() => console.log('Sucesso!'))
+      .then(() => NotificationManager.success('Presta por favor', 'Titulo'))
       .catch(() => setError('Usuário não encontrado'));
   };
 
