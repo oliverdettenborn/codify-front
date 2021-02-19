@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 import {
   BoxBackground,
@@ -8,19 +10,38 @@ import {
   Button,
   TextLink,
 } from '../../components';
+import UserContext from '../../context/UserContext';
 
 export default function ForgetPassword() {
-  const [value, setValue] = useState('');
+  const [email, setEmail] = useState('');
   const [loading] = useState(false);
+  const { user } = useContext(UserContext);
+  const history = useHistory();
+
+  const requestRecoveryEmail = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(
+        `${process.env.REACT_APP_URL_API}/users/forgot-password`,
+        { email },
+        { headers: { Authorization: `Bearer ${user.token}` } },
+      )
+      .then((r) => {
+        console.log(r.response);
+        history.push('/redefinir-senha');
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <BoxBackground>
       <Title />
-      <FormBox>
+      <FormBox onSubmit={requestRecoveryEmail}>
         <Input
           placeholder="digite seu e-mail"
-          onChange={(e) => setValue(e.target.value)}
-          value={value}
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
           type="email"
         />
 
