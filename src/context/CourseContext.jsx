@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import hexRgb from 'hex-rgb';
-import useLocalStorage from '../hooks/useLocalStorage';
 import UserContext from './UserContext';
 
 const CourseContext = createContext();
@@ -11,13 +10,13 @@ const CourseContext = createContext();
 export default CourseContext;
 
 export function CourseProvider({ children }) {
-  const [courseId, setCourseId] = useLocalStorage('@codify-course', 0);
-  const [lastTopicId, setLastTopicId] = useLocalStorage('@codify-lastTopic', '');
-  const [courseName, setCourseName] = useLocalStorage('@codify-courseName', '');
-  const [description, setDescription] = useLocalStorage('@codify-description', '');
-  const [color, setColor] = useLocalStorage('@codify-color', '');
-  const [imageUrl, setImageUrl] = useLocalStorage('@codify-imageUrl', '');
-  const [chapters, setChapters] = useLocalStorage('@codify-chapters', []);
+  const [courseId, setCourseId] = useState(0);
+  const [lastTopicId, setLastTopicId] = useState('');
+  const [courseName, setCourseName] = useState('');
+  const [description, setDescription] = useState('');
+  const [color, setColor] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [chapters, setChapters] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const { user } = useContext(UserContext);
 
@@ -28,7 +27,7 @@ export function CourseProvider({ children }) {
       .then((response) => {
         setCourseName(response.data.title);
         setDescription(response.data.description);
-        setColor(hexRgb(response.data.color, { format: 'array' }).slice(0, 3).join());
+        setColor(hexRgb(response.data.color || '#8E8e8E', { format: 'array' }).slice(0, 3).join());
         setChapters(response.data.chapters);
         setImageUrl(response.data.imageUrl);
         setLastTopicId(response.data.lastTopicId);

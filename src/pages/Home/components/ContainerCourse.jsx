@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import styled from 'styled-components';
@@ -5,8 +6,8 @@ import styled from 'styled-components';
 import CourseBox from './CourseBox';
 import { Loading } from '../../../components';
 
-export default function TitleNameUser({
-  courses, title, loading, showMessageWithEmptyArray,
+export default function ContainerCouse({
+  courses, title, loading, showMessageWithEmptyArray, haveContinueButton,
 }) {
   return (
     <>
@@ -17,8 +18,13 @@ export default function TitleNameUser({
           ? <Loading />
           : (
             (courses.length === 0)
-              ? showMessageWithEmptyArray && <Message> Nenhum curso encontrado</Message>
-              : courses.map((course) => <CourseBox course={course} />)
+                ? showMessageWithEmptyArray && <Message> Nenhum curso encontrado</Message>
+                : courses.map((course) => (
+                  <CourseBox
+                    course={course}
+                    haveContinueButton={haveContinueButton}
+                  />
+                ))
           )
       }
       </Container>

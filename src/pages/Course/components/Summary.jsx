@@ -16,17 +16,21 @@ export default function Course({ chapters, courseId }) {
         Ementa
       </PlainText>
       <BoxWhite>
-        <Accordion defaultIndex={[0]} allowMultiple>
-          {
-            chapters.map((chapter) => (
-              <ItemAccordion
-                chapter={chapter}
-                key={chapter.id}
-                courseId={courseId}
-              />
-            ))
-          }
-        </Accordion>
+        {
+          chapters && (
+            <Accordion defaultIndex={[0]} allowMultiple>
+              {
+                chapters.map((chapter) => (
+                  <ItemAccordion
+                    chapter={chapter}
+                    key={chapter.id}
+                    courseId={courseId}
+                  />
+                ))
+              }
+            </Accordion>
+          )
+        }
       </BoxWhite>
     </>
   );

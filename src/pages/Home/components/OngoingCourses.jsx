@@ -33,6 +33,7 @@ export default function OngoingCourses({ user }) {
             title={courses.length > 1 && 'Meus cursos em andamento'}
             loading={loading}
             showMessageWithEmptyArray={false}
+            haveContinueButton
           />
         )
       }
