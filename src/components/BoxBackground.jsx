@@ -12,6 +12,7 @@ export default function BoxBackground({ children }) {
 const Background = styled.div`
     background-image: url('/assets/background.png');
     background-size: cover;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     width: 100vw;
 `;

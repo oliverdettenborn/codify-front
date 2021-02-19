@@ -9,19 +9,19 @@ import {
 import { Link } from 'react-router-dom';
 import { TextLink } from '../../../components';
 
-export default function Item({ topic }) {
+export default function Item({ topic, courseId }) {
   return (
     <Link to={`/estudo/${topic.courseId}/topic/${topic.id}`} text="">
       <Topic flex="1" textAlign="left">
         <div>
           {
-          (topic.userHasFinished)
-            ? <FaCheckCircle color="#76DF93" />
-            : <BsCircleFill color="#CFCFCF" />
-        }
+            (topic.userHasFinished)
+              ? <FaCheckCircle color="#76DF93" />
+              : <BsCircleFill color="#CFCFCF" />
+          }
           <h3>{topic.name}</h3>
         </div>
-        <TextLink to={`/estudo/${topic.courseId}/topic/${topic.id}`} text="Visualizar" />
+        <TextLink to={`/estudo/${courseId}/topic/${topic.id}`} text="Visualizar" />
       </Topic>
     </Link>
   );

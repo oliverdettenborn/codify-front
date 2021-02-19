@@ -11,7 +11,7 @@ import {
 
 import TopicItem from './TopicItem';
 
-export default function ClassWrapper({ chapter }) {
+export default function ClassWrapper({ chapter, courseId }) {
   return (
     <AccordionItem>
       <h2>
@@ -27,7 +27,13 @@ export default function ClassWrapper({ chapter }) {
       </h2>
       <PanelItem pb={4}>
         {
-          chapter.topics.map((topic) => <TopicItem topic={topic} key={topic.id} />)
+          chapter.topics.map((topic) => (
+            <TopicItem
+              topic={topic}
+              key={topic.id}
+              courseId={courseId}
+            />
+          ))
         }
       </PanelItem>
     </AccordionItem>

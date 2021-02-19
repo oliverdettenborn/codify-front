@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   Menu,
@@ -8,9 +8,9 @@ import {
   MenuItem,
   Portal,
   Button,
+  MenuDivider,
 } from '@chakra-ui/react';
 import { FiChevronDown } from 'react-icons/fi';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
 import axios from 'axios';
 import UserAvatar from './Avatar';
 import UserContext from '../context/UserContext';
@@ -22,13 +22,14 @@ const ButtonTransparent = styled(Button)`
 
 export default function Header({ user }) {
   const { setUser } = useContext(UserContext);
+  const history = useHistory();
 
   function handleLogout() {
     axios
       .post(`${process.env.REACT_APP_URL_API}/users/signOut`,
         null,
         { headers: { Authorization: `Bearer ${user.token}` } })
-      .then(() => setUser({}));
+      .finally(() => setUser({}));
   }
 
   return (
@@ -49,25 +50,29 @@ export default function Header({ user }) {
             Cursos
           </Text>
         </Link>
-        <Link to="/perfil">
-          <Text>
-            Perfil
-          </Text>
-        </Link>
       </div>
       <Menu>
         <MenuButton as={ButtonTransparent} rightIcon={<FiChevronDown color="#3D3D3D" />}>
           <UserAvatar user={user} size="40" />
         </MenuButton>
         <Portal>
-          <MenuList>
+          <Box maxW="sm" w="100px">
             <MenuItem
-              icon={<AiOutlineCloseCircle size="25" />}
-              onClick={handleLogout}
+              onClick={() => history.push('/perfil')}
+              _hover={{ bg: 'transparent' }}
             >
-              <Text>Logout</Text>
+              <Text>
+                Perfil
+              </Text>
             </MenuItem>
-          </MenuList>
+            <Divider />
+            <MenuItem
+              onClick={handleLogout}
+              _hover={{ bg: 'transparent' }}
+            >
+              <Text>Sair</Text>
+            </MenuItem>
+          </Box>
         </Portal>
       </Menu>
     </Container>
@@ -107,14 +112,25 @@ const Container = styled.div`
 const Text = styled.h6`
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
     text-align: center;
-    padding-top: 5px;
-    margin: 10px 15px;
+    width: 100%;
     color: #262626;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
 
     ${media}{
       margin: 10px;
     }
+`;
+
+const Divider = styled(MenuDivider)`
+  border-color: #D7D7D7!important;
+  opacity: 1!important;
+`;
+
+const Box = styled(MenuList)`
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15)!important;
+  border-radius: 0px 0px 10px 20px!important;
 `;

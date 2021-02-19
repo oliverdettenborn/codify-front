@@ -1,51 +1,111 @@
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import {
-  CircleLines, YoutubeVideo, Checkbox, CourseDropdown, Exercise,
+  CircleLines, CourseDropdown, Activity,
 } from './components';
-import { Button } from '../../components';
+import { AlertDialog, Loading } from '../../components';
+
 import UserContext from '../../context/UserContext';
+import CourseContext from '../../context/CourseContext';
 
 export default function StudyArea() {
-  const { topicId } = useParams();
+  const { topicId, courseId } = useParams();
   const { user } = useContext(UserContext);
-  const [data, setData] = useState(false);
-  const [topicType, setTopicType] = useState('theory');
-  const [refresh, setRefresh] = useState(false);
+  const { setLastTopicId, refreshContext, setRefreshContext } = useContext(CourseContext);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [indexActivity, setIndexActivity] = useState(0);
+  const [disabledButton, setDisabledButton] = useState(false);
+  const [refreshCheckBox, setRefreshCheckBox] = useState(false);
+  const [alertIsOpen, setAlertIsOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL_API}/topics/${topicId}/users/${user.userId}`,
+      .get(`${process.env.REACT_APP_URL_API}/topics/${topicId}/users`,
         { headers: { Authorization: `Bearer ${user.token}` } })
       .then((response) => {
         setData([...response.data.theories, ...response.data.exercises]);
+        setLoading(false);
       });
-  }, [refresh]);
+  }, [refreshCheckBox, refreshContext, topicId, courseId]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  function changeToNext() {
+    if (indexActivity < data.length - 1) {
+      setIndexActivity(indexActivity + 1);
+    } else {
+      setDisabledButton(true);
+      setLastTopicId(topicId);
+      axios
+        .post(
+          `${process.env.REACT_APP_URL_API}/users/topics/${topicId}/progress`,
+          null,
+          { headers: { Authorization: `Bearer ${user.token}` } },
+        )
+        .then((res) => {
+          history.push(`/estudo/${courseId}/topic/${res.data.nextTopic}`);
+          setRefreshContext(!refreshContext);
+        })
+        .catch(() => {
+          setErrorMessage('Ocorreu um erro ao finalizar esse tópico, tente novamente mais tarde!');
+          setAlertIsOpen(true);
+        })
+        .finally(() => setDisabledButton(false));
+    }
+  }
+
   return (
-    <>
-      <CourseDropdown />
-      {data && <CircleLines list={data} finished={data} /> }
-      {data && (
-        topicType === 'theory'
-          ? (
-            <YoutubeVideo link={data[0].youtubeUrl}>
-              <Container>
-                <Checkbox theoryId={data[0].theoryId} refresh={refresh} setRefresh={setRefresh} />
-                <Button onClick={() => setTopicType('Exercise')} width="25%" height="30px" fontsize="15px" borderRadius="8px">{'Avançar >>'}</Button>
-              </Container>
-            </YoutubeVideo>
+    <Background>
+      <CourseDropdown
+        topicId={topicId}
+        courseId={courseId}
+        showOnlyButtonBack={data.length === 0}
+        refreshContext={refreshContext}
+      />
+      {
+        data.length === 0
+          ? <Message>Esse tópico está indisponível, tente novamente mais tarde.</Message>
+          : (
+            <>
+              <CircleLines list={data} finished={data} setIndexActivity={setIndexActivity} />
+              <Activity
+                activity={data[indexActivity]}
+                refresh={refreshCheckBox}
+                setRefresh={setRefreshCheckBox}
+                changeToNext={changeToNext}
+                totalOfActivities={data.length}
+                index={indexActivity}
+                disabledButton={disabledButton}
+              />
+              <AlertDialog
+                alertIsOpen={alertIsOpen}
+                setAlertIsOpen={setAlertIsOpen}
+                errorMessage={errorMessage}
+              />
+            </>
           )
-          : <Exercise description={data[1].description} />
-      )}
-    </>
+      }
+    </Background>
   );
 }
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 48vw;
-  height: 50px;
-  padding: 0px 5px;
+
+const Background = styled.div`
+  background: #3d3d3d;
+  width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  width: 100vw;
+`;
+
+const Message = styled.h3`
+  text-align: center;
+  color: white;
+  padding: 100px;
 `;

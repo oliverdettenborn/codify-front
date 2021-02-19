@@ -3,6 +3,7 @@ import YoutubeVideo from './YoutubeVideo';
 import Checkbox from './Checkbox';
 import CourseDropdown from './DropDown';
 import Exercise from './Exercise';
+import Activity from './Activity';
 
 export {
   CircleLines,
@@ -10,4 +11,5 @@ export {
   Checkbox,
   CourseDropdown,
   Exercise,
+  Activity,
 };

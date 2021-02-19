@@ -1,49 +1,137 @@
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  Button,
+  MenuOptionGroup,
+} from '@chakra-ui/react';
+import { FiChevronDown } from 'react-icons/fi';
+import { FaCheckCircle } from 'react-icons/fa';
+import { BsCircleFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+
 import { ButtonClickToBack } from '../../../components';
 import CourseContext from '../../../context/CourseContext';
 
-export default function CourseDropdown() {
-  const options = ['Apresentação - Como usar', 'Apresentação - Entrando na plataforma', 'Apresentação - Fazendo teorias'];
-  const defaultOption = options[0];
-  const { course } = useContext(CourseContext);
-  console.log(course);
+const ButtonTransparent = styled(Button)`
+  background: transparent!important;
+  :hover{
+    background: none!important;
+  }
+`;
+
+export default function CourseDropdown(props) {
+  const {
+    topicId, courseId, showOnlyButtonBack, refreshContext,
+  } = props;
+  const { chapters } = useContext(CourseContext);
+  const [defaultOption, setDefaultOption] = useState({});
+  const [options, setOptions] = useState([]);
+
+  if (showOnlyButtonBack) {
+    return (
+      <Container>
+        <ButtonClickToBack to={`/cursos/${courseId}`} top="35px" left="10px" height="60%!important" />
+      </Container>
+    );
+  }
+
+  useEffect(() => {
+    const currentChapter = chapters.find(({ topics }) => topics.filter((t) => t.id === +topicId));
+    const currentTopic = currentChapter.topics.find((t) => t.id === +topicId);
+    setDefaultOption({
+      chapterName: currentChapter.name,
+      chapterId: currentChapter.id,
+      topicId,
+      topicName: currentTopic.name,
+    });
+    const optionsMap = chapters
+      .map((chapter) => {
+        const topicsMap = chapter.topics.map((topic) => (
+          topic.id !== topicId && {
+            value: topic.id,
+            label: topic.name,
+            done: topic.userHasFinished,
+          }
+        ));
+        return {
+          name: chapter.name,
+          items: topicsMap,
+        };
+      });
+    setOptions(optionsMap);
+  }, [refreshContext, topicId, courseId, chapters]);
+
   return (
     <Container>
-      <ButtonClickToBack to="/" top="1.3vh" left="0" height="35px!important" />
-      <Dropdown menuClassName="menu" arrowClassName="arrow" controlClassName="dropdown" options={options} value={defaultOption} placeholder="Select an option" />
+      <ButtonClickToBack to={`/cursos/${courseId}`} top="20%" left="10px" height="60%!important" />
+      <Menu placement="top">
+        <MenuButton as={ButtonTransparent} rightIcon={<FiChevronDown />}>
+          {`${defaultOption.chapterName} - ${defaultOption.topicName}`}
+        </MenuButton>
+        <Box>
+          {
+            options.map((opt) => (
+              <MenuOptionGroup title={opt.name}>
+                {
+                  opt.items.map((item) => (
+                    <TextLink to={`/estudo/${courseId}/topic/${item.value}`}>
+                      {
+                          (item.done)
+                            ? <FaCheckCircle color="#76DF93" />
+                            : <BsCircleFill color="#6A6A6A" />
+                        }
+                      {item.label}
+                    </TextLink>
+                  ))
+                }
+              </MenuOptionGroup>
+            ))
+          }
+        </Box>
+      </Menu>
     </Container>
   );
 }
 const Container = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #292929;
-    height: 8vh;
-    position: relative;
-    .dropdown {
-        background: initial;
-        color: #D6D6D6;
-        border: none;
-        font-family: Roboto;
-        cursor: pointer;
-    }
-    .arrow{
-        border-width: 8px 8px 0;
-    }
-    .menu{
-        border-radius: 4px;
-        font-family: Roboto;
-    }
-    .Dropdown-option {
-        color: #D6D6D6!important;
-        cursor: pointer;
-        background: #3D3D3D;
-        &:hover{
-            background: #797979;
-        }
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #292929;
+  height: 10%;
+  position: relative;
+  font-family: 'Roboto';
+  font-style: normal;
+  color: #D6D6D6;
+`;
+
+const Box = styled(MenuList)`
+  background: #292929!important;
+  color: #D6D6D6;
+  max-height: 420px;
+  width: 400px;
+  padding: 30px 5px;
+  border-radius: 25px;
+  margin-top: -10px;
+  overflow-y: scroll;
+
+  div:hover{
+    background: none!important;
+  }
+`;
+
+const TextLink = styled(Link)`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 30px;
+  cursor: pointer;
+  font-size: 17px;
+
+  svg{
+    padding-right: 8px;
+    font-size: 24px;
+  }
 `;
