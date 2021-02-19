@@ -6,22 +6,24 @@ import { BsCircleFill } from 'react-icons/bs';
 import {
   Box,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { TextLink } from '../../../components';
 
 export default function Item({ topic, courseId }) {
   return (
-    <Topic flex="1" textAlign="left">
-      <div>
-        {
-          (topic.userHasFinished)
-            ? <FaCheckCircle color="#76DF93" />
-            : <BsCircleFill color="#CFCFCF" />
-        }
-        <h3>{topic.name}</h3>
-      </div>
-      <TextLink to={`/estudo/${courseId}/topic/${topic.id}`} text="Visualizar" />
-    </Topic>
-
+    <Link to={`/estudo/${topic.courseId}/topic/${topic.id}`} text="">
+      <Topic flex="1" textAlign="left">
+        <div>
+          {
+            (topic.userHasFinished)
+              ? <FaCheckCircle color="#76DF93" />
+              : <BsCircleFill color="#CFCFCF" />
+          }
+          <h3>{topic.name}</h3>
+        </div>
+        <TextLink to={`/estudo/${courseId}/topic/${topic.id}`} text="Visualizar" />
+      </Topic>
+    </Link>
   );
 }
 
@@ -35,6 +37,10 @@ const Topic = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  &:hover{
+    background: #fff;
+  }
 
   h3{
     text-align: left;

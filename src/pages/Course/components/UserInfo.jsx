@@ -84,7 +84,7 @@ export default function Course({
         </Container>
       </UserProgress>
       <Button
-        width="180px"
+        width="200px"
         onClick={hasStarted ? continueCourse : initCourse}
         disabledButton={disabledButton}
         height="55px"
