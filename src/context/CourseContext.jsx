@@ -27,7 +27,7 @@ export function CourseProvider({ children }) {
       .then((response) => {
         setCourseName(response.data.title);
         setDescription(response.data.description);
-        setColor(hexRgb(response.data.color || '#000', { format: 'array' }).slice(0, 3).join());
+        setColor(hexRgb(response.data.color || '#8E8e8E', { format: 'array' }).slice(0, 3).join());
         setChapters(response.data.chapters);
         setImageUrl(response.data.imageUrl);
         setLastTopicId(response.data.lastTopicId);

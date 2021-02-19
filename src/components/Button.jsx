@@ -45,6 +45,9 @@ const StyledButton = styled.button`
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => (props.borderRadius)};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${mediaQuery} {
     font-size: 1.2rem;
   }
