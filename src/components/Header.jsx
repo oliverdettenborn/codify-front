@@ -61,16 +61,16 @@ export default function Header({ user }) {
               onClick={() => history.push('/perfil')}
               _hover={{ bg: 'transparent' }}
             >
-              <Text>
+              <TextMenu>
                 Perfil
-              </Text>
+              </TextMenu>
             </MenuItem>
             <Divider />
             <MenuItem
               onClick={handleLogout}
               _hover={{ bg: 'transparent' }}
             >
-              <Text>Sair</Text>
+              <TextMenu>Sair</TextMenu>
             </MenuItem>
           </Box>
         </Portal>
@@ -118,6 +118,19 @@ const Text = styled.h6`
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
+    margin: 15px;
+
+    ${media}{
+      margin: 10px;
+    }
+`;
+
+const TextMenu = styled.h6`
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    width: 100%;
+    color: #262626;
+    font-size: 16px;
 
     ${media}{
       margin: 10px;
