@@ -14,11 +14,12 @@ import UserContext from '../../context/UserContext';
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState('');
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext);
 
   const requestRecoveryEmail = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     axios
       .post(
@@ -27,7 +28,8 @@ export default function ForgetPassword() {
         { headers: { Authorization: `Bearer ${user.token}` } },
       )
       .then(() => NotificationManager.success('Cheque sua caixa de entrada para redefinir sua senha', 'Email enviado'))
-      .catch(() => NotificationManager.error('Verifique se seu e-mail está correto', 'Usuário não encontrado', 4000));
+      .catch(() => NotificationManager.error('Verifique se seu e-mail está correto', 'Usuário não encontrado', 4000))
+      .finally(() => setLoading(false));
   };
 
   return (
