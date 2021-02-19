@@ -41,7 +41,7 @@ export default function PasswordReset() {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => alert.show('senha redefinida'))
+      .then(() => alert.sucess('senha redefinida'))
       .catch((err) => {
         if (err.response && err.response.status === 401) {
           alert.show('Não foi possível alterar sua senha');
