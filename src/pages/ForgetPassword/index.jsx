@@ -9,14 +9,12 @@ import {
   Input,
   Button,
   TextLink,
-  Error,
 } from '../../components';
 import UserContext from '../../context/UserContext';
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState('');
   const [loading] = useState(false);
-  const [error, setError] = useState('');
   const { user } = useContext(UserContext);
 
   const requestRecoveryEmail = (e) => {
@@ -28,8 +26,8 @@ export default function ForgetPassword() {
         { email },
         { headers: { Authorization: `Bearer ${user.token}` } },
       )
-      .then(() => NotificationManager.success('Presta por favor', 'Titulo'))
-      .catch(() => setError('Usuário não encontrado'));
+      .then(() => NotificationManager.success('Cheque sua caixa de entrada para redefinir sua senha', 'Email enviado'))
+      .catch(() => NotificationManager.error('Verifique se seu e-mail está correto', 'Usuário não encontrado', 4000));
   };
 
   return (
@@ -42,8 +40,6 @@ export default function ForgetPassword() {
           value={email}
           type="email"
         />
-
-        {error && <Error>{error}</Error>}
 
         <Button type="submit" disabledButton={loading}>
           recuperar senha

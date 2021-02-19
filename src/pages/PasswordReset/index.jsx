@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAlert } from 'react-alert';
 import axios from 'axios';
 
 import {
@@ -18,8 +17,6 @@ export default function PasswordReset() {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const alert = useAlert();
 
   const { token } = useParams();
 
