@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import {
@@ -9,14 +8,15 @@ import {
   Input,
   Button,
   TextLink,
+  Error,
 } from '../../components';
 import UserContext from '../../context/UserContext';
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState('');
   const [loading] = useState(false);
+  const [error, setError] = useState('');
   const { user } = useContext(UserContext);
-  const history = useHistory();
 
   const requestRecoveryEmail = (e) => {
     e.preventDefault();
@@ -27,11 +27,8 @@ export default function ForgetPassword() {
         { email },
         { headers: { Authorization: `Bearer ${user.token}` } },
       )
-      .then((r) => {
-        console.log(r.response);
-        history.push('/redefinir-senha');
-      })
-      .catch((err) => console.log(err));
+      .then(() => console.log('Sucesso!'))
+      .catch(() => setError('Usuário não encontrado'));
   };
 
   return (
@@ -44,6 +41,8 @@ export default function ForgetPassword() {
           value={email}
           type="email"
         />
+
+        {error && <Error>{error}</Error>}
 
         <Button type="submit" disabledButton={loading}>
           recuperar senha
