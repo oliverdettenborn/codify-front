@@ -41,8 +41,8 @@ export default function PasswordReset() {
         },
       })
       .then(() => {
-        NotificationManager.success('Senha redefinida com sucesso!', 'Faça login para continuar')
-        history.push('/')
+        NotificationManager.success('Senha redefinida com sucesso!', 'Faça login para continuar');
+        history.push('/');
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {
