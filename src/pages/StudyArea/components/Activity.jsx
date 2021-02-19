@@ -30,6 +30,7 @@ export default function Activity(props) {
           height="30%!important"
           fontsize="15px"
           borderRadius="8px"
+          padding="5px"
         >
           {
             (index === (totalOfActivities - 1))
