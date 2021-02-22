@@ -11,7 +11,7 @@ import { TextLink } from '../../../components';
 
 export default function Item({ topic, courseId }) {
   return (
-    <Link to={`/estudo/${topic.courseId}/topic/${topic.id}`} text="">
+    <Link to={`/estudo/${courseId}/topic/${topic.id}`} text="">
       <Topic flex="1" textAlign="left">
         <div>
           {
