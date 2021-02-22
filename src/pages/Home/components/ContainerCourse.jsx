@@ -47,8 +47,8 @@ const Title = styled.h3`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
-  font-size: 35px;
-  line-height: 40px;
+  font-size: 30px;
+  line-height: 35px;
   color: #262626;
 `;
 
