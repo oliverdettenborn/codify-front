@@ -33,7 +33,7 @@ export default function CourseDropdown(props) {
   if (showOnlyButtonBack) {
     return (
       <Container>
-        <ButtonClickToBack to={`/cursos/${courseId}`} top="35px" left="10px" height="60%!important" />
+        <ButtonClickToBack to={`/cursos/${courseId}`} top="5px" left="10px" />
       </Container>
     );
   }
@@ -66,7 +66,7 @@ export default function CourseDropdown(props) {
 
   return (
     <Container>
-      <ButtonClickToBack to={`/cursos/${courseId}`} top="20%" left="10px" height="60%!important" />
+      <ButtonClickToBack to={`/cursos/${courseId}`} top="5px" left="10px" />
       <Menu placement="top">
         <MenuButton as={ButtonTransparent} rightIcon={<FiChevronDown />}>
           {`${defaultOption.chapterName} - ${defaultOption.topicName}`}
@@ -99,8 +99,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #292929;
-  height: 10%;
+  background: #161616;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  height: 50px;
   position: relative;
   font-family: 'Roboto';
   font-style: normal;
