@@ -1,6 +1,7 @@
 import React, {
   createContext, useEffect, useContext, useState,
 } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import hexRgb from 'hex-rgb';
 import UserContext from './UserContext';
@@ -18,9 +19,11 @@ export function CourseProvider({ children }) {
   const [imageUrl, setImageUrl] = useState('');
   const [chapters, setChapters] = useState([]);
   const [refresh, setRefresh] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const history = useHistory();
 
   useEffect(() => {
+    if (courseId === 0) return;
     axios
       .get(`${process.env.REACT_APP_URL_API}/courses/${courseId}/chapters`,
         { headers: { Authorization: `Bearer ${user.token}` } })
@@ -31,6 +34,12 @@ export function CourseProvider({ children }) {
         setChapters(response.data.chapters);
         setImageUrl(response.data.imageUrl);
         setLastTopicId(response.data.lastTopicId);
+      })
+      .catch((err) => {
+        if (err && err.response.status === 401) {
+          setUser({});
+          history.push('/');
+        }
       });
   }, [courseId, refresh]);
 
