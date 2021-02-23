@@ -49,8 +49,8 @@ export default function TitleNameUser({ course, haveContinueButton }) {
 }
 
 const Container = styled.div`
-  height: ${(props) => (props.haveContinueButton ? '350px' : '310px')};
-  width: 280px;
+  height: ${(props) => (props.haveContinueButton ? '340px' : '300px')};
+  width: 240px;
   background: #FFFFFF;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
   border-radius: 20px;
@@ -59,8 +59,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: 20px;
   position: relative;
-  margin: 20px;
   cursor: pointer;
 
   button{

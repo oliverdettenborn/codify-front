@@ -34,12 +34,10 @@ export default function ContainerCouse({
 
 const Container = styled.div`
   width: 100%;
-  margin: 0 auto;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-left: -20px;
   margin-bottom: 20px;
 `;
 
@@ -47,9 +45,10 @@ const Title = styled.h3`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
-  font-size: 30px;
-  line-height: 35px;
+  font-size: 1.7rem;
+  line-height: 2rem;
   color: #262626;
+  margin-bottom: 20px;
 `;
 
 const Message = styled.h3`
