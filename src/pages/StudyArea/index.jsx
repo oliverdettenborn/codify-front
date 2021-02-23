@@ -86,6 +86,7 @@ export default function StudyArea() {
               />
               <Activity
                 activity={data[indexActivity]}
+                key={data[indexActivity].id}
                 refresh={refreshCheckBox}
                 setRefresh={setRefreshCheckBox}
                 changeToNext={changeToNext}

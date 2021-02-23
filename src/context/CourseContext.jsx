@@ -5,19 +5,20 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import hexRgb from 'hex-rgb';
 import UserContext from './UserContext';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const CourseContext = createContext();
 
 export default CourseContext;
 
 export function CourseProvider({ children }) {
-  const [courseId, setCourseId] = useState(0);
-  const [lastTopicId, setLastTopicId] = useState('');
+  const [courseId, setCourseId] = useLocalStorage('@codify-courseId', 0);
+  const [lastTopicId, setLastTopicId] = useLocalStorage('@codify-lastTopicId', '');
   const [courseName, setCourseName] = useState('');
   const [description, setDescription] = useState('');
   const [color, setColor] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [chapters, setChapters] = useState([]);
+  const [chapters, setChapters] = useLocalStorage('@codify-chapters', []);
   const [refresh, setRefresh] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const history = useHistory();

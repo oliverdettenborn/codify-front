@@ -51,12 +51,13 @@ export default function CourseDropdown(props) {
       .map((chapter) => {
         const topicsMap = chapter.topics.map((topic) => (
           topic.id !== topicId && {
-            value: topic.id,
+            id: topic.id,
             label: topic.name,
             done: topic.userHasFinished,
           }
         ));
         return {
+          id: chapter.id,
           name: chapter.name,
           items: topicsMap,
         };
@@ -74,10 +75,10 @@ export default function CourseDropdown(props) {
         <Box>
           {
             options.map((opt) => (
-              <MenuOptionGroup title={opt.name}>
+              <MenuOptionGroup title={opt.name} key={opt.id}>
                 {
                   opt.items.map((item) => (
-                    <TextLink to={`/estudo/${courseId}/topic/${item.value}`}>
+                    <TextLink to={`/estudo/${courseId}/topic/${item.id}`} key={item.id}>
                       {
                           (item.done)
                             ? <FaCheckCircle color="#76DF93" />

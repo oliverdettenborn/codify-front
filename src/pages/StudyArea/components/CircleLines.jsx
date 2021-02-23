@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import styled from 'styled-components';
@@ -11,6 +12,7 @@ export default function CircleLines({ list, setIndexActivity, indexCurrent }) {
             exerciseNumber={i}
             done={e.userHasFinished}
             active={i === indexCurrent}
+            key={i}
           >
             <Bullet
               done={e.userHasFinished}

@@ -21,7 +21,7 @@ export default function ClassWrapper({ chapter, courseId }) {
             {chapter.name}
           </TitleItem>
           <QuantityInfos flex="0.5" textAlign="right">
-            {`${chapter.topicsQuantity} aulas • ${chapter.exercisesQuantity} exercícios`}
+            {`${chapter.theoryQuantity} aulas • ${chapter.exercisesQuantity} exercícios`}
           </QuantityInfos>
         </ContainerTitle>
       </h2>
