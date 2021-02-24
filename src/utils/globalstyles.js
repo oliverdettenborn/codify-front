@@ -58,5 +58,34 @@ button{
   ::-webkit-scrollbar-thumb:window-inactive {
     background: #5B5B5B; 
   }
+
+  .notification{
+    background: #FFFFFF!important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)!important;
+    border-radius: 10px!important;
+  }
+
+  .notification-message .message{
+    color: #898989!important;
+    font-size: 14px!important;
+  }
+
+  .notification-success:before{
+    color: #008E16!important;
+  }
+
+  .notification-error:before{
+    color: #C10000!important;
+  }
+
+  .notification-success .notification-message .title{
+    color: #008E16!important;
+    font-size: 16px!important;
+  }
+
+  .notification-error .notification-message .title{
+    color: #C10000!important;
+    font-size: 16px!important;
+  }
   `;
 export default GlobalStyle;
