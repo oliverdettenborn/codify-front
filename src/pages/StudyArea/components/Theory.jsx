@@ -10,7 +10,7 @@ export default function Theory(props) {
   } = props;
   const id = getYoutubeID(`${theory.youtubeUrl}`);
   return (
-    <>
+    <Box>
       <Container>
         {
         theory.youtubeUrl
@@ -27,9 +27,13 @@ export default function Theory(props) {
         totalOfActivities={totalOfActivities}
         disabledButton={disabledButton}
       />
-    </>
+    </Box>
   );
 }
 const Container = styled.div`
   padding-bottom: 15px;
+`;
+
+const Box = styled.div`
+  padding: 30px 25% 0 25%;
 `;

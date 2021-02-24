@@ -20,5 +20,4 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 30px 25% 0 25%;
 `;

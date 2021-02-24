@@ -37,7 +37,7 @@ export default function Activity(props) {
   );
 }
 
-const Footer = styled.div`
+const Footer = styled.footer`
   width: 100%;
   display: flex;
   justify-content: space-between;
