@@ -10,6 +10,8 @@ export default function InputContainer(props) {
     setName,
     email,
     setEmail,
+    disabledButton,
+    onSubmit,
   } = props;
   return (
     <>
@@ -49,6 +51,9 @@ export default function InputContainer(props) {
           fontsize="21px"
           width="initial"
           padding="0 40px"
+          type="submit"
+          disabledButton={disabledButton}
+          onClick={onSubmit}
         >
           Salvar
         </Button>

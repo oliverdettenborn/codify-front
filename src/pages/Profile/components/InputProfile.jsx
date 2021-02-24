@@ -25,6 +25,7 @@ export default function InputProfile(props) {
           onChange={onChange}
           placeholder={placeholder}
           type={type}
+          required={false}
         />
       </StyledLabel>
     </Container>
