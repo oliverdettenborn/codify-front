@@ -1,44 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '../../../components';
 
-import YoutubeVideo from './YoutubeVideo';
+import Theory from './Theory';
 import Exercise from './Exercise';
-import Checkbox from './Checkbox';
 
 export default function Activity(props) {
-  const {
-    activity, refresh, setRefresh, changeToNext, index, totalOfActivities, disabledButton,
-  } = props;
+  const { activity, index } = props;
+
   return (
     <Container>
-      {activity && activity.youtubeUrl
-        ? <YoutubeVideo link={activity.youtubeUrl} />
-        : <Exercise description={activity.description} />}
-      <Footer>
-        <Checkbox
-          id={activity.theoryId || activity.exerciseId}
-          userHasFinished={activity.userHasFinished}
-          refresh={refresh}
-          setRefresh={setRefresh}
-          type={index === 0 ? 'theories' : 'exercises'}
-        />
-        <Button
-          onClick={changeToNext}
-          disabledButton={disabledButton}
-          width="25%"
-          height="30%!important"
-          fontsize="15px"
-          borderRadius="8px"
-          padding="5px"
-        >
-          {
-            (index === (totalOfActivities - 1))
-              ? 'Finalizar o tópico >>'
-              : 'Avançar >>'
-          }
-        </Button>
-      </Footer>
+      {activity && index === 0 && activity.youtubeUrl
+        ? <Theory theory={activity} {...props} />
+        : <Exercise exercise={activity} {...props} />}
     </Container>
   );
 }
@@ -48,12 +21,4 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 30px 25% 0 25%;
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
 `;

@@ -78,9 +78,15 @@ export default function StudyArea() {
           ? <Message>Esse tópico está indisponível, tente novamente mais tarde.</Message>
           : (
             <>
-              <CircleLines list={data} finished={data} setIndexActivity={setIndexActivity} />
+              <CircleLines
+                list={data}
+                finished={data}
+                setIndexActivity={setIndexActivity}
+                indexCurrent={indexActivity}
+              />
               <Activity
                 activity={data[indexActivity]}
+                key={data[indexActivity].id}
                 refresh={refreshCheckBox}
                 setRefresh={setRefreshCheckBox}
                 changeToNext={changeToNext}

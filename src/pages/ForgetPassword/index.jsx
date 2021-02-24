@@ -27,7 +27,7 @@ export default function ForgetPassword() {
         { email },
         { headers: { Authorization: `Bearer ${user.token}` } },
       )
-      .then(() => NotificationManager.success('Cheque sua caixa de entrada para redefinir sua senha', 'Email enviado'))
+      .then(() => NotificationManager.success('Cheque sua caixa de entrada para redefinir sua senha', 'Email enviado!'))
       .catch(() => NotificationManager.error('Verifique se seu e-mail está correto', 'Usuário não encontrado', 4000))
       .finally(() => setLoading(false));
   };

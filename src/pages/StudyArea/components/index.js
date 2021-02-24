@@ -1,5 +1,5 @@
 import CircleLines from './CircleLines';
-import YoutubeVideo from './YoutubeVideo';
+import Theory from './Theory';
 import Checkbox from './Checkbox';
 import CourseDropdown from './DropDown';
 import Exercise from './Exercise';
@@ -7,7 +7,7 @@ import Activity from './Activity';
 
 export {
   CircleLines,
-  YoutubeVideo,
+  Theory,
   Checkbox,
   CourseDropdown,
   Exercise,

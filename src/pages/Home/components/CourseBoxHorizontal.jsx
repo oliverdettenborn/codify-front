@@ -58,9 +58,10 @@ const Title = styled.h3`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
-  font-size: 35px;
-  line-height: 40px;
+  font-size: 1.7rem;
+  line-height: 2rem;
   color: #262626;
+  margin-bottom: 20px;
 `;
 
 const Course = styled.div`

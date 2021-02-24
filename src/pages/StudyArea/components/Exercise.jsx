@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import Footer from './Footer';
 
-export default function Exercise({ description }) {
+export default function Exercise(props) {
   return (
-    <Box>
-      {description}
-    </Box>
+    <>
+      <Box>
+        Teste
+      </Box>
+      <Footer {...props} />
+    </>
   );
 }
 
