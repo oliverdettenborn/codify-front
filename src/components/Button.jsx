@@ -6,7 +6,7 @@ import Loading from './Loading';
 
 export default function Button({
   onClick, type, disabledButton, children,
-  background, width, height, fontsize, borderRadius, padding,
+  background, width, height, fontsize, borderRadius, padding, marginRight,
 }) {
   return (
     <StyledButton
@@ -19,6 +19,7 @@ export default function Button({
       fontsize={fontsize || '20px'}
       borderRadius={borderRadius || '6px'}
       padding={padding || '0px'}
+      marginRight={marginRight}
     >
       {disabledButton
         ? <Loading />
@@ -39,6 +40,7 @@ const StyledButton = styled.button`
   color: white;
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-right: ${(props) => (props.marginRight ? props.marginRight : '0px')};
   text-align: center;
   outline: none;
   padding: ${(props) => (props.padding)};
