@@ -10,6 +10,8 @@ export default function InputProfile(props) {
     onChange,
     placeholder,
     type,
+    width,
+    display,
   } = props;
   return (
     <Container>
@@ -26,6 +28,8 @@ export default function InputProfile(props) {
           placeholder={placeholder}
           type={type}
           required={false}
+          width={width}
+          display={display}
         />
       </StyledLabel>
     </Container>

@@ -5,7 +5,7 @@ import mediaQuery from '../utils/mediaQuery';
 import Loading from './Loading';
 
 export default function Button({
-  onClick, type, disabledButton, children,
+  onClick, type, disabledButton, children, display,
   background, width, height, fontsize, borderRadius, padding, marginRight,
 }) {
   return (
@@ -20,6 +20,7 @@ export default function Button({
       borderRadius={borderRadius || '6px'}
       padding={padding || '0px'}
       marginRight={marginRight}
+      display={display}
     >
       {disabledButton
         ? <Loading />
@@ -47,7 +48,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => (props.borderRadius)};
-  display: flex;
+  display: ${(props) => (props.display ? 'none' : 'flex')};
   justify-content: center;
   align-items: center;
   ${mediaQuery} {

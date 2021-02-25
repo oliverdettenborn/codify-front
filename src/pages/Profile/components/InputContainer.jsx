@@ -1,17 +1,27 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import styled from 'styled-components';
 import InputProfile from './InputProfile';
 import { Button, Container, UserAvatar } from '../../../components';
+import EditImage from './EditImage';
 
 export default function InputContainer(props) {
   const {
     user,
+    setUser,
     name,
     setName,
     email,
     setEmail,
     disabledButton,
     onSubmit,
+    onClick,
+    changePassword,
+    disablePasswordButton,
+    password,
+    setPassword,
+    passwordConfirmation,
+    setPasswordConfirmation,
   } = props;
   return (
     <>
@@ -32,8 +42,30 @@ export default function InputContainer(props) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          {
+            changePassword && (
+            <>
+              <InputProfile
+                type="password"
+                label="senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                width="55%"
+                display="block"
+              />
+              <InputProfile
+                type="password"
+                label="repita a senha"
+                value={passwordConfirmation}
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                width="55%"
+                display="block"
+              />
+            </>
+            )
+          }
         </Container>
-        <UserAvatar user={user} size="140" />
+        <EditImage user={user} setUser={setUser} />
       </Container>
       <Container
         justifyContent="start"
@@ -44,6 +76,9 @@ export default function InputContainer(props) {
           width="initial"
           padding="0 40px"
           marginRight="10px"
+          onClick={onClick}
+          type="button"
+          display={disablePasswordButton}
         >
           Trocar senha
         </Button>
@@ -61,3 +96,14 @@ export default function InputContainer(props) {
     </>
   );
 }
+const StyledDiv = styled.div`
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  /* background-color:#fcfcfc99; */
+  position:relative;
+
+  &:hover {
+    background-color:#fcfcfcc4;
+  }
+`;
