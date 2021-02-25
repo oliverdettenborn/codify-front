@@ -1,11 +1,14 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactSafeHtml from 'react-safe-html';
+import { HiOutlineLightBulb } from 'react-icons/hi';
 import Footer from './Footer';
+import EditorCode from './EditorCode';
 
 export default function Exercise(props) {
   const { exercise } = props;
+  const [code, setCode] = useState(exercise.initialCode);
 
   return (
     <Container>
@@ -16,7 +19,20 @@ export default function Exercise(props) {
         <Footer {...props} />
       </ContainerLeft>
       <ContainerRight>
-        code
+        <EditorCode
+          code={code}
+          setCode={setCode}
+          language={exercise.language}
+          title="Seu código"
+          haveButton
+          textButton={(
+            <>
+              Ver solução
+              <HiOutlineLightBulb size={18} />
+            </>
+          )}
+          buttonOnclick={() => console.log('cliquei')}
+        />
       </ContainerRight>
     </Container>
   );
@@ -57,8 +73,8 @@ const Enunciated = styled.div`
   }
 
   p{
-    font-size: 1rem;
-    line-height: 1.3rem;
+    font-size: 0.9rem;
+    line-height: 1.2rem;
   }
 `;
 
@@ -66,7 +82,6 @@ const ContainerRight = styled.div`
   width: 60%;
   height: 100%;
   flex-shrink: 0;
-  background-color: blue;
   overflow-y: auto;
 `;
 
