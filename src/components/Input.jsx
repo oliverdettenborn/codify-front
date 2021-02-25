@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function Input({
-  value, onChange, placeholder, type, background,
+  value, onChange, placeholder, type, background, required = true,
 }) {
   return (
     <StyledInput
@@ -11,7 +11,7 @@ export default function Input({
       placeholder={placeholder}
       background={background || 'white'}
       type={type}
-      required
+      required={required}
     />
   );
 }
