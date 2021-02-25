@@ -23,7 +23,7 @@ export default function EditorCode(props) {
             type="button"
             background="#595959"
             width="160px"
-            height="30px"
+            height="35px"
             fontsize="15px"
             borderRadius="10px"
             padding="5px"
@@ -71,6 +71,7 @@ const Header = styled.header`
   button{
     color: #D6D6D6;
     align-items: center;
+    margin: 0;
 
     svg{
       margin-left: 7px;

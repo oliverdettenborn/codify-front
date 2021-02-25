@@ -3,12 +3,26 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactSafeHtml from 'react-safe-html';
 import { HiOutlineLightBulb } from 'react-icons/hi';
+import { VscRunAll } from 'react-icons/vsc';
+import * as mochaAsPromised from '@bootcamp-ra/mocha-as-promised';
+import { NotificationManager } from 'react-notifications';
 import Footer from './Footer';
 import EditorCode from './EditorCode';
+import Console from './Console';
 
 export default function Exercise(props) {
   const { exercise } = props;
   const [code, setCode] = useState(exercise.initialCode);
+  const [resultTests, setResultTests] = useState({});
+
+  function runTestsExercise() {
+    mochaAsPromised
+      .runTests(code, exercise.tests)
+      .then((result) => {
+        setResultTests(result);
+      })
+      .catch(() => NotificationManager.error('Ocorreu um erro!', 'Não foi possível rodar os testes!'));
+  }
 
   return (
     <Container>
@@ -31,7 +45,19 @@ export default function Exercise(props) {
               <HiOutlineLightBulb size={18} />
             </>
           )}
-          buttonOnclick={() => console.log('cliquei')}
+          buttonOnclick={() => true}
+        />
+        <Console
+          title="Console"
+          haveButton
+          resultTests={resultTests}
+          textButton={(
+            <>
+              Ver solução
+              <VscRunAll size={18} />
+            </>
+          )}
+          buttonOnclick={runTestsExercise}
         />
       </ContainerRight>
     </Container>

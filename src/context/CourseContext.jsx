@@ -38,6 +38,7 @@ export function CourseProvider({ children }) {
       })
       .catch((err) => {
         if (err && err.response.status === 401) {
+          setCourseId(0);
           setUser({});
           history.push('/');
         }
