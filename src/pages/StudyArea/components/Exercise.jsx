@@ -81,7 +81,7 @@ const ContainerLeft = styled.div`
     flex-wrap: wrap;
 
     button{
-      width: 130px;
+      width: 150px;
     }
   }
 `;
