@@ -6,17 +6,27 @@ import Checkbox from './Checkbox';
 
 export default function Activity(props) {
   const {
-    activity, refresh, setRefresh, changeToNext, index, totalOfActivities, disabledButton,
+    activity,
+    refresh,
+    setRefresh,
+    changeToNext,
+    index,
+    totalOfActivities,
+    disabledButton,
+    setChecked,
+    checked,
+    handleCheckboxChange,
   } = props;
 
   return (
     <Footer>
       <Checkbox
-        id={activity.theoryId || activity.exerciseId}
         userHasFinished={activity.userHasFinished}
         refresh={refresh}
         setRefresh={setRefresh}
-        type={index === 0 ? 'theories' : 'exercises'}
+        checked={checked}
+        setChecked={setChecked}
+        handleCheckboxChange={handleCheckboxChange}
       />
       <Button
         onClick={changeToNext}
@@ -37,7 +47,7 @@ export default function Activity(props) {
   );
 }
 
-const Footer = styled.div`
+const Footer = styled.footer`
   width: 100%;
   display: flex;
   justify-content: space-between;
