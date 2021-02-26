@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import {
-  Title, BoxBackground, Input, FormBox, Button, TextLink,
+  Title, BoxBackground, Input, FormBox, Button, TextLink, Error,
 } from '../../components';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [disabledButton, setDisabledButton] = useState(false);
   const history = useHistory();
@@ -18,7 +19,15 @@ export default function SignUp() {
     setDisabledButton(true);
     axios.post(`${process.env.REACT_APP_URL_API}/users/register`, {
       name, email, password, passwordConfirmation: repeatPassword,
-    }).then(() => history.push('/'));
+    }).then(() => history.push('/'))
+      .catch((err) => {
+        if (err.response && err.response.status === 409) {
+          setError('Email já está em uso');
+          setDisabledButton(false);
+        } else {
+          setError('Houve um erro desconhecido, tente novamente mais tarde');
+        }
+      });
   }
   return (
     <BoxBackground>
@@ -28,6 +37,7 @@ export default function SignUp() {
         <Input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
         <Input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} />
         <Input type="password" placeholder="Repetir senha" value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} />
+        {error && <Error>{ error }</Error>}
         <Button type="submit" disabledButton={disabledButton}>Cadastrar</Button>
         <TextLink to="/" text="Já tem conta? Faça seu login" />
         <TextLink to="/esqueceu-sua-senha" text="Esqueceu sua senha?" />
