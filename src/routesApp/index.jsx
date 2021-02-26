@@ -1,8 +1,9 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import ReactGA from 'react-ga';
 import {
   Route,
   Switch,
+  useLocation,
 } from 'react-router-dom';
 
 import {
@@ -17,6 +18,16 @@ import {
 } from '../pages';
 
 function Routes() {
+  const location = useLocation();
+  useEffect(() => {
+    ReactGA.initialize('UA-190686186-1');
+  }, []);
+  useEffect(
+    () => {
+      ReactGA.pageview(location.pathname);
+    },
+    [location.pathname],
+  );
   return (
     <Switch>
       <Route path="/" exact component={SignIn} />
