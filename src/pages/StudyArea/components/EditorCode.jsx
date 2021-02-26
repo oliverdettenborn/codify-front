@@ -5,7 +5,15 @@ import { Button } from '../../../components';
 
 export default function EditorCode(props) {
   const {
-    setCode, language, code, title, haveButton, textButton, buttonOnclick,
+    setCode,
+    language,
+    code,
+    title,
+    haveButton,
+    textButton,
+    buttonOnclick,
+    readOnly = false,
+    height,
   } = props;
 
   const handleEditorChange = (value) => {
@@ -34,7 +42,7 @@ export default function EditorCode(props) {
         }
       </Header>
       <Editor
-        height="55%"
+        height={height || '55%'}
         defaultLanguage="javascript"
         defaultValue={code}
         theme="vs-dark"
@@ -52,7 +60,7 @@ export default function EditorCode(props) {
           selectionHighlight: true,
           fontFamily: 'Fira Code',
           fontLigatures: true,
-          readOnly: false,
+          readOnly,
           minimap: {
             enabled: false,
           },

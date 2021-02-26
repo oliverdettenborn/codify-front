@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactSafeHtml from 'react-safe-html';
-import { HiOutlineLightBulb } from 'react-icons/hi';
+import { HiOutlineLightBulb, HiPencil } from 'react-icons/hi';
 import { VscRunAll } from 'react-icons/vsc';
 import * as mochaAsPromised from '@bootcamp-ra/mocha-as-promised';
 import { NotificationManager } from 'react-notifications';
@@ -14,6 +14,7 @@ export default function Exercise(props) {
   const { exercise } = props;
   const [code, setCode] = useState(exercise.initialCode);
   const [resultTests, setResultTests] = useState({});
+  const [showSolution, setShowSolution] = useState(false);
 
   function runTestsExercise() {
     mochaAsPromised
@@ -41,11 +42,11 @@ export default function Exercise(props) {
           haveButton
           textButton={(
             <>
-              Ver solução
-              <HiOutlineLightBulb size={18} />
+              {showSolution ? 'Seu código' : 'Ver solução'}
+              {showSolution ? <HiPencil size={18} /> : <HiOutlineLightBulb size={18} />}
             </>
           )}
-          buttonOnclick={() => true}
+          buttonOnclick={() => setShowSolution(!showSolution)}
         />
         <Console
           title="Console"
@@ -59,6 +60,29 @@ export default function Exercise(props) {
           )}
           buttonOnclick={runTestsExercise}
         />
+
+        {
+          showSolution && (
+            <BoxCover>
+              <EditorCode
+                code={exercise.solution}
+                height="100%"
+                setCode={() => true}
+                language={exercise.language}
+                title="Nossa solução"
+                haveButton
+                readOnly
+                textButton={(
+                  <>
+                    Seu código
+                    <HiPencil size={18} />
+                  </>
+          )}
+                buttonOnclick={() => setShowSolution(!showSolution)}
+              />
+            </BoxCover>
+          )
+        }
       </ContainerRight>
     </Container>
   );
@@ -109,6 +133,17 @@ const ContainerRight = styled.div`
   height: 100%;
   flex-shrink: 0;
   overflow-y: auto;
+  position: relative;
+`;
+
+const BoxCover = styled.aside`
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  z-index: 5;
+  background: #3d3d3d;
 `;
 
 const Container = styled.div`
