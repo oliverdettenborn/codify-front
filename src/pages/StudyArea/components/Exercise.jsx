@@ -12,19 +12,21 @@ import Console from './Console';
 
 export default function Exercise(props) {
   const {
-    exercise, handleCheckboxChange, checked,
+    exercise, handleCheckboxChange, checked, index,
   } = props;
   const [resultTests, setResultTests] = useState({});
   const [showSolution, setShowSolution] = useState(false);
   const [code, setCode] = useState(exercise.initialCode);
 
   useEffect(() => {
+    setResultTests({});
+    setShowSolution(false);
     setCode(exercise.initialCode);
 
     if (exercise.solutionUser !== null) {
       setCode(exercise.solutionUser);
     }
-  }, [exercise.exerciseId]);
+  }, [exercise.exerciseId, index]);
 
   function runTestsExercise() {
     mochaAsPromised

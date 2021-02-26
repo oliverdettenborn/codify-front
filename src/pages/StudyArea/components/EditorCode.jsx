@@ -59,6 +59,7 @@ export default function EditorCode(props) {
         theme="vs-dark"
         language={language}
         onChange={handleEditorChange}
+        saveViewState={false}
         options={{
           selectOnLineNumbers: true,
           colorDecorators: true,
