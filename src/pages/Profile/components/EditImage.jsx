@@ -1,21 +1,27 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Avatar from 'react-avatar';
 import { BsPencil } from 'react-icons/bs';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import { PacmanLoader } from 'react-spinners';
+import { NotificationManager } from 'react-notifications';
+import mediaQuery from '../../../utils/mediaQuery';
 
 export default function EditImage({ user, setUser }) {
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({ noDrag: true, maxFiles: 1, accept: 'image/*' });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     acceptedFiles.forEach((file) => {
       const body = new FormData();
       body.append('image', file);
+      setLoading(true);
 
       axios
-        .post(`${process.env.REACT_APP_URL_API}/users/${user.id}/upload-image`, body,
+        .post(`${process.env.REACT_APP_URL_API}/users/avatar`, body,
           { headers: { Authorization: `Bearer ${user.token}` } })
         .then((response) => {
           setUser({
@@ -23,23 +29,32 @@ export default function EditImage({ user, setUser }) {
             avatarUrl: response.data,
           });
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(() => NotificationManager.error('Houve um erro, tente novamente mais tarde'))
+        .finally(() => setLoading(false));
     });
   }, [acceptedFiles]);
 
   return (
-    <div>
-      <Avatar src={user.avatarUrl} email={user.email} name={user.name} round size={140} color={Avatar.getRandomColor('sitebase', ['red', 'green', 'pink', 'blue'])} style={{ position: 'absolute' }} />
+    <Container>
+      {loading
+        ? <PacmanLoader color="#19AACA" />
+        : <Avatar src={user.avatarUrl} email={user.email} name={user.name} round size={140} color={Avatar.getRandomColor('sitebase', ['red', 'green', 'pink', 'blue'])} style={{ position: 'absolute' }} />}
       <StyledDiv {...getRootProps()}>
         <BsPencil />
         EDITAR
         <input {...getInputProps()} />
       </StyledDiv>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  margin: 0px 0px 0px 70px;
+
+  ${mediaQuery} {
+    margin: 0px;
+  }
+`;
 
 const StyledDiv = styled.div`
   width:140px;
@@ -62,7 +77,7 @@ const StyledDiv = styled.div`
   }
 
   svg {
-    font-size: 40px;
+    font-size: 2.5rem;
   }
 
 `;

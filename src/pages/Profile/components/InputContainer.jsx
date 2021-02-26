@@ -14,7 +14,6 @@ export default function InputContainer(props) {
     email,
     setEmail,
     disabledButton,
-    onSubmit,
     onClick,
     changePassword,
     disablePasswordButton,
@@ -28,7 +27,6 @@ export default function InputContainer(props) {
       <Container>
         <Container
           flexDirection="column"
-          margin="0px 70px 0px 0px"
         >
           <InputProfile
             label="nome completo"
@@ -38,6 +36,7 @@ export default function InputContainer(props) {
           />
           <InputProfile
             label="e-mail"
+            type="email"
             placeholder={user.email}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -72,6 +71,9 @@ export default function InputContainer(props) {
         margin="20px 0px 0px"
       >
         <Button
+          background="white"
+          color="#19AACA"
+          border="2px solid #19AACA"
           fontsize="21px"
           width="initial"
           padding="0 40px"
@@ -88,7 +90,6 @@ export default function InputContainer(props) {
           padding="0 40px"
           type="submit"
           disabledButton={disabledButton}
-          onClick={onSubmit}
         >
           Salvar
         </Button>
@@ -96,14 +97,3 @@ export default function InputContainer(props) {
     </>
   );
 }
-const StyledDiv = styled.div`
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  /* background-color:#fcfcfc99; */
-  position:relative;
-
-  &:hover {
-    background-color:#fcfcfcc4;
-  }
-`;

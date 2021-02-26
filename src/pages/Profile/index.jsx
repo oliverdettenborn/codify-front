@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 import {
   Container, Error, FormBox, Header, PlainText, UserAvatar,
@@ -48,7 +49,7 @@ export default function Profile() {
     }
 
     axios
-      .put(`${process.env.REACT_APP_URL_API}/users/${user.id}/change-data`, data,
+      .put(`${process.env.REACT_APP_URL_API}/users`, data,
         { headers: { Authorization: `Bearer ${user.token}` } })
       .then((response) => {
         if (email) user.email = email;
@@ -59,7 +60,7 @@ export default function Profile() {
           setChangePassword(false);
           setDisablePasswordButton(false);
         }
-        setUser(user);
+        setUser({ ...user });
       })
       .catch((err) => {
         if (err.response && err.response.status === 409) {
@@ -88,7 +89,7 @@ export default function Profile() {
         padding="1.4rem 0"
         avatarBorder="3px solid"
       >
-        <UserAvatar user={user} size="75" />
+        <StyledDiv><UserAvatar user={user} size="75" /></StyledDiv>
         <PlainText
           fontSize="1.7rem"
           color="white"
@@ -98,7 +99,8 @@ export default function Profile() {
           {user.name}
         </PlainText>
         <FormBox
-          width="80%"
+          width="70%"
+          onSubmit={onSubmit}
         >
           <InputContainer
             user={user}
@@ -123,3 +125,8 @@ export default function Profile() {
     </>
   );
 }
+
+const StyledDiv = styled.div`
+  border-radius: 50%;
+  border: 3px solid white;
+`;
