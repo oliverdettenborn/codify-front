@@ -55,7 +55,8 @@ export default function EditorCode(props) {
       <Editor
         height={height || '55%'}
         defaultLanguage="javascript"
-        defaultValue={code}
+        defaultValue="// digite algo"
+        value={code}
         theme="vs-dark"
         language={language}
         onChange={handleEditorChange}
