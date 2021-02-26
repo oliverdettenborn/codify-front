@@ -5,8 +5,8 @@ import mediaQuery from '../utils/mediaQuery';
 import Loading from './Loading';
 
 export default function Button({
-  onClick, type, disabledButton, children,
-  background, width, height, fontsize, borderRadius, padding,
+  onClick, type, disabledButton, children, display, color, border,
+  background, width, height, fontsize, borderRadius, padding, marginRight,
 }) {
   return (
     <StyledButton
@@ -19,6 +19,10 @@ export default function Button({
       fontsize={fontsize || '20px'}
       borderRadius={borderRadius || '6px'}
       padding={padding || '0px'}
+      marginRight={marginRight}
+      display={display}
+      color={color}
+      border={border}
     >
       {disabledButton
         ? <Loading />
@@ -31,23 +35,25 @@ const StyledButton = styled.button`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   background-color: ${(props) => (props.disabled ? 'gray' : props.background)};
-  border: none;
+  border: ${(props) => (props.border ? props.border : 'none')};
   font-family: 'Roboto', sans-serif;
   font-size: ${(props) => (props.fontsize)};
   font-weight: bold;
   line-height: 28px;
-  color: white;
+  color: ${(props) => (props.color ? props.color : 'white')};
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-right: ${(props) => (props.marginRight ? props.marginRight : '0px')};
   text-align: center;
   outline: none;
   padding: ${(props) => (props.padding)};
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => (props.borderRadius)};
-  display: flex;
+  display: ${(props) => (props.display ? 'none' : 'flex')};
   justify-content: center;
   align-items: center;
+
   ${mediaQuery} {
     font-size: 1.2rem;
   }

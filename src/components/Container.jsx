@@ -13,6 +13,9 @@ export default function Container(props) {
     padding,
     borderBottom,
     cursor,
+    background,
+    height,
+    avatarBorder,
   } = props;
 
   return (
@@ -24,6 +27,9 @@ export default function Container(props) {
       borderBottom={borderBottom}
       cursor={cursor}
       flexDirection={flexDirection}
+      background={background}
+      height={height}
+      avatarBorder={avatarBorder}
     >
       {children}
     </FlexContainer>
@@ -34,6 +40,12 @@ const FlexContainer = styled.div`
   width: 100%;
   display: flex;
 
+  .sb-avatar__text {
+    &:first-child {
+    border: ${(props) => (props.avatarBorder || 'initial')};
+    }
+  }
+
   ${(props) => (
     css`
       flex-direction: ${props.flexDirection || 'initial'};
@@ -42,6 +54,8 @@ const FlexContainer = styled.div`
       justify-content: ${props.justifyContent || 'center'};
       align-items: ${props.alignItems || 'center'};
       border-bottom: ${props.borderBottom || 'none'};
+      background-color: ${props.background || 'intial'};
+      height: ${props.height || 'initial'};
       cursor: ${props.cursor || 'initial'};
     `
   )}

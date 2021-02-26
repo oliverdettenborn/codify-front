@@ -28,6 +28,7 @@ export default function TitleNameUser({ user, setUser }) {
       courses={courses}
       loading={loading}
       showMessageWithEmptyArray
+      isFlexStart
     />
   );
 }

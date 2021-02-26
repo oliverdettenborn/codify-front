@@ -1,44 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { Button } from '../../../components';
+import axios from 'axios';
+import UserContext from '../../../context/UserContext';
 
-import YoutubeVideo from './YoutubeVideo';
+import Theory from './Theory';
 import Exercise from './Exercise';
-import Checkbox from './Checkbox';
 
 export default function Activity(props) {
   const {
-    activity, refresh, setRefresh, changeToNext, index, totalOfActivities, disabledButton,
+    activity, index, setChecked, checked, refresh, setRefresh,
   } = props;
+  const { user } = useContext(UserContext);
+
+  const id = activity.theoryId || activity.exerciseId;
+  const type = index === 0 ? 'theories' : 'exercises';
+
+  function handleCheckboxChange() {
+    setChecked(!checked);
+    axios
+      .post(
+        `${process.env.REACT_APP_URL_API}/users/${type}/${id}/progress`,
+        null,
+        { headers: { Authorization: `Bearer ${user.token}` } },
+      )
+      .then(() => setRefresh(!refresh));
+  }
+
   return (
     <Container>
-      {activity && activity.youtubeUrl
-        ? <YoutubeVideo link={activity.youtubeUrl} />
-        : <Exercise description={activity.description} />}
-      <Footer>
-        <Checkbox
-          id={activity.theoryId || activity.exerciseId}
-          userHasFinished={activity.userHasFinished}
-          refresh={refresh}
-          setRefresh={setRefresh}
-          type={index === 0 ? 'theories' : 'exercises'}
-        />
-        <Button
-          onClick={changeToNext}
-          disabledButton={disabledButton}
-          width="25%"
-          height="30%!important"
-          fontsize="15px"
-          borderRadius="8px"
-          padding="5px"
-        >
-          {
-            (index === (totalOfActivities - 1))
-              ? 'Finalizar o tópico >>'
-              : 'Avançar >>'
-          }
-        </Button>
-      </Footer>
+      {activity && index === 0 && activity.youtubeUrl
+        ? (
+          <Theory
+            id={id}
+            type={type}
+            theory={activity}
+            handleCheckboxChange={handleCheckboxChange}
+            {...props}
+          />
+        )
+        : (
+          <Exercise
+            exercise={activity}
+            handleCheckboxChange={handleCheckboxChange}
+            {...props}
+          />
+        )}
     </Container>
   );
 }
@@ -47,13 +53,4 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 30px 25% 0 25%;
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
 `;

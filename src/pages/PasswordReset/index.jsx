@@ -41,14 +41,14 @@ export default function PasswordReset() {
         },
       })
       .then(() => {
-        NotificationManager.success('Senha redefinida com sucesso!', 'Faça login para continuar');
+        NotificationManager.success('Faça login para continuar!', 'Senha redefinida com sucesso!');
         history.push('/');
       })
       .catch((err) => {
         if (err.response && err.response.status === 401) {
-          NotificationManager.error('Não foi possível alterar sua senha');
+          NotificationManager.error('Verifique seu cadastro!', 'Não encontramos esse usuário ou token');
         } else {
-          NotificationManager.error('Houve um erro desconhecido, tente novamente mais tarde');
+          NotificationManager.error('Tente novamente mais tarde!', 'Houve um erro desconhecido');
         }
       })
       .finally(() => setLoading(false));

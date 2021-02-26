@@ -7,12 +7,12 @@ import CourseBox from './CourseBox';
 import { Loading } from '../../../components';
 
 export default function ContainerCouse({
-  courses, title, loading, showMessageWithEmptyArray, haveContinueButton,
+  courses, title, loading, showMessageWithEmptyArray, haveContinueButton, isFlexStart,
 }) {
   return (
     <>
       { title && <Title>{title}</Title>}
-      <Container>
+      <Container isFlexStart={isFlexStart}>
         {
         loading
           ? <Loading />
@@ -21,6 +21,7 @@ export default function ContainerCouse({
                 ? showMessageWithEmptyArray && <Message> Nenhum curso encontrado</Message>
                 : courses.map((course) => (
                   <CourseBox
+                    key={course.id}
                     course={course}
                     haveContinueButton={haveContinueButton}
                   />
@@ -34,22 +35,25 @@ export default function ContainerCouse({
 
 const Container = styled.div`
   width: 100%;
-  margin: 0 auto;
   display: flex;
-  justify-content: flex-start;
+  justify-content: ${(props) => (props.isFlexStart ? 'flex-start' : 'space-between')};
   align-items: center;
   flex-wrap: wrap;
-  margin-left: -20px;
   margin-bottom: 20px;
+  
+  & > div{
+    margin-right: ${(props) => props.isFlexStart && '20px'}
+  }
 `;
 
 const Title = styled.h3`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: normal;
-  font-size: 35px;
-  line-height: 40px;
+  font-size: 1.7rem;
+  line-height: 2rem;
   color: #262626;
+  margin-bottom: 20px;
 `;
 
 const Message = styled.h3`

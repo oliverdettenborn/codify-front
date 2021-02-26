@@ -33,7 +33,7 @@ export default function CourseDropdown(props) {
   if (showOnlyButtonBack) {
     return (
       <Container>
-        <ButtonClickToBack to={`/cursos/${courseId}`} top="35px" left="10px" height="60%!important" />
+        <ButtonClickToBack to={`/cursos/${courseId}`} top="5px" left="10px" />
       </Container>
     );
   }
@@ -51,12 +51,13 @@ export default function CourseDropdown(props) {
       .map((chapter) => {
         const topicsMap = chapter.topics.map((topic) => (
           topic.id !== topicId && {
-            value: topic.id,
+            id: topic.id,
             label: topic.name,
             done: topic.userHasFinished,
           }
         ));
         return {
+          id: chapter.id,
           name: chapter.name,
           items: topicsMap,
         };
@@ -66,7 +67,7 @@ export default function CourseDropdown(props) {
 
   return (
     <Container>
-      <ButtonClickToBack to={`/cursos/${courseId}`} top="20%" left="10px" height="60%!important" />
+      <ButtonClickToBack to={`/cursos/${courseId}`} top="5px" left="10px" />
       <Menu placement="top">
         <MenuButton as={ButtonTransparent} rightIcon={<FiChevronDown />}>
           {`${defaultOption.chapterName} - ${defaultOption.topicName}`}
@@ -74,10 +75,10 @@ export default function CourseDropdown(props) {
         <Box>
           {
             options.map((opt) => (
-              <MenuOptionGroup title={opt.name}>
+              <MenuOptionGroup title={opt.name} key={opt.id}>
                 {
                   opt.items.map((item) => (
-                    <TextLink to={`/estudo/${courseId}/topic/${item.value}`}>
+                    <TextLink to={`/estudo/${courseId}/topic/${item.id}`} key={item.id}>
                       {
                           (item.done)
                             ? <FaCheckCircle color="#76DF93" />
@@ -99,8 +100,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #292929;
-  height: 10%;
+  background: #161616;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  height: 50px;
   position: relative;
   font-family: 'Roboto';
   font-style: normal;
