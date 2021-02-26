@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 import {
   Container, Error, FormBox, Header, PlainText, UserAvatar,
@@ -18,8 +19,17 @@ export default function Profile() {
   }
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [disabledButton, setDisabledButton] = useState(false);
   const [error, setError] = useState('');
+  const [changePassword, setChangePassword] = useState(false);
+  const [disablePasswordButton, setDisablePasswordButton] = useState(false);
+
+  function onClickChangePassword() {
+    setChangePassword(true);
+    setDisablePasswordButton(true);
+  }
 
   function onSubmit(e) {
     e.preventDefault();
@@ -28,14 +38,29 @@ export default function Profile() {
     if (email) data.email = email;
     if (name) data.name = name;
 
+    if (changePassword) {
+      if (!password || password !== passwordConfirmation) {
+        setError('As senhas não batem.');
+        setDisabledButton(false);
+        return;
+      }
+      data.password = password;
+      data.passwordConfirmation = passwordConfirmation;
+    }
+
     axios
-      .put(`${process.env.REACT_APP_URL_API}/users/change-data`, data,
+      .put(`${process.env.REACT_APP_URL_API}/users`, data,
         { headers: { Authorization: `Bearer ${user.token}` } })
       .then((response) => {
         if (email) user.email = email;
         if (name) user.name = name;
 
-        setUser(user);
+        if (password) {
+          alert('Senha trocada com sucesso');
+          setChangePassword(false);
+          setDisablePasswordButton(false);
+        }
+        setUser({ ...user });
       })
       .catch((err) => {
         if (err.response && err.response.status === 409) {
@@ -64,7 +89,7 @@ export default function Profile() {
         padding="1.4rem 0"
         avatarBorder="3px solid"
       >
-        <UserAvatar user={user} size="75" />
+        <StyledDiv><UserAvatar user={user} size="75" /></StyledDiv>
         <PlainText
           fontSize="1.7rem"
           color="white"
@@ -74,16 +99,25 @@ export default function Profile() {
           {user.name}
         </PlainText>
         <FormBox
-          width="80%"
+          width="70%"
+          onSubmit={onSubmit}
         >
           <InputContainer
             user={user}
+            setUser={setUser}
             name={name}
             setName={setName}
             email={email}
             setEmail={setEmail}
             disabledButton={disabledButton}
             onSubmit={onSubmit}
+            onClick={onClickChangePassword}
+            changePassword={changePassword}
+            disablePasswordButton={disablePasswordButton}
+            password={password}
+            setPassword={setPassword}
+            passwordConfirmation={passwordConfirmation}
+            setPasswordConfirmation={setPasswordConfirmation}
           />
           {error && <Error>{error}</Error>}
         </FormBox>
@@ -91,3 +125,8 @@ export default function Profile() {
     </>
   );
 }
+
+const StyledDiv = styled.div`
+  border-radius: 50%;
+  border: 3px solid white;
+`;
