@@ -22,6 +22,7 @@ export default function StudyArea() {
   const [alertIsOpen, setAlertIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     axios
@@ -93,6 +94,8 @@ export default function StudyArea() {
                 totalOfActivities={data.length}
                 index={indexActivity}
                 disabledButton={disabledButton}
+                checked={checked}
+                setChecked={setChecked}
               />
               <AlertDialog
                 alertIsOpen={alertIsOpen}

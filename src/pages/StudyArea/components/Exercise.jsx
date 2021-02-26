@@ -11,7 +11,7 @@ import EditorCode from './EditorCode';
 import Console from './Console';
 
 export default function Exercise(props) {
-  const { exercise } = props;
+  const { exercise, handleCheckboxChange } = props;
   const [code, setCode] = useState(exercise.initialCode);
   const [resultTests, setResultTests] = useState({});
   const [showSolution, setShowSolution] = useState(false);
@@ -21,6 +21,9 @@ export default function Exercise(props) {
       .runTests(code, exercise.tests)
       .then((result) => {
         setResultTests(result);
+        if (result.total === result.passed) {
+          handleCheckboxChange();
+        }
       })
       .catch(() => NotificationManager.error('Ocorreu um erro!', 'Não foi possível rodar os testes!'));
   }
