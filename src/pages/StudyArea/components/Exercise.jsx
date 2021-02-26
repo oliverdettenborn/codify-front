@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactSafeHtml from 'react-safe-html';
 import { HiOutlineLightBulb, HiPencil } from 'react-icons/hi';
@@ -11,18 +11,32 @@ import EditorCode from './EditorCode';
 import Console from './Console';
 
 export default function Exercise(props) {
-  const { exercise, handleCheckboxChange } = props;
-  const [code, setCode] = useState(exercise.initialCode);
+  const {
+    exercise, handleCheckboxChange, checked, index,
+  } = props;
   const [resultTests, setResultTests] = useState({});
   const [showSolution, setShowSolution] = useState(false);
+  const [code, setCode] = useState(exercise.initialCode);
+
+  useEffect(() => {
+    setResultTests({});
+    setShowSolution(false);
+    setCode(exercise.initialCode);
+
+    if (exercise.solutionUser) {
+      setCode(exercise.solutionUser);
+    }
+  }, [exercise.exerciseId, index]);
 
   function runTestsExercise() {
     mochaAsPromised
       .runTests(code, exercise.tests)
       .then((result) => {
         setResultTests(result);
-        if (result.total === result.passed) {
-          handleCheckboxChange();
+        if (result.total === result.passed && !checked) {
+          handleCheckboxChange(code);
+        } else if (result.total !== result.passed && checked) {
+          handleCheckboxChange(code);
         }
       })
       .catch(() => NotificationManager.error('Ocorreu um erro!', 'Não foi possível rodar os testes!'));
@@ -45,8 +59,8 @@ export default function Exercise(props) {
           haveButton
           textButton={(
             <>
-              {showSolution ? 'Seu código' : 'Ver solução'}
-              {showSolution ? <HiPencil size={18} /> : <HiOutlineLightBulb size={18} />}
+              Ver solução
+              <HiOutlineLightBulb size={18} />
             </>
           )}
           buttonOnclick={() => setShowSolution(!showSolution)}
