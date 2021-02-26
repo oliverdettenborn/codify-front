@@ -1,7 +1,6 @@
 import React, {
   createContext, useEffect, useContext, useState,
 } from 'react';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import hexRgb from 'hex-rgb';
 import UserContext from './UserContext';
@@ -21,7 +20,6 @@ export function CourseProvider({ children }) {
   const [chapters, setChapters] = useLocalStorage('@codify-chapters', []);
   const [refresh, setRefresh] = useState(false);
   const { user, setUser } = useContext(UserContext);
-  const history = useHistory();
 
   useEffect(() => {
     if (courseId === 0) return;
@@ -40,7 +38,6 @@ export function CourseProvider({ children }) {
         if (err && err.response.status === 401) {
           setCourseId(0);
           setUser({});
-          history.push('/');
         }
       });
   }, [courseId, refresh]);

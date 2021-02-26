@@ -1,5 +1,5 @@
-import React from 'react';
-import Editor from '@monaco-editor/react';
+import React, { useRef, useEffect } from 'react';
+import Editor, { useMonaco } from '@monaco-editor/react';
 import styled from 'styled-components';
 import { Button } from '../../../components';
 
@@ -15,10 +15,20 @@ export default function EditorCode(props) {
     readOnly = false,
     height,
   } = props;
+  const editorRef = useRef(null);
+  const monaco = useMonaco();
 
   const handleEditorChange = (value) => {
     setCode(value);
   };
+
+  function handleEditorDidMount(editor) {
+    editorRef.current = editor;
+  }
+
+  useEffect(() => {
+    monaco?.languages.typescript.javascriptDefaults.setEagerModelSync(true);
+  }, [monaco]);
 
   return (
     <>
@@ -35,6 +45,7 @@ export default function EditorCode(props) {
             fontsize="15px"
             borderRadius="10px"
             padding="5px"
+            onMount={handleEditorDidMount}
           >
             {textButton}
           </Button>
