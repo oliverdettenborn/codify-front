@@ -23,7 +23,7 @@ export default function Exercise(props) {
     setShowSolution(false);
     setCode(exercise.initialCode);
 
-    if (exercise.solutionUser !== null) {
+    if (exercise.solutionUser) {
       setCode(exercise.solutionUser);
     }
   }, [exercise.exerciseId, index]);
