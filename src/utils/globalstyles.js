@@ -14,7 +14,7 @@ button{
   }
   button:hover {
     box-shadow: 0px 0px 0px transparent;
-    border: 0px solid transparent;
+    border: 0px solid inherit;
     text-shadow: 0px 0px 0px transparent;
   }
   button:active {
