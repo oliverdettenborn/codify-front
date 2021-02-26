@@ -25,7 +25,6 @@ function Routes() {
   useEffect(
     () => {
       ReactGA.pageview(location.pathname);
-      console.log(location);
     },
     [location.pathname],
   );
