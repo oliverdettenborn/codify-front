@@ -23,11 +23,13 @@ export default function SignUp() {
       .catch((err) => {
         if (err.response && err.response.status === 409) {
           setError('Email já está em uso');
-          setDisabledButton(false);
+        } else if (err.response && err.response.status === 422) {
+          setError('As senhas precisam ser iguais!');
         } else {
           setError('Houve um erro desconhecido, tente novamente mais tarde');
         }
-      });
+      })
+      .finally(() => setDisabledButton(false));
   }
   return (
     <BoxBackground>
