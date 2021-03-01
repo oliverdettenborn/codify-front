@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export default function Checkbox(props) {
   const {
-    id, userHasFinished, setChecked, checked, handleCheckboxChange,
+    id, userHasFinished, setChecked, checked, handleCheckboxChange, code,
   } = props;
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function Checkbox(props) {
   }, [id]);
 
   return (
-    <CheckboxContainer checked={checked} onClick={handleCheckboxChange}>
+    <CheckboxContainer checked={checked} onClick={() => handleCheckboxChange(code)}>
       <HiddenCheckbox checked={checked} />
       <StyledCheckbox checked={checked} />
       <Text checked={checked}>
