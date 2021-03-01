@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { NotificationContainer } from 'react-notifications';
 import Globalstyles from './utils/globalstyles';
-import Routes from './routesApp';
+import Routes from './routes';
 import Providers from './providers';
 
 function App() {

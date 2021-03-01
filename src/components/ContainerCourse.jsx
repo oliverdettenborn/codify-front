@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import CourseBox from './CourseBox';
-import { Loading } from '../../../components';
+import Loading from './Loading';
 
 export default function ContainerCouse({
   courses, title, loading, showMessageWithEmptyArray, haveContinueButton, isFlexStart,

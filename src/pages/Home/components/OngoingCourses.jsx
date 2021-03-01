@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import ContainerCourse from './ContainerCourse';
+import { ContainerCourse } from '../../../components';
 import CourseBoxHorizontal from './CourseBoxHorizontal';
 
 export default function OngoingCourses({ user }) {
