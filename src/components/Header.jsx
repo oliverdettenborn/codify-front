@@ -36,7 +36,7 @@ export default function Header({ user }) {
     <Container>
       <div>
         <h5>
-          <Link to="home">
+          <Link to="/home">
             codify
           </Link>
         </h5>
