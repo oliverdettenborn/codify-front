@@ -15,7 +15,7 @@ export default function Activity(props) {
   const id = activity.theoryId || activity.exerciseId;
   const type = index === 0 ? 'theories' : 'exercises';
 
-  function handleCheckboxChange(code = '') {
+  function handleCheckboxChange(code) {
     setChecked(!checked);
     const data = type === 'exercises' ? { solutionUser: code } : null;
     axios

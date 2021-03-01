@@ -14,7 +14,7 @@ import CourseContext from '../../../context/CourseContext';
 export default function Course({
   user, setUser, courseId, chapters,
 }) {
-  const [progress, setProgress] = useState(20);
+  const [progress, setProgress] = useState(0);
   const [disabledButton, setDisabledButton] = useState(false);
   const [hasStarted, setHasStarted] = useState(true);
   const { lastTopicId } = useContext(CourseContext);

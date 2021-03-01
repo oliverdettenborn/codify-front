@@ -48,7 +48,7 @@ export default function Exercise(props) {
         <Enunciated>
           <ReactSafeHtml html={exercise.enunciated} />
         </Enunciated>
-        <Footer {...props} />
+        <Footer {...props} code={code} />
       </ContainerLeft>
       <ContainerRight>
         <EditorCode
@@ -71,7 +71,7 @@ export default function Exercise(props) {
           resultTests={resultTests}
           textButton={(
             <>
-              Ver solução
+              Rodar os testes
               <VscRunAll size={18} />
             </>
           )}

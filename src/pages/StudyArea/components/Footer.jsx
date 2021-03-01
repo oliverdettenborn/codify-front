@@ -16,6 +16,7 @@ export default function Activity(props) {
     setChecked,
     checked,
     handleCheckboxChange,
+    code,
   } = props;
 
   return (
@@ -27,6 +28,7 @@ export default function Activity(props) {
         checked={checked}
         setChecked={setChecked}
         handleCheckboxChange={handleCheckboxChange}
+        code={code}
       />
       <Button
         onClick={changeToNext}
