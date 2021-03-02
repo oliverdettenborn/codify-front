@@ -79,6 +79,8 @@ const Course = styled.div`
 
   ${mediaQuery}{
     flex-direction: column;
+    height: 340px;
+    padding: inherit;
   }
 `;
 
@@ -93,6 +95,11 @@ const BoxImage = styled.div`
     height: 100%;
     border-radius: 20px 0 0 20px;
   }
+
+  ${mediaQuery}{
+    width: 100%;
+    height: 175px;
+  }
 `;
 
 const Details = styled.div`
@@ -103,6 +110,14 @@ const Details = styled.div`
   justify-content: space-around;
   align-items: flex-start;
   flex-grow: 1;
+
+  ${mediaQuery}{
+    padding: 5px 25px;
+
+    h6{
+      margin: 0;
+    }
+  }
 `;
 
 const TitleCourse = styled.h3`
@@ -111,6 +126,11 @@ const TitleCourse = styled.h3`
   font-size: 22px;
   line-height: 26px;
   color: #000000;
+
+  ${mediaQuery}{
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
 `;
 
 const Description = styled.h4`
@@ -120,4 +140,9 @@ const Description = styled.h4`
   line-height: 20px;
   color: #777777;
   margin-top: 8px;
+
+  ${mediaQuery}{
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
 `;
