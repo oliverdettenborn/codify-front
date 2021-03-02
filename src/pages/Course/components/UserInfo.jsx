@@ -10,6 +10,7 @@ import {
 } from '../../../components';
 import ProgressBar from './ProgressBar';
 import CourseContext from '../../../context/CourseContext';
+import mediaQuery from '../../../utils/mediaQuery';
 
 export default function Course({
   user, setUser, courseId, chapters,
@@ -66,9 +67,9 @@ export default function Course({
   return (
     <CourseDataWrapper height="190px" position="relative" top="-60px" padding="43px">
       <UserProgress>
-        <UserAvatar user={user} size="55" />
+        <UserAvatar className="avatar" user={user} size="55" />
         <Container flexDirection="column" alignItems="flex-start" margin="0 0 0 25px">
-          <PlainText fontSize="1.3rem">
+          <PlainText fontSize="1.2rem">
             {
                 hasStarted
                   ? (progress >= 0 && progress < 50)
@@ -99,4 +100,15 @@ const UserProgress = styled.div`
   display: flex;
   align-items: center;
   flex-grow: 1;
+
+  ${mediaQuery}{
+    .avatar, .sb-avatar, .sb-avatar--text{
+      display: none!important;
+    }
+
+    & > div{
+      margin: inherit;
+      width: 100%;
+    }
+  }
 `;
