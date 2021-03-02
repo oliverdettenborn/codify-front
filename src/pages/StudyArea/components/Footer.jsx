@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button } from '../../../components';
 
 import Checkbox from './Checkbox';
+import media from '../../../utils/mediaQuery';
 
 export default function Activity(props) {
   const {
@@ -55,4 +56,13 @@ const Footer = styled.footer`
   justify-content: space-between;
   align-items: center;
   padding: 0 15px;
+
+  ${media}{
+    flex-direction: column;
+    margin-top: 15px;
+
+    button{
+      width: 200px;
+    }
+  }
 `;

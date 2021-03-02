@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import CourseBox from './CourseBox';
 import Loading from './Loading';
+import media from '../utils/mediaQuery';
 
 export default function ContainerCouse({
   courses, title, loading, showMessageWithEmptyArray, haveContinueButton, isFlexStart,
@@ -54,6 +55,10 @@ const Title = styled.h3`
   line-height: 2rem;
   color: #262626;
   margin-bottom: 20px;
+
+  ${media}{
+    font-size: 1.6rem;
+  }
 `;
 
 const Message = styled.h3`

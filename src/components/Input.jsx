@@ -26,9 +26,9 @@ const StyledInput = styled.input`
   height: 50px;
   margin-bottom: 15px;
   font-family: 'Roboto', sans-serif;
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: bold;
-  line-height: 28px;
+  line-height: 2rem;
   color: #9F9F9F;
   border: 1px solid #B4B4B4;
   padding: 16px 21px 14px 21px;
