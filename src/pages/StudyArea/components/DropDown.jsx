@@ -68,7 +68,7 @@ export default function CourseDropdown(props) {
   return (
     <Container>
       <ButtonClickToBack to={`/cursos/${courseId}`} top="5px" left="10px" />
-      <Menu placement="top">
+      <Menu placement="top" size="1rem">
         <MenuButton as={ButtonTransparent} rightIcon={<FiChevronDown />}>
           {`${defaultOption.chapterName} - ${defaultOption.topicName}`}
         </MenuButton>
@@ -131,7 +131,7 @@ const TextLink = styled(Link)`
   align-items: center;
   padding: 5px 30px;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 1rem;
 
   svg{
     padding-right: 8px;

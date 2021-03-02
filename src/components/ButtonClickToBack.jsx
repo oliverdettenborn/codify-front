@@ -33,6 +33,7 @@ const Icon = styled.div`
   height: 50px;
   max-height: 35px;
   position: absolute;
+  z-index: 999999999999999999999999;
   
   ${(props) => (
     css`
