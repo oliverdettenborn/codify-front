@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import ContainerCourse from './ContainerCourse';
+import { ContainerCourse } from '../../../components';
 
 export default function SuggestedCourses({ user }) {
   const [loading, setLoading] = useState(true);

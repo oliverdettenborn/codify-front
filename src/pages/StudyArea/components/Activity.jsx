@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import UserContext from '../../../context/UserContext';
@@ -13,7 +13,7 @@ export default function Activity(props) {
   const { user } = useContext(UserContext);
 
   const id = activity.theoryId || activity.exerciseId;
-  const type = index === 0 ? 'theories' : 'exercises';
+  const type = activity.theoryId ? 'theories' : 'exercises';
 
   function handleCheckboxChange(code) {
     setChecked(!checked);
@@ -26,6 +26,10 @@ export default function Activity(props) {
       )
       .then(() => setRefresh(!refresh));
   }
+
+  useEffect(() => {
+    setChecked(activity.userHasFinished);
+  }, [activity]);
 
   return (
     <Container>

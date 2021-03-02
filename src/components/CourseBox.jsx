@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import { Button } from '../../../components';
+import Button from './Button';
 
 export default function TitleNameUser({ course, haveContinueButton }) {
   const {

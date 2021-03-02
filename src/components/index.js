@@ -16,6 +16,12 @@ import Banner from './Banner';
 import UserAvatar from './Avatar';
 import ButtonClickToBack from './ButtonClickToBack';
 import AlertDialog from './AlertDialog';
+import ListAllCourse from './ListAllCourse';
+import BannerWelcome from './BannerWelcome';
+import ContainerCourse from './ContainerCourse';
+import CourseBox from './CourseBox';
+import TextWelcome from './TextWelcome';
+import TitleNameUser from './TitleNameUser';
 
 export {
   Building,
@@ -36,4 +42,10 @@ export {
   Banner,
   ButtonClickToBack,
   AlertDialog,
+  ListAllCourse,
+  BannerWelcome,
+  ContainerCourse,
+  CourseBox,
+  TextWelcome,
+  TitleNameUser,
 };

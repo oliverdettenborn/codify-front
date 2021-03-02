@@ -15,6 +15,7 @@ import {
   ForgetPassword,
   StudyArea,
   PasswordReset,
+  Courses,
 } from '../pages';
 
 function Routes() {
@@ -37,6 +38,7 @@ function Routes() {
       <Route path="/criar-nova-senha/:token" exact component={PasswordReset} />
       <Route path="/perfil" exact component={Profile} />
       <Route path="/cursos/:id" exact component={Course} />
+      <Route path="/cursos" exact component={Courses} />
       <Route path="/estudo/:courseId/topic/:topicId" exact component={StudyArea} />
     </Switch>
   );
