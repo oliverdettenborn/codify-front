@@ -186,7 +186,7 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   background: #3d3d3d;
-
+  overflow: hidden;
   ${media}{
     flex-direction: column;
   }

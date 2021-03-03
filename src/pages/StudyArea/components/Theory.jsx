@@ -1,29 +1,35 @@
-import React from 'react';
-import YouTube from 'react-youtube';
+/* eslint-disable consistent-return */
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
+import ReactPlayer from 'react-player/youtube';
 import styled from 'styled-components';
-import getYoutubeID from 'get-youtube-id';
 import Footer from './Footer';
 
 import media from '../../../utils/mediaQuery';
 
 export default function Theory(props) {
-  const { theory } = props;
-  const id = getYoutubeID(`${theory.youtubeUrl}`);
-
-  const opts = {
-    height: '300px',
-    width: '600px',
-    maxWidth: '100%',
-    playerVars: {
-      autoplay: 1,
-    },
-  };
+  const { theory, handleCheckboxChange, checked } = props;
+  const [totalDuration, setTotalDuration] = useState(0);
+  function checkProgress(event) {
+    if (event.playedSeconds / totalDuration >= 0.8 && !checked) {
+      handleCheckboxChange();
+    }
+  }
   return (
     <Box>
       <Container>
         {
         theory.youtubeUrl
-          && <YouTube videoId={id} opts={opts} />
+          ? (
+            <ReactPlayer
+              url={theory.youtubeUrl}
+              controls
+              onProgress={checkProgress}
+              onDuration={(duration) => setTotalDuration(duration)}
+              width="100%"
+            />
+          )
+          : 'Teoria ainda não foi cadastrada'
       }
       </Container>
       <Footer {...props} />
@@ -35,20 +41,21 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
-  padding: 30px 25% 0 25%;
-
+  padding-top: 30px;
+  width: 50%;
+  height: 500px;
+  flex-grow: 1;
+  padding-bottom: 35px;
+  .player-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+}
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
   ${media}{
-    padding: 0;
-    margin-top: 40px;
-
-    iframe{
-      width: 100%;
-      height: 215px;
-    }
-
-    & #player{
-      width: 100%;
-      height: 215px;
-    }
+    width: 95%;
   }
 `;

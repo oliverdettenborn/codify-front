@@ -114,6 +114,7 @@ const Background = styled.div`
   width: 100%;
   height: 100%;
   min-height: 100vh;
+  overflow: hidden;
   min-width: 100vw;
   max-width: 100%;
 `;
