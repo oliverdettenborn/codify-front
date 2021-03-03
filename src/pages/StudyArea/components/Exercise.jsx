@@ -9,6 +9,7 @@ import { NotificationManager } from 'react-notifications';
 import Footer from './Footer';
 import EditorCode from './EditorCode';
 import Console from './Console';
+import media from '../../../utils/mediaQuery';
 
 export default function Exercise(props) {
   const {
@@ -125,6 +126,11 @@ const ContainerLeft = styled.div`
       width: 150px;
     }
   }
+
+  ${media}{
+    width: 100%;
+    margin-bottom: 10px;
+  }
 `;
 
 const Enunciated = styled.div`
@@ -143,6 +149,10 @@ const Enunciated = styled.div`
     font-size: 0.9rem;
     line-height: 1.2rem;
   }
+
+  ${media}{
+    height: 350px;;
+  }
 `;
 
 const ContainerRight = styled.div`
@@ -151,6 +161,11 @@ const ContainerRight = styled.div`
   flex-shrink: 0;
   overflow-y: auto;
   position: relative;
+
+  ${media}{
+    width: 100%;
+    margin-top: 10px;
+  }
 `;
 
 const BoxCover = styled.aside`
@@ -159,6 +174,7 @@ const BoxCover = styled.aside`
   width: 100%;
   position: absolute;
   height: 100%;
+  min-height: 100vh;
   z-index: 5;
   background: #3d3d3d;
 `;
@@ -169,4 +185,9 @@ const Container = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background: #3d3d3d;
+  overflow: hidden;
+  ${media}{
+    flex-direction: column;
+  }
 `;

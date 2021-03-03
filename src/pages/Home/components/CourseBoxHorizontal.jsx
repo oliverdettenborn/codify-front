@@ -62,6 +62,11 @@ const Title = styled.h3`
   line-height: 2rem;
   color: #262626;
   margin-bottom: 20px;
+
+  ${mediaQuery}{
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+  }
 `;
 
 const Course = styled.div`
@@ -79,6 +84,8 @@ const Course = styled.div`
 
   ${mediaQuery}{
     flex-direction: column;
+    height: 340px;
+    padding: inherit;
   }
 `;
 
@@ -93,6 +100,15 @@ const BoxImage = styled.div`
     height: 100%;
     border-radius: 20px 0 0 20px;
   }
+
+  ${mediaQuery}{
+    width: 100%;
+    height: 175px;
+
+    img{
+      border-radius: 20px 20px 0px 0px;
+    }
+  }
 `;
 
 const Details = styled.div`
@@ -103,14 +119,27 @@ const Details = styled.div`
   justify-content: space-around;
   align-items: flex-start;
   flex-grow: 1;
+
+  ${mediaQuery}{
+    padding: 5px 25px;
+
+    h6{
+      margin: 0;
+    }
+  }
 `;
 
 const TitleCourse = styled.h3`
   font-style: normal;
   font-weight: bold;
-  font-size: 22px;
-  line-height: 26px;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
   color: #000000;
+
+  ${mediaQuery}{
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
 `;
 
 const Description = styled.h4`
@@ -120,4 +149,9 @@ const Description = styled.h4`
   line-height: 20px;
   color: #777777;
   margin-top: 8px;
+
+  ${mediaQuery}{
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
 `;

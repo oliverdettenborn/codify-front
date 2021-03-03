@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -17,8 +16,8 @@ export default function Profile() {
   if (!user.token) {
     history.push('/');
   }
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [disabledButton, setDisabledButton] = useState(false);
@@ -35,7 +34,7 @@ export default function Profile() {
     e.preventDefault();
     setDisabledButton(true);
     const data = {};
-    if (email) data.email = email;
+    if (email && email !== user.email) data.email = email;
     if (name) data.name = name;
 
     if (changePassword) {
@@ -51,8 +50,8 @@ export default function Profile() {
     axios
       .put(`${process.env.REACT_APP_URL_API}/users`, data,
         { headers: { Authorization: `Bearer ${user.token}` } })
-      .then((response) => {
-        if (email) user.email = email;
+      .then(() => {
+        if (email && email !== user.email) user.email = email;
         if (name) user.name = name;
 
         if (password) {
@@ -75,7 +74,10 @@ export default function Profile() {
           setError('Houve um erro desconhecido, tente novamente mais tarde');
         }
       })
-      .finally(() => setDisabledButton(false));
+      .finally(() => {
+        setDisabledButton(false);
+        setError('');
+      });
   }
 
   return (

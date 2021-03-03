@@ -5,6 +5,8 @@ import ReactPlayer from 'react-player/youtube';
 import styled from 'styled-components';
 import Footer from './Footer';
 
+import media from '../../../utils/mediaQuery';
+
 export default function Theory(props) {
   const { theory, handleCheckboxChange, checked } = props;
   const [totalDuration, setTotalDuration] = useState(0);
@@ -24,6 +26,7 @@ export default function Theory(props) {
               controls
               onProgress={checkProgress}
               onDuration={(duration) => setTotalDuration(duration)}
+              width="100%"
             />
           )
           : 'Teoria ainda não foi cadastrada'
@@ -38,5 +41,21 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
-  padding: 30px 25% 0 25%;
+  padding-top: 30px;
+  width: 50%;
+  height: 500px;
+  flex-grow: 1;
+  padding-bottom: 35px;
+  .player-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+}
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+  ${media}{
+    width: 95%;
+  }
 `;

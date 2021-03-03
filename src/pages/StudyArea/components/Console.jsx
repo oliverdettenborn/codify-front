@@ -52,6 +52,7 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  background: #3d3d3d;
 
   button{
     color: #D6D6D6;
@@ -69,6 +70,7 @@ const Title = styled.h6`
   color: #E0E0E0;
   font-size: 0.9rem;
   font-weight: 600;
+  background: #3d3d3d;
 `;
 
 const ConsoleBox = styled.div`
