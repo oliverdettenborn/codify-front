@@ -8,7 +8,7 @@ import Exercise from './Exercise';
 
 export default function Activity(props) {
   const {
-    activity, index, setChecked, checked, refresh, setRefresh,
+    activity, index, setChecked, refresh, setRefresh,
   } = props;
   const { user } = useContext(UserContext);
 
@@ -16,7 +16,6 @@ export default function Activity(props) {
   const type = activity.theoryId ? 'theories' : 'exercises';
 
   function handleCheckboxChange(code) {
-    setChecked(!checked);
     const data = type === 'exercises' ? { solutionUser: code } : null;
     axios
       .post(
