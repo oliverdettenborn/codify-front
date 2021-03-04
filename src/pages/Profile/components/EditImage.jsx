@@ -66,13 +66,13 @@ const StyledDiv = styled.div`
   cursor: pointer;
   font-weight: bold;
   outline: none;
+  background-color:#fcfcfcc4;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 
   &:hover {
-    background-color:#fcfcfcc4;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
     opacity:100;
   }
 
@@ -80,4 +80,7 @@ const StyledDiv = styled.div`
     font-size: 2.5rem;
   }
 
+  ${mediaQuery} {
+    opacity:100;
+  }
 `;
