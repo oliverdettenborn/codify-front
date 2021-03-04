@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { ChakraProvider } from '@chakra-ui/react';
 import { UserProvider } from '../context/UserContext';
 import { CourseProvider } from '../context/CourseContext';

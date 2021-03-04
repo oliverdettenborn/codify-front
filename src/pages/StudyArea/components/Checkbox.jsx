@@ -1,31 +1,17 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import UserContext from '../../../context/UserContext';
 
 export default function Checkbox(props) {
   const {
-    id, setRefresh, refresh, userHasFinished, type,
+    id, userHasFinished, setChecked, checked, handleCheckboxChange, code,
   } = props;
-  const { user } = useContext(UserContext);
-  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     setChecked(userHasFinished);
   }, [id]);
 
-  function handleCheckboxChange() {
-    setChecked(!checked);
-    axios
-      .post(
-        `${process.env.REACT_APP_URL_API}/users/${type}/${id}/progress`,
-        null,
-        { headers: { Authorization: `Bearer ${user.token}` } },
-      )
-      .then(() => setRefresh(!refresh));
-  }
   return (
-    <CheckboxContainer checked={checked} onClick={handleCheckboxChange}>
+    <CheckboxContainer checked={checked} onClick={() => handleCheckboxChange(code)}>
       <HiddenCheckbox checked={checked} />
       <StyledCheckbox checked={checked} />
       <Text checked={checked}>

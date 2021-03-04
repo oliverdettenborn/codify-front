@@ -36,7 +36,7 @@ export default function Header({ user }) {
     <Container>
       <div>
         <h5>
-          <Link to="home">
+          <Link to="/home">
             codify
           </Link>
         </h5>
@@ -79,35 +79,39 @@ export default function Header({ user }) {
   );
 }
 const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  color: #262626;
+  padding: 0 30px 15px 30px;
+  margin-top: 15px;
+  height: 60px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  div {
     display: flex;
-    justify-content: space-between;
-    color: #262626;
-    padding: 0 30px 15px 30px;
-    margin-top: 15px;
-    height: 60px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    div{
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        height: 100%;
-    }
-    h5{
-        color: #333333;
-        font-size: 2rem;
-        font-family: 'Zilla Slab Highlight', cursive;
-        letter-spacing: 2px;
-        margin-right: 5px;
-        cursor: pointer;
-    }
-    .sb-avatar{
-        cursor: pointer;
-        margin-right: 10px;
-    }
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+  }
+  h5 {
+    color: #333333;
+    font-size: 2rem;
+    font-family: 'Zilla Slab Highlight', cursive;
+    letter-spacing: 2px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  .sb-avatar {
+    cursor: pointer;
+    margin-right: 10px;
+  }
 
-    ${media}{
-      padding-left: 10px;
+  ${media} {
+    padding-left: 10px;
+    padding-right: 0px;
+    .sb-avatar{
+      margin: 0px;
     }
+  }
 `;
 const Text = styled.h6`
     font-family: 'Roboto', sans-serif;
@@ -116,8 +120,8 @@ const Text = styled.h6`
     width: 100%;
     color: #262626;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 1rem;
+    line-height: 1.2rem;
     margin: 15px;
 
     ${media}{
@@ -130,7 +134,7 @@ const TextMenu = styled.h6`
     text-align: center;
     width: 100%;
     color: #262626;
-    font-size: 16px;
+    font-size: 1rem;
 
     ${media}{
       margin: 10px;

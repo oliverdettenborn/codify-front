@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { PlainText } from '../../../components';
+import mediaQuery from '../../../utils/mediaQuery';
 
 export default function ProgressBar({ percentage }) {
   return (
@@ -22,6 +23,10 @@ const Bar = styled.div`
   background: lightgray;
   border-radius: 15px;
   margin-top: 15px;
+
+  ${mediaQuery}{
+    width: 100%;
+  }
 `;
 
 const Progress = styled.div`

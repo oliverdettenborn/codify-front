@@ -22,6 +22,7 @@ export default function StudyArea() {
   const [alertIsOpen, setAlertIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     axios
@@ -93,6 +94,8 @@ export default function StudyArea() {
                 totalOfActivities={data.length}
                 index={indexActivity}
                 disabledButton={disabledButton}
+                checked={checked}
+                setChecked={setChecked}
               />
               <AlertDialog
                 alertIsOpen={alertIsOpen}
@@ -108,10 +111,12 @@ export default function StudyArea() {
 
 const Background = styled.div`
   background: #3d3d3d;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   min-height: 100vh;
-  width: 100vw;
+  overflow: hidden;
+  min-width: 100vw;
+  max-width: 100%;
 `;
 
 const Message = styled.h3`

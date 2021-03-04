@@ -4,9 +4,6 @@ import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 
 import { Header, ListAllCourse, BannerWelcome } from '../../components';
-import {
-  OngoingCourses, SuggestedCourses,
-} from './components';
 
 export default function Home() {
   const { user, setUser } = useContext(UserContext);
@@ -21,16 +18,7 @@ export default function Home() {
       <Header user={user} />
       <BannerWelcome user={user} alredyStartCourse={user.hasInitAnyCourse} />
       <Container>
-        {
-          user.hasInitAnyCourse
-            ? (
-              <>
-                <OngoingCourses user={user} />
-                <SuggestedCourses user={user} />
-              </>
-            )
-            : <ListAllCourse user={user} setUser={setUser} />
-        }
+        <ListAllCourse user={user} setUser={setUser} />
       </Container>
     </>
   );

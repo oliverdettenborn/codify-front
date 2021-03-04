@@ -3,27 +3,40 @@ import styled from 'styled-components';
 import { Button } from '../../../components';
 
 import Checkbox from './Checkbox';
+import media from '../../../utils/mediaQuery';
 
 export default function Activity(props) {
   const {
-    activity, refresh, setRefresh, changeToNext, index, totalOfActivities, disabledButton,
+    activity,
+    refresh,
+    setRefresh,
+    changeToNext,
+    index,
+    totalOfActivities,
+    disabledButton,
+    setChecked,
+    checked,
+    handleCheckboxChange,
+    code,
   } = props;
 
   return (
     <Footer>
       <Checkbox
-        id={activity.theoryId || activity.exerciseId}
         userHasFinished={activity.userHasFinished}
         refresh={refresh}
         setRefresh={setRefresh}
-        type={index === 0 ? 'theories' : 'exercises'}
+        checked={checked}
+        setChecked={setChecked}
+        handleCheckboxChange={handleCheckboxChange}
+        code={code}
       />
       <Button
         onClick={changeToNext}
         disabledButton={disabledButton}
         width="25%"
         height="30%!important"
-        fontsize="15px"
+        fontsize="1rem"
         borderRadius="8px"
         padding="5px"
       >
@@ -37,10 +50,19 @@ export default function Activity(props) {
   );
 }
 
-const Footer = styled.div`
+const Footer = styled.footer`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 15px;
+
+  ${media}{
+    flex-direction: column;
+    margin-top: 15px;
+
+    button{
+      width: 200px;
+    }
+  }
 `;

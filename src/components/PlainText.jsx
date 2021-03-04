@@ -13,11 +13,13 @@ export default function PlainText(props) {
     alignSelf,
     mediaQueryDisplay,
     mediaQueryMargin,
+    className,
   } = props;
 
   return (
     <Text
       color={color}
+      className={className && className}
       fontSize={fontSize}
       fontWeight={fontWeight}
       margin={margin}
@@ -46,5 +48,14 @@ text-align: center;
   ${mediaQuery} {
     display: ${(props) => props.mediaQueryDisplay};
     margin: ${(props) => props.mediaQueryMargin};
+
+    &.user-info.title{
+      padding-top: 42px;
+      font-size: 1.8rem;
+    }
+
+    &.user-info{
+      font-size: 1.05rem;
+    }
   }
 `;
