@@ -21,7 +21,7 @@ export default function Console(props) {
             background="#595959"
             width="160px"
             height="35px"
-            fontsize="1rem"
+            fontsize="0.9rem"
             borderRadius="10px"
             padding="5px"
           >
