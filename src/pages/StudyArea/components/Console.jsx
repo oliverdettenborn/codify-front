@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../../../components';
 import MessageTests from './MessageTests';
+import media from '../../../utils/mediaQuery';
 
 export default function Console(props) {
   const {
@@ -20,7 +21,7 @@ export default function Console(props) {
             background="#595959"
             width="160px"
             height="35px"
-            fontsize="15px"
+            fontsize="1rem"
             borderRadius="10px"
             padding="5px"
           >
@@ -63,6 +64,11 @@ const Header = styled.header`
       margin-left: 7px;
       margin-top: -2px;
     }
+  }
+
+  ${media}{
+    padding-right: 0;
+    padding-left: 20px;
   }
 `;
 

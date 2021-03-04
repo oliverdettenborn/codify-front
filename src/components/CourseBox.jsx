@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Button from './Button';
 
+import media from '../utils/mediaQuery';
+
 export default function TitleNameUser({ course, haveContinueButton }) {
   const {
     id, title, description, color, imageUrl, nextTopicId,
@@ -62,6 +64,11 @@ const Container = styled.div`
   margin-bottom: 20px;
   position: relative;
   cursor: pointer;
+
+  ${media}{
+    width: 100%;
+    height: ${(props) => (props.haveContinueButton ? '330px' : '280px')};
+  }
 
   button{
     position: absolute;

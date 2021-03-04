@@ -123,7 +123,7 @@ const ContainerLeft = styled.div`
     flex-wrap: wrap;
 
     button{
-      width: 150px;
+      width: 180px;
     }
   }
 
@@ -159,7 +159,7 @@ const ContainerRight = styled.div`
   width: 60%;
   height: 100%;
   flex-shrink: 0;
-  overflow-y: auto;
+  overflow: hidden;
   position: relative;
 
   ${media}{
@@ -186,7 +186,7 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   background: #3d3d3d;
-  overflow: hidden;
+  overflow: auto;
   ${media}{
     flex-direction: column;
   }

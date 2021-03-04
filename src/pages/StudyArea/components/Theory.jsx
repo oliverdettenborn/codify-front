@@ -37,19 +37,21 @@ export default function Theory(props) {
   );
 }
 const Container = styled.div`
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 `;
 
 const Box = styled.div`
-  padding-top: 30px;
+  padding-top: 20px;
   width: 50%;
   height: 500px;
   flex-grow: 1;
   padding-bottom: 35px;
+  overflow: hidden;
+  
   .player-wrapper {
-  position: relative;
-  padding-top: 56.25%;
-}
+    position: relative;
+    padding-top: 56.25%;
+  }
 .react-player {
   position: absolute;
   top: 0;

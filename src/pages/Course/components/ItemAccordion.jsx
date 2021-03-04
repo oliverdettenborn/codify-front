@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import {
   AccordionItem,
   AccordionButton,
@@ -47,6 +46,7 @@ const QuantityInfos = styled(Box)`
   font-size: 1rem;
   line-height: 33px;
   color: #656565;
+  flex-wrap: wrap;
 `;
 
 const TitleItem = styled(Box)`
@@ -57,6 +57,7 @@ const TitleItem = styled(Box)`
   line-height: 1.4rem;
   margin-left: 8px;
   color: #656565;
+  word-break: break-all;
 `;
 
 const PanelItem = styled(AccordionPanel)`

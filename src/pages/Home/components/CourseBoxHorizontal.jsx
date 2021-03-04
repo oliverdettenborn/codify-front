@@ -84,7 +84,7 @@ const Course = styled.div`
 
   ${mediaQuery}{
     flex-direction: column;
-    height: 340px;
+    height: 330px;
     padding: inherit;
   }
 `;

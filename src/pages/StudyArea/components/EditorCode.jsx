@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import Editor, { useMonaco } from '@monaco-editor/react';
 import styled from 'styled-components';
 import { Button } from '../../../components';
+import media from '../../../utils/mediaQuery';
 
 export default function EditorCode(props) {
   const {
@@ -42,7 +43,7 @@ export default function EditorCode(props) {
             background="#595959"
             width="160px"
             height="35px"
-            fontsize="15px"
+            fontsize="1rem"
             borderRadius="10px"
             padding="5px"
             onMount={handleEditorDidMount}
@@ -99,6 +100,11 @@ const Header = styled.header`
       margin-left: 7px;
       margin-top: -2px;
     }
+  }
+
+  ${media}{
+    padding-right: 0;
+    padding-left: 20px;
   }
 `;
 

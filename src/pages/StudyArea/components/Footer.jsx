@@ -36,7 +36,7 @@ export default function Activity(props) {
         disabledButton={disabledButton}
         width="25%"
         height="30%!important"
-        fontsize="15px"
+        fontsize="1rem"
         borderRadius="8px"
         padding="5px"
       >

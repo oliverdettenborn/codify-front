@@ -50,12 +50,12 @@ text-align: center;
     margin: ${(props) => props.mediaQueryMargin};
 
     &.user-info.title{
-      padding-top: 30px;
-      font-size: 1.6rem;
+      padding-top: 42px;
+      font-size: 1.8rem;
     }
 
     &.user-info{
-      font-size: 1rem;
+      font-size: 1.05rem;
     }
   }
 `;
